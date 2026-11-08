@@ -132,13 +132,23 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 # Email configuration
-EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND', 'django.core.mail.backends.console.EmailBackend')
-EMAIL_HOST = os.environ.get('EMAIL_HOST', 'smtp.gmail.com')
-EMAIL_PORT = int(os.environ.get('EMAIL_PORT', 587))
-EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', 'True') == 'True'
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
-DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', 'noreply@cleaningservices.com.au')
+# Now using SMTP backend for actual email delivery to Gmail
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'baralanup832@gmail.com'
+EMAIL_HOST_PASSWORD = 'lszg npgx cdfx vbmu'  # Gmail app password
+DEFAULT_FROM_EMAIL = 'baralanup832@gmail.com'
+
+# IMPORTANT: If emails are not being delivered:
+# 1. Check https://myaccount.google.com/security for "Less secure app access"
+# 2. Or create a separate Gmail account specifically for this app
+# 3. See GMAIL_DELIVERY_FIX.md for complete troubleshooting guide
+# 
+# The email is being SENT successfully (verified by diagnostic tool),
+# but Gmail may be blocking delivery due to security settings.
 
 # Security settings for production
 if not DEBUG:
@@ -174,3 +184,4 @@ BUSINESS_PHONE = os.environ.get('BUSINESS_PHONE', '+61 2 1234 5678')
 BUSINESS_EMAIL = os.environ.get('BUSINESS_EMAIL', 'hello@cleaningservices.com.au')
 BUSINESS_ADDRESS = os.environ.get('BUSINESS_ADDRESS', 'Sydney, NSW 2000, Australia')
 WHATSAPP_NUMBER = os.environ.get('WHATSAPP_NUMBER', '61412345678')
+SITE_URL = os.environ.get('SITE_URL', 'http://localhost:8000')
