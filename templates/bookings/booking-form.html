@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}Book a Cleaning | {{ BUSINESS_NAME }}{% endblock %}
+
+{% block content %}
+<section class="section-padding bg-white">
+    <div class="container-lg">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h1 class="mb-2">Book Your Cleaning</h1>
+                <p class="text-muted mb-4">Fill in the form below to request a cleaning booking</p>
+
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+                {% endfor %}
+                {% endif %}
+
+                <form method="post" novalidate>
+                    {% csrf_token %}
+
+                    <!-- Customer Information -->
+                    <div class="card mb-4">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0"><i class="fas fa-user me-2"></i> Your Information</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="id_full_name" class="form-label">Full Name *</label>
+                                    {{ customer_form.full_name }}
+                                    {% if customer_form.full_name.errors %}
+                                    <div class="invalid-feedback d-block">{{ customer_form.full_name.errors.0 }}</div>
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="id_email" class="form-label">Email *</label>
+                                    {{ customer_form.email }}
+                                    {% if customer_form.email.errors %}
+                                    <div class="invalid-feedback d-block">{{ customer_form.email.errors.0 }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="id_phone" class="form-label">Phone *</label>
+                                    {{ customer_form.phone }}
+                                    {% if customer_form.phone.errors %}
+                                    <div class="invalid-feedback d-block">{{ customer_form.phone.errors.0 }}</div>
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="id_address" class="form-label">Address</label>
+                                    {{ customer_form.address }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="id_suburb" class="form-label">Suburb *</label>
+                                    {{ customer_form.suburb }}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="id_postcode" class="form-label">Postcode *</label>
+                                    {{ customer_form.postcode }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service Selection -->
+                    <div class="card mb-4">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0"><i class="fas fa-briefcase me-2"></i> Service Details</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label for="id_service" class="form-label">Select Service *</label>
+                                <select name="service" class="form-select" required>
+                                    <option value="">-- Choose a service --</option>
+                                    {% for service in services %}
+                                    <option value="{{ service.id }}" {% if service_id|stringformat:"s" == service.id|stringformat:"s" %}selected{% endif %}>
+                                        {{ service.name }}
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="id_property_type" class="form-label">Property Type *</label>
+                                    {{ form.property_type }}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="id_property_size" class="form-label">Property Size</label>
+                                    {{ form.property_size }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="id_bedrooms" class="form-label">Bedrooms</label>
+                                    {{ form.bedrooms }}
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="id_bathrooms" class="form-label">Bathrooms</label>
+                                    {{ form.bathrooms }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Scheduling -->
+                    <div class="card mb-4">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0"><i class="fas fa-calendar me-2"></i> Scheduling</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="id_preferred_date" class="form-label">Preferred Date *</label>
+                                    {{ form.preferred_date }}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="id_preferred_time" class="form-label">Preferred Time *</label>
+                                    {{ form.preferred_time }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Additional Requirements -->
+                    <div class="card mb-4">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0"><i class="fas fa-comment-dots me-2"></i> Additional Information</h5>
+                        </div>
+                        <div class="card-body">
+                            <label for="id_additional_requirements" class="form-label">Additional Requirements</label>
+                            {{ form.additional_requirements }}
+                            <small class="text-muted d-block mt-2">Let us know about any special requirements or preferences</small>
+                        </div>
+                    </div>
+
+                    <!-- Submit -->
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fas fa-check-circle me-2"></i> Request Booking
+                        </button>
+                        <a href="{% url 'core:home' %}" class="btn btn-outline-secondary">Cancel</a>
+                    </div>
+                </form>
+
+                <div class="alert alert-info mt-4">
+                    <p class="mb-0"><strong>Note:</strong> Your booking request will be reviewed and confirmed. You'll receive a confirmation email with booking details and reference number.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

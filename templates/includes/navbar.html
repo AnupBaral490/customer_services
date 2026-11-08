@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background: white; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);">
+    <div class="container-lg">
+        <a class="navbar-brand fw-700" href="{% url 'core:home' %}">
+            <i class="fas fa-sparkles" style="color: #DCA85C;"></i> {{ BUSINESS_NAME }}
+        </a>
+        
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-center">
+                <li class="nav-item">
+                    <a class="nav-link fw-600" href="{% url 'core:home' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link fw-600" href="{% url 'services:service-list' %}">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link fw-600" href="{% url 'core:about' %}">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link fw-600" href="{% url 'contact:contact' %}">Contact</a>
+                </li>
+                <li class="nav-item ms-lg-3">
+                    <a class="btn btn-primary btn-sm" href="{% url 'bookings:booking-create' %}">
+                        <i class="fas fa-calendar-check me-1"></i> Book Now
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

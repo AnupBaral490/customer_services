@@ -1,0 +1,275 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home | {{ BUSINESS_NAME }}{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container-lg">
+        <div class="row align-items-center min-vh-75">
+            <div class="col-lg-8 mx-auto text-center">
+                <h1 class="display-3 fw-800 mb-4">A Cleaner Space.<br><span class="gradient-text">A Better Life.</span></h1>
+                <p class="lead mb-5 text-white-75">Professional cleaning services you can trust. Let us handle the cleaning while you focus on what matters most.</p>
+                <div class="hero-cta">
+                    <a href="{% url 'bookings:booking-create' %}" class="btn btn-light btn-lg shadow-lg">
+                        <i class="fas fa-calendar-check me-2"></i> Book a Cleaning
+                    </a>
+                    <a href="{% url 'bookings:quote-request' %}" class="btn btn-outline-light btn-lg">
+                        <i class="fas fa-quote-left me-2"></i> Get a Free Quote
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Why Choose Us -->
+<section class="section-padding bg-white">
+    <div class="container-lg">
+        <div class="text-center mb-5">
+            <h2 class="section-title">Why Choose Premium Cleaning?</h2>
+            <p class="section-subtitle">Experience the difference with professional cleaning services</p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="text-center h-100">
+                    <div class="mb-4">
+                        <div class="rounded-circle mx-auto mb-3" style="width: 80px; height: 80px; background: linear-gradient(135deg, #183D39 0%, #2d5b57 100%); display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-shield-alt text-white" style="font-size: 2rem;"></i>
+                        </div>
+                    </div>
+                    <h5 class="fw-700 mb-2">Professional & Insured</h5>
+                    <p class="text-muted small">Fully trained, background-checked, and fully insured teams</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="text-center h-100">
+                    <div class="mb-4">
+                        <div class="rounded-circle mx-auto mb-3" style="width: 80px; height: 80px; background: linear-gradient(135deg, #183D39 0%, #2d5b57 100%); display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-check-circle text-white" style="font-size: 2rem;"></i>
+                        </div>
+                    </div>
+                    <h5 class="fw-700 mb-2">100% Satisfaction</h5>
+                    <p class="text-muted small">Satisfaction guaranteed or we'll re-clean for free</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="text-center h-100">
+                    <div class="mb-4">
+                        <div class="rounded-circle mx-auto mb-3" style="width: 80px; height: 80px; background: linear-gradient(135deg, #183D39 0%, #2d5b57 100%); display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-leaf text-white" style="font-size: 2rem;"></i>
+                        </div>
+                    </div>
+                    <h5 class="fw-700 mb-2">Eco-Friendly</h5>
+                    <p class="text-muted small">Safe, environmentally responsible cleaning products</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="text-center h-100">
+                    <div class="mb-4">
+                        <div class="rounded-circle mx-auto mb-3" style="width: 80px; height: 80px; background: linear-gradient(135deg, #183D39 0%, #2d5b57 100%); display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-clock text-white" style="font-size: 2rem;"></i>
+                        </div>
+                    </div>
+                    <h5 class="fw-700 mb-2">On-Time & Reliable</h5>
+                    <p class="text-muted small">Punctual service with flexible scheduling options</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Services -->
+<section class="section-padding" style="background: linear-gradient(135deg, #F7F9F8 0%, #DCEFE8 100%);">
+    <div class="container-lg">
+        <div class="text-center mb-5">
+            <h2 class="section-title">Our Services</h2>
+            <p class="section-subtitle">Professional cleaning solutions tailored to your needs</p>
+        </div>
+
+        <div class="row g-4">
+            {% for service in featured_services %}
+            <div class="col-md-6 col-lg-4">
+                <div class="service-card">
+                    {% if service.image %}
+                    <img src="{{ service.image.url }}" alt="{{ service.name }}" class="card-img-top">
+                    {% else %}
+                    <div style="height: 280px; background: linear-gradient(135deg, #183D39 0%, #2d5b57 100%); display: flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-sparkles" style="font-size: 3rem; color: white; opacity: 0.5;"></i>
+                    </div>
+                    {% endif %}
+                    <div class="service-card-body">
+                        <h5 class="fw-700">{{ service.name }}</h5>
+                        <p>{{ service.description|truncatewords:20 }}</p>
+                        {% if service.price %}
+                        <p class="service-price mb-3">{{ service.price }}</p>
+                        {% endif %}
+                        <div class="d-grid gap-2">
+                            <a href="{% url 'services:service-detail' service.slug %}" class="btn btn-outline-primary btn-sm">View Details</a>
+                            <a href="{% url 'bookings:booking-create' %}?service_id={{ service.id }}" class="btn btn-primary btn-sm">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="text-center mt-5">
+            <a href="{% url 'services:service-list' %}" class="btn btn-primary btn-lg">
+                <i class="fas fa-arrow-right me-2"></i> View All Services
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works -->
+<section class="section-padding bg-white">
+    <div class="container-lg">
+        <div class="text-center mb-5">
+            <h2 class="section-title">How It Works</h2>
+            <p class="section-subtitle">Simple process to get your home cleaned</p>
+        </div>
+
+        <div class="row g-4">
+            {% for i in "1234" %}
+            <div class="col-lg-3 col-md-6">
+                <div class="text-center">
+                    <div class="rounded-circle mx-auto mb-4" style="width: 70px; height: 70px; background: linear-gradient(135deg, #DCA85C 0%, #E8B870 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.8rem; font-weight: bold;">
+                        {{ i }}
+                    </div>
+                    <h5 class="fw-700 mb-2">
+                        {% if i == "1" %}Request{% elif i == "2" %}Quote{% elif i == "3" %}Confirm{% else %}Enjoy{% endif %}
+                    </h5>
+                    <p class="text-muted">
+                        {% if i == "1" %}Tell us about your cleaning needs{% elif i == "2" %}Receive a personalized quote{% elif i == "3" %}Confirm your booking{% else %}Relax while we clean{% endif %}
+                    </p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials -->
+{% if testimonials %}
+<section class="section-padding" style="background: linear-gradient(135deg, #F7F9F8 0%, #DCEFE8 100%);">
+    <div class="container-lg">
+        <div class="text-center mb-5">
+            <h2 class="section-title">What Our Clients Say</h2>
+            <p class="section-subtitle">Trusted by thousands of satisfied customers</p>
+        </div>
+
+        <div class="row g-4">
+            {% for testimonial in testimonials %}
+            <div class="col-md-6 col-lg-4">
+                <div class="testimonial-card h-100">
+                    <div class="testimonial-stars mb-3">
+                        {% for i in "12345" %}
+                            {% if forloop.counter <= testimonial.rating %}
+                            <i class="fas fa-star"></i>
+                            {% else %}
+                            <i class="far fa-star"></i>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <p class="mb-3">"{{ testimonial.comment }}"</p>
+                    <div>
+                        <p class="testimonial-author mb-1">{{ testimonial.customer_name }}</p>
+                        <p class="testimonial-service">{{ testimonial.service }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- FAQ Section -->
+{% if faqs %}
+<section class="section-padding bg-white">
+    <div class="container-lg">
+        <div class="text-center mb-5">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <p class="section-subtitle">Find answers to common questions</p>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="accordion" id="faqAccordion">
+                    {% for faq in faqs %}
+                    <div class="accordion-item border-0 mb-3 rounded-lg shadow-sm-custom">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button {% if forloop.first %}{% else %}collapsed{% endif %} fw-600" type="button" data-bs-toggle="collapse" data-bs-target="#faq{{ faq.id }}">
+                                <i class="fas fa-question-circle me-2 text-accent"></i> {{ faq.question }}
+                            </button>
+                        </h2>
+                        <div id="faq{{ faq.id }}" class="accordion-collapse collapse {% if forloop.first %}show{% endif %}" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                {{ faq.answer }}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Final CTA -->
+<section class="section-padding" style="background: linear-gradient(135deg, #183D39 0%, #2d5b57 100%);">
+    <div class="container-lg">
+        <div class="row align-items-center">
+            <div class="col-lg-7">
+                <h2 style="color: white; font-size: 2.2rem; margin-bottom: 15px;">Ready for a Cleaner Space?</h2>
+                <p class="lead text-white-75 mb-0">Let our professional team handle the cleaning. Get your free quote today!</p>
+            </div>
+            <div class="col-lg-5 text-lg-end pt-4 pt-lg-0">
+                <div class="d-flex gap-3 justify-content-lg-end flex-wrap">
+                    <a href="{% url 'bookings:booking-create' %}" class="btn btn-light btn-lg">
+                        <i class="fas fa-calendar-check me-2"></i> Book Now
+                    </a>
+                    <a href="{% url 'bookings:quote-request' %}" class="btn btn-outline-light btn-lg">
+                        <i class="fas fa-quote-left me-2"></i> Get Quote
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .min-vh-75 {
+        min-height: 75vh;
+    }
+
+    .text-white-75 {
+        color: rgba(255, 255, 255, 0.9);
+    }
+
+    .fw-800 {
+        font-weight: 800;
+    }
+
+    .fw-700 {
+        font-weight: 700;
+    }
+
+    .fw-600 {
+        font-weight: 600;
+    }
+
+    .accordion-button:not(.collapsed) {
+        background: linear-gradient(135deg, #183D39 0%, #2d5b57 100%);
+        color: white;
+    }
+
+    .accordion-button::after {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23DCA85C'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ service.name }} | {{ BUSINESS_NAME }}{% endblock %}
+
+{% block content %}
+<section class="section-padding bg-white">
+    <div class="container-lg">
+        <div class="row g-4">
+            <!-- Service Image -->
+            <div class="col-lg-6">
+                {% if service.image %}
+                <img src="{{ service.image.url }}" alt="{{ service.name }}" class="img-fluid rounded" style="max-height: 500px; width: 100%; object-fit: cover;">
+                {% else %}
+                <div style="height: 500px; background: linear-gradient(135deg, #183D39 0%, #2d5b57 100%); display: flex; align-items: center; justify-content: center; border-radius: 12px;">
+                    <i class="fas fa-sparkles" style="font-size: 4rem; color: white; opacity: 0.3;"></i>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Service Details -->
+            <div class="col-lg-6">
+                <h1 class="mb-3">{{ service.name }}</h1>
+                
+                {% if service.price %}
+                <p class="service-price mb-4">{{ service.price }}</p>
+                {% endif %}
+
+                <p class="lead text-muted mb-4">{{ service.description }}</p>
+
+                <div class="mb-4">
+                    <h5 class="mb-3">What's Included</h5>
+                    <ul class="list-unstyled">
+                        {% for item in service.get_included_items %}
+                        <li class="mb-2">
+                            <i class="fas fa-check text-primary me-2"></i>
+                            {{ item }}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <a href="{% url 'bookings:booking-create' %}?service_id={{ service.id }}" class="btn btn-primary btn-lg">
+                        <i class="fas fa-calendar-check me-2"></i> Book This Service
+                    </a>
+                    <a href="{% url 'bookings:quote-request' %}" class="btn btn-outline-primary btn-lg">
+                        <i class="fas fa-quote-left me-2"></i> Get a Custom Quote
+                    </a>
+                </div>
+
+                <div class="alert alert-light border mt-4">
+                    <p class="mb-0"><strong>Questions?</strong> <a href="{% url 'contact:contact' %}">Contact us</a> or call {{ BUSINESS_PHONE }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Related Services -->
+{% if related_services %}
+<section class="section-padding" style="background-color: var(--secondary);">
+    <div class="container-lg">
+        <h2 class="section-title text-center mb-5">Related Services</h2>
+        <div class="row g-4">
+            {% for related in related_services %}
+            <div class="col-md-6 col-lg-4">
+                <div class="service-card h-100">
+                    {% if related.image %}
+                    <img src="{{ related.image.url }}" alt="{{ related.name }}" class="card-img-top">
+                    {% else %}
+                    <div style="height: 200px; background: linear-gradient(135deg, #183D39 0%, #2d5b57 100%); display: flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-sparkles" style="font-size: 2rem; color: white; opacity: 0.5;"></i>
+                    </div>
+                    {% endif %}
+                    <div class="service-card-body">
+                        <h5>{{ related.name }}</h5>
+                        <p class="small text-muted">{{ related.description|truncatewords:15 }}</p>
+                        {% if related.price %}
+                        <p class="service-price mb-3">{{ related.price }}</p>
+                        {% endif %}
+                        <a href="{% url 'services:service-detail' related.slug %}" class="btn btn-outline-primary btn-sm">View Details</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- CTA -->
+<section class="section-padding bg-white">
+    <div class="container-lg text-center">
+        <h2 class="section-title mb-3">Ready to Get Started?</h2>
+        <p class="lead text-muted mb-4">Book {{ service.name }} today and enjoy a cleaner space</p>
+        <a href="{% url 'bookings:booking-create' %}?service_id={{ service.id }}" class="btn btn-primary btn-lg">
+            <i class="fas fa-calendar-check me-2"></i> Book Now
+        </a>
+    </div>
+</section>
+{% endblock %}

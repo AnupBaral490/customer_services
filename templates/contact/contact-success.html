@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Message Sent | {{ BUSINESS_NAME }}{% endblock %}
+
+{% block content %}
+<section class="section-padding bg-white">
+    <div class="container-lg">
+        <div class="row">
+            <div class="col-lg-6 mx-auto text-center">
+                <div class="mb-4">
+                    <i class="fas fa-check-circle text-success" style="font-size: 4rem;"></i>
+                </div>
+
+                <h1 class="mb-3">Message Sent!</h1>
+                <p class="lead text-muted mb-4">Thank you for contacting {{ BUSINESS_NAME }}. We've received your message and will respond as soon as possible.</p>
+
+                <div class="alert alert-light border mb-4">
+                    <p class="mb-0">We typically respond to messages within 24 hours during business days.</p>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <a href="{% url 'core:home' %}" class="btn btn-primary btn-lg">
+                        <i class="fas fa-home me-2"></i> Return to Home
+                    </a>
+                    <a href="{% url 'bookings:booking-create' %}" class="btn btn-outline-primary">
+                        <i class="fas fa-calendar-check me-2"></i> Book a Cleaning
+                    </a>
+                </div>
+
+                <div class="mt-4">
+                    <p class="text-muted">Urgent? Call us at <a href="tel:{{ BUSINESS_PHONE }}">{{ BUSINESS_PHONE }}</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

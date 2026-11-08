@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact Form | {{ BUSINESS_NAME }}{% endblock %}
+
+{% block content %}
+<section class="section-padding bg-white">
+    <div class="container-lg">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h1 class="mb-2">Send us a Message</h1>
+                <p class="text-muted mb-4">We'll get back to you as soon as possible</p>
+
+                <form method="post" novalidate>
+                    {% csrf_token %}
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="id_full_name" class="form-label">Full Name *</label>
+                            {{ form.full_name }}
+                            {% if form.full_name.errors %}
+                            <div class="invalid-feedback d-block">{{ form.full_name.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="id_email" class="form-label">Email *</label>
+                            {{ form.email }}
+                            {% if form.email.errors %}
+                            <div class="invalid-feedback d-block">{{ form.email.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="id_phone" class="form-label">Phone *</label>
+                        {{ form.phone }}
+                        {% if form.phone.errors %}
+                        <div class="invalid-feedback d-block">{{ form.phone.errors.0 }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="id_subject" class="form-label">Subject *</label>
+                        {{ form.subject }}
+                        {% if form.subject.errors %}
+                        <div class="invalid-feedback d-block">{{ form.subject.errors.0 }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="id_message" class="form-label">Message *</label>
+                        {{ form.message }}
+                        {% if form.message.errors %}
+                        <div class="invalid-feedback d-block">{{ form.message.errors.0 }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fas fa-send me-2"></i> Send Message
+                        </button>
+                        <a href="{% url 'contact:contact' %}" class="btn btn-outline-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Get a Free Quote | {{ BUSINESS_NAME }}{% endblock %}
+
+{% block content %}
+<section class="section-padding bg-white">
+    <div class="container-lg">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h1 class="mb-2">Get a Free Quote</h1>
+                <p class="text-muted mb-4">Fill in the form below and we'll provide you with a personalized quote</p>
+
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+                {% endfor %}
+                {% endif %}
+
+                <form method="post" novalidate>
+                    {% csrf_token %}
+
+                    <!-- Customer Information -->
+                    <div class="card mb-4">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0"><i class="fas fa-user me-2"></i> Your Information</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="id_full_name" class="form-label">Full Name *</label>
+                                    {{ customer_form.full_name }}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="id_email" class="form-label">Email *</label>
+                                    {{ customer_form.email }}
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="id_phone" class="form-label">Phone *</label>
+                                {{ customer_form.phone }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service and Property Information -->
+                    <div class="card mb-4">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0"><i class="fas fa-briefcase me-2"></i> Service Details</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="id_service" class="form-label">Service Required *</label>
+                                    {{ quote_form.service }}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="id_property_type" class="form-label">Property Type *</label>
+                                    {{ quote_form.property_type }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="id_cleaning_frequency" class="form-label">Cleaning Frequency *</label>
+                                    {{ quote_form.cleaning_frequency }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Location -->
+                    <div class="card mb-4">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0"><i class="fas fa-map-marker-alt me-2"></i> Location</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="id_suburb" class="form-label">Suburb *</label>
+                                    {{ quote_form.suburb }}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="id_postcode" class="form-label">Postcode *</label>
+                                    {{ quote_form.postcode }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Additional Information -->
+                    <div class="card mb-4">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0"><i class="fas fa-comment-dots me-2"></i> Additional Details</h5>
+                        </div>
+                        <div class="card-body">
+                            <label for="id_additional_requirements" class="form-label">Tell Us More</label>
+                            {{ quote_form.additional_requirements }}
+                            <small class="text-muted d-block mt-2">Describe your property size, specific cleaning needs, or any other details that would help us provide an accurate quote</small>
+                        </div>
+                    </div>
+
+                    <!-- Submit -->
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fas fa-envelope me-2"></i> Request Quote
+                        </button>
+                        <a href="{% url 'core:home' %}" class="btn btn-outline-secondary">Cancel</a>
+                    </div>
+                </form>
+
+                <div class="alert alert-info mt-4">
+                    <p class="mb-0"><strong>Completely Free:</strong> This quote request is completely free with no obligation. We'll provide you with a detailed estimate within 24-48 hours.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

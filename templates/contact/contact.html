@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact Us | {{ BUSINESS_NAME }}{% endblock %}
+
+{% block content %}
+<!-- Hero -->
+<section class="hero-section" style="padding: 60px 0;">
+    <div class="container-lg">
+        <h1 class="display-4 mb-3">Get in Touch</h1>
+        <p class="lead">We're here to help and answer any questions</p>
+    </div>
+</section>
+
+<!-- Contact Information -->
+<section class="section-padding bg-white">
+    <div class="container-lg">
+        <div class="row g-4 mb-5">
+            <div class="col-md-6 col-lg-3">
+                <div class="text-center">
+                    <div class="mb-3">
+                        <i class="fas fa-phone text-primary" style="font-size: 2rem;"></i>
+                    </div>
+                    <h5>Phone</h5>
+                    <p class="text-muted">
+                        <a href="tel:{{ BUSINESS_PHONE }}" class="text-decoration-none">{{ BUSINESS_PHONE }}</a>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="text-center">
+                    <div class="mb-3">
+                        <i class="fas fa-envelope text-primary" style="font-size: 2rem;"></i>
+                    </div>
+                    <h5>Email</h5>
+                    <p class="text-muted">
+                        <a href="mailto:{{ BUSINESS_EMAIL }}" class="text-decoration-none">{{ BUSINESS_EMAIL }}</a>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="text-center">
+                    <div class="mb-3">
+                        <i class="fab fa-whatsapp text-primary" style="font-size: 2rem;"></i>
+                    </div>
+                    <h5>WhatsApp</h5>
+                    <p class="text-muted">
+                        <a href="https://wa.me/{{ WHATSAPP_NUMBER }}" target="_blank" class="text-decoration-none">Chat Now</a>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="text-center">
+                    <div class="mb-3">
+                        <i class="fas fa-map-marker-alt text-primary" style="font-size: 2rem;"></i>
+                    </div>
+                    <h5>Location</h5>
+                    <p class="text-muted">{{ BUSINESS_ADDRESS }}</p>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- Contact Form -->
+        <div class="row mt-5">
+            <div class="col-lg-8 mx-auto">
+                <h2 class="section-title text-center mb-4">Send us a Message</h2>
+                <a href="{% url 'contact:message' %}" class="btn btn-primary btn-lg w-100">
+                    <i class="fas fa-envelope me-2"></i> Go to Contact Form
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Service Areas -->
+<section class="section-padding" style="background-color: var(--secondary);">
+    <div class="container-lg">
+        <h2 class="section-title text-center mb-5">Service Coverage Areas</h2>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+                <div class="text-center">
+                    <i class="fas fa-map-pin text-primary mb-2" style="font-size: 2rem;"></i>
+                    <h5>Sydney Metropolitan</h5>
+                    <p class="text-muted small">Covering Sydney's inner and outer suburbs</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="text-center">
+                    <i class="fas fa-map-pin text-primary mb-2" style="font-size: 2rem;"></i>
+                    <h5>Northern Beaches</h5>
+                    <p class="text-muted small">From Narrabeen to Palm Beach</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="text-center">
+                    <i class="fas fa-map-pin text-primary mb-2" style="font-size: 2rem;"></i>
+                    <h5>Western Sydney</h5>
+                    <p class="text-muted small">Greater Western Sydney areas</p>
+                </div>
+            </div>
+        </div>
+        <p class="text-center text-muted mt-4"><strong>Not sure if we cover your area?</strong> <a href="{% url 'contact:message' %}">Contact us</a> to check.</p>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="section-padding bg-white">
+    <div class="container-lg text-center">
+        <h2 class="section-title mb-3">Ready for a Cleaner Space?</h2>
+        <p class="lead text-muted mb-4">Book your cleaning or get a free quote today</p>
+        <div class="d-flex gap-3 justify-content-center flex-wrap">
+            <a href="{% url 'bookings:booking-create' %}" class="btn btn-primary btn-lg">
+                <i class="fas fa-calendar-check me-2"></i> Book Now
+            </a>
+            <a href="{% url 'bookings:quote-request' %}" class="btn btn-outline-primary btn-lg">
+                <i class="fas fa-quote-left me-2"></i> Get a Quote
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

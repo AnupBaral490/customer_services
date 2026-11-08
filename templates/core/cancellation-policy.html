@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}Cancellation Policy | {{ BUSINESS_NAME }}{% endblock %}
+
+{% block content %}
+<section class="section-padding bg-white">
+    <div class="container-lg">
+        <div class="row">
+            <div class="col-lg-8">
+                <h1 class="mb-4">Cancellation Policy</h1>
+                <p class="text-muted mb-4">Last updated: November 2024</p>
+
+                <h3 class="mt-4 mb-3">Booking Cancellation</h3>
+                <p>We understand that plans can change. Below is our cancellation policy for bookings:</p>
+
+                <div class="alert alert-light border mt-3 mb-3">
+                    <h5 class="mb-3">Cancellation Timeline</h5>
+                    <ul>
+                        <li><strong>More than 7 days before:</strong> Full refund or reschedule without penalty</li>
+                        <li><strong>3-7 days before:</strong> 50% refund or reschedule subject to availability</li>
+                        <li><strong>Less than 3 days before:</strong> No refund (booking fee retained)</li>
+                    </ul>
+                </div>
+
+                <h3 class="mt-4 mb-3">How to Cancel</h3>
+                <p>To cancel your booking, please contact us:</p>
+                <ul>
+                    <li>Email: {{ BUSINESS_EMAIL }}</li>
+                    <li>Phone: {{ BUSINESS_PHONE }}</li>
+                </ul>
+
+                <p>Cancellations must be made in writing and confirmed by {{ BUSINESS_NAME }}.</p>
+
+                <h3 class="mt-4 mb-3">Our Right to Cancel</h3>
+                <p>{{ BUSINESS_NAME }} reserves the right to cancel or reschedule bookings if:</p>
+                <ul>
+                    <li>Extreme weather or unforeseen circumstances prevent service delivery</li>
+                    <li>The property is inaccessible as arranged</li>
+                    <li>Safety concerns are identified</li>
+                </ul>
+
+                <p>In such cases, a full refund or alternative date will be offered.</p>
+
+                <h3 class="mt-4 mb-3">Rescheduling</h3>
+                <p>We understand that sometimes you need to reschedule. Subject to availability and our cancellation policy, we'll work with you to find a new date for your cleaning.</p>
+
+                <h3 class="mt-4 mb-3">Contact Us</h3>
+                <p>
+                    <strong>{{ BUSINESS_NAME }}</strong><br>
+                    Email: {{ BUSINESS_EMAIL }}<br>
+                    Phone: {{ BUSINESS_PHONE }}
+                </p>
+
+                <hr class="my-5">
+                <p class="text-muted small"><em>This is a template cancellation policy. Please customize it according to your business terms and have it reviewed by a legal professional to ensure compliance with Australian consumer law.</em></p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

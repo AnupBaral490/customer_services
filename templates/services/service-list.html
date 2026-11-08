@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Services | {{ BUSINESS_NAME }}{% endblock %}
+
+{% block content %}
+<!-- Hero -->
+<section class="hero-section" style="padding: 60px 0;">
+    <div class="container-lg">
+        <h1 class="display-4 mb-3">Our Services</h1>
+        <p class="lead">Professional cleaning solutions for every need</p>
+    </div>
+</section>
+
+<!-- Services Grid -->
+<section class="section-padding bg-white">
+    <div class="container-lg">
+        <div class="row g-4">
+            {% for service in services %}
+            <div class="col-md-6 col-lg-4">
+                <div class="service-card h-100">
+                    {% if service.image %}
+                    <img src="{{ service.image.url }}" alt="{{ service.name }}" class="card-img-top">
+                    {% else %}
+                    <div style="height: 250px; background: linear-gradient(135deg, #183D39 0%, #2d5b57 100%); display: flex; align-items: center; justify-content: center;">
+                        <i class="fas fa-sparkles" style="font-size: 3rem; color: white; opacity: 0.5;"></i>
+                    </div>
+                    {% endif %}
+                    <div class="service-card-body">
+                        <h5>{{ service.name }}</h5>
+                        <p>{{ service.description }}</p>
+                        {% if service.price %}
+                        <p class="service-price">{{ service.price }}</p>
+                        {% endif %}
+                        <div class="d-grid gap-2">
+                            <a href="{% url 'services:service-detail' service.slug %}" class="btn btn-outline-primary btn-sm">View Details</a>
+                            <a href="{% url 'bookings:booking-create' %}?service_id={{ service.id }}" class="btn btn-primary btn-sm">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12">
+                <div class="alert alert-info">No services available at the moment. Please check back soon!</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="section-padding" style="background-color: var(--secondary);">
+    <div class="container-lg text-center">
+        <h2 class="section-title mb-3">Can't Find What You're Looking For?</h2>
+        <p class="lead text-muted mb-4">Get a personalized quote for your specific cleaning needs</p>
+        <a href="{% url 'bookings:quote-request' %}" class="btn btn-primary btn-lg">
+            <i class="fas fa-quote-left me-2"></i> Request a Quote
+        </a>
+    </div>
+</section>
+{% endblock %}

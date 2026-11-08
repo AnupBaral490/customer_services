@@ -1,0 +1,171 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About Us | {{ BUSINESS_NAME }}{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section" style="padding: 60px 0;">
+    <div class="container-lg">
+        <h1 class="display-4 mb-3">About {{ BUSINESS_NAME }}</h1>
+        <p class="lead">Your trusted partner in cleanliness since day one</p>
+    </div>
+</section>
+
+<!-- Company Introduction -->
+<section class="section-padding bg-white">
+    <div class="container-lg">
+        <div class="row g-4 align-items-center">
+            <div class="col-lg-6">
+                <h2 class="section-title mb-3">Our Story</h2>
+                <p class="text-muted mb-3">{{ BUSINESS_NAME }} was founded with a simple mission: to provide professional, reliable cleaning services that exceed expectations.</p>
+                <p class="text-muted mb-3">We believe that a clean space isn't just about appearances—it's about creating healthier, happier environments for families and businesses. Our team combines professional expertise with genuine care for every property we service.</p>
+                <p class="text-muted">With years of experience serving Australian homes and businesses, we've built our reputation on reliability, quality, and customer satisfaction.</p>
+            </div>
+            <div class="col-lg-6">
+                <div style="background: linear-gradient(135deg, #183D39 0%, #2d5b57 100%); height: 300px; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-home" style="font-size: 5rem; color: white; opacity: 0.3;"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Mission, Vision, Values -->
+<section class="section-padding" style="background-color: var(--secondary);">
+    <div class="container-lg">
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="text-center">
+                    <i class="fas fa-bullseye text-primary mb-3" style="font-size: 2rem;"></i>
+                    <h5>Our Mission</h5>
+                    <p class="text-muted">To deliver exceptional cleaning services that enhance the quality of life for our customers and their families.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="text-center">
+                    <i class="fas fa-eye text-primary mb-3" style="font-size: 2rem;"></i>
+                    <h5>Our Vision</h5>
+                    <p class="text-muted">To be the most trusted and recommended cleaning service provider across Australia.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="text-center">
+                    <i class="fas fa-heart text-primary mb-3" style="font-size: 2rem;"></i>
+                    <h5>Our Values</h5>
+                    <p class="text-muted">Integrity, reliability, excellence, and customer-first service in everything we do.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Core Values -->
+<section class="section-padding bg-white">
+    <div class="container-lg">
+        <h2 class="section-title text-center mb-5">Our Core Values</h2>
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="d-flex gap-3">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-handshake text-primary" style="font-size: 1.5rem;"></i>
+                    </div>
+                    <div>
+                        <h5>Reliability</h5>
+                        <p class="text-muted">You can count on us to deliver exactly what we promise, every single time.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="d-flex gap-3">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-star text-primary" style="font-size: 1.5rem;"></i>
+                    </div>
+                    <div>
+                        <h5>Excellence</h5>
+                        <p class="text-muted">We maintain the highest standards in every service we provide.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="d-flex gap-3">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-leaf text-primary" style="font-size: 1.5rem;"></i>
+                    </div>
+                    <div>
+                        <h5>Sustainability</h5>
+                        <p class="text-muted">We're committed to environmentally responsible cleaning practices.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="d-flex gap-3">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-smile text-primary" style="font-size: 1.5rem;"></i>
+                    </div>
+                    <div>
+                        <h5>Customer Care</h5>
+                        <p class="text-muted">Your satisfaction is our top priority in every interaction.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Professional Standards -->
+<section class="section-padding" style="background-color: var(--secondary);">
+    <div class="container-lg">
+        <h2 class="section-title text-center mb-5">Professional Standards</h2>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="text-center">
+                    <div class="rounded-circle bg-primary text-white mx-auto mb-3" style="width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; font-size: 2rem;">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h5>Certified Staff</h5>
+                    <p class="text-muted small">All team members are fully trained and certified</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="text-center">
+                    <div class="rounded-circle bg-primary text-white mx-auto mb-3" style="width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; font-size: 2rem;">
+                        <i class="fas fa-check-shield"></i>
+                    </div>
+                    <h5>Fully Insured</h5>
+                    <p class="text-muted small">Comprehensive insurance coverage</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="text-center">
+                    <div class="rounded-circle bg-primary text-white mx-auto mb-3" style="width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; font-size: 2rem;">
+                        <i class="fas fa-microscope"></i>
+                    </div>
+                    <h5>Quality Control</h5>
+                    <p class="text-muted small">Rigorous quality assurance checks</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="text-center">
+                    <div class="rounded-circle bg-primary text-white mx-auto mb-3" style="width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; font-size: 2rem;">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h5>Background Checked</h5>
+                    <p class="text-muted small">All team members verified and screened</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="section-padding bg-white">
+    <div class="container-lg text-center">
+        <h2 class="section-title mb-3">Experience Our Service Quality</h2>
+        <p class="lead text-muted mb-4">Join thousands of satisfied Australian customers</p>
+        <a href="{% url 'bookings:booking-create' %}" class="btn btn-primary btn-lg">
+            <i class="fas fa-calendar-check me-2"></i> Book Your First Cleaning
+        </a>
+    </div>
+</section>
+{% endblock %}

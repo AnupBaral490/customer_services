@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}Terms and Conditions | {{ BUSINESS_NAME }}{% endblock %}
+
+{% block content %}
+<section class="section-padding bg-white">
+    <div class="container-lg">
+        <div class="row">
+            <div class="col-lg-8">
+                <h1 class="mb-4">Terms and Conditions</h1>
+                <p class="text-muted mb-4">Last updated: November 2024</p>
+
+                <h3 class="mt-4 mb-3">1. Agreement to Terms</h3>
+                <p>By accessing and using this website and booking our services, you accept and agree to be bound by the terms and provision of this agreement.</p>
+
+                <h3 class="mt-4 mb-3">2. Services</h3>
+                <p>{{ BUSINESS_NAME }} provides professional cleaning services in Australia. Services are provided as described in the service details and booking confirmation.</p>
+
+                <h3 class="mt-4 mb-3">3. Booking and Payment</h3>
+                <ul>
+                    <li>All bookings must be made through our website or by contacting us directly</li>
+                    <li>Booking requests are subject to confirmation</li>
+                    <li>Payment terms will be specified in your booking confirmation</li>
+                </ul>
+
+                <h3 class="mt-4 mb-3">4. Customer Responsibilities</h3>
+                <ul>
+                    <li>Customers are responsible for providing accurate property information</li>
+                    <li>Access to the property must be arranged as specified</li>
+                    <li>Customers should remove valuables before the cleaning date</li>
+                </ul>
+
+                <h3 class="mt-4 mb-3">5. Service Quality</h3>
+                <p>We are committed to providing high-quality cleaning services. If you are not satisfied with our service, please contact us within 24 hours to discuss remedies.</p>
+
+                <h3 class="mt-4 mb-3">6. Limitation of Liability</h3>
+                <p>{{ BUSINESS_NAME }} shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use of or inability to use the services or website.</p>
+
+                <h3 class="mt-4 mb-3">7. Changes to Terms</h3>
+                <p>We reserve the right to modify these terms at any time. Continued use of the website following changes constitutes your acceptance of the new terms.</p>
+
+                <h3 class="mt-4 mb-3">8. Contact Us</h3>
+                <p>
+                    <strong>{{ BUSINESS_NAME }}</strong><br>
+                    Email: {{ BUSINESS_EMAIL }}<br>
+                    Phone: {{ BUSINESS_PHONE }}
+                </p>
+
+                <hr class="my-5">
+                <p class="text-muted small"><em>This is a template terms and conditions document. Please have it reviewed by a legal professional to ensure it covers your specific services and complies with Australian consumer law.</em></p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
