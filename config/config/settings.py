@@ -127,6 +127,10 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+# Authentication settings
+LOGIN_URL = 'customers:customer-login'
+LOGIN_REDIRECT_URL = '/'
+
 # Crispy Forms configuration
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
