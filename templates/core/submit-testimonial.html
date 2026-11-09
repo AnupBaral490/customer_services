@@ -1,0 +1,598 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Submit a Review | {{ BUSINESS_NAME }}{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="testimonial-hero">
+    <div class="testimonial-hero-overlay"></div>
+    <div class="testimonial-hero-content">
+        <h1 class="testimonial-hero-title">Share Your Experience</h1>
+        <p class="testimonial-hero-subtitle">Help other customers discover quality service</p>
+    </div>
+</section>
+
+<!-- Testimonial Form Section -->
+<section class="testimonial-form-section">
+    <div class="container-lg">
+        <div class="testimonial-form-wrapper">
+            <!-- Form Container -->
+            <div class="testimonial-form-container">
+                <!-- Form Header -->
+                <div class="testimonial-form-header">
+                    <h2 class="testimonial-form-title">Write Your Review</h2>
+                    <p class="testimonial-form-intro">Your feedback helps us improve and helps other customers make informed decisions</p>
+                </div>
+
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+                {% endfor %}
+                {% endif %}
+
+                <form method="post" class="testimonial-form" novalidate>
+                    {% csrf_token %}
+
+                    <!-- Customer Info Section -->
+                    <div class="form-section">
+                        <div class="form-section-header">
+                            <i class="fas fa-user-circle"></i>
+                            <h3>Your Information</h3>
+                        </div>
+                        <div class="form-section-body">
+                            <div class="form-group-custom">
+                                <label for="{{ form.customer_name.id_for_label }}" class="form-label-custom">Full Name <span class="required">*</span></label>
+                                {{ form.customer_name }}
+                                {% if form.customer_name.errors %}
+                                <div class="invalid-feedback d-block">{{ form.customer_name.errors.0 }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service Section -->
+                    <div class="form-section">
+                        <div class="form-section-header">
+                            <i class="fas fa-briefcase"></i>
+                            <h3>Service Details</h3>
+                        </div>
+                        <div class="form-section-body">
+                            <div class="form-group-custom">
+                                <label for="{{ form.service.id_for_label }}" class="form-label-custom">Service You Used <span class="required">*</span></label>
+                                {{ form.service }}
+                                {% if form.service.errors %}
+                                <div class="invalid-feedback d-block">{{ form.service.errors.0 }}</div>
+                                {% endif %}
+                                <small class="form-hint">e.g., Residential Cleaning, Commercial Cleaning, End-of-Lease Cleaning</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rating Section -->
+                    <div class="form-section">
+                        <div class="form-section-header">
+                            <i class="fas fa-star"></i>
+                            <h3>Your Rating</h3>
+                        </div>
+                        <div class="form-section-body">
+                            <div class="rating-group">
+                                {% for value, label in form.rating.field.choices %}
+                                <label class="rating-label">
+                                    <input type="radio" name="rating" value="{{ value }}" {% if form.rating.value == value|stringformat:"s" %}checked{% endif %} class="rating-input">
+                                    <span class="rating-stars">
+                                        {% for i in "12345" %}
+                                            {% if i|add:"0" <= value|add:"0" %}
+                                            <i class="fas fa-star"></i>
+                                            {% else %}
+                                            <i class="far fa-star"></i>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </span>
+                                    <span class="rating-text">{{ label }}</span>
+                                </label>
+                                {% endfor %}
+                            </div>
+                            {% if form.rating.errors %}
+                            <div class="invalid-feedback d-block">{{ form.rating.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Review Section -->
+                    <div class="form-section">
+                        <div class="form-section-header">
+                            <i class="fas fa-comment-dots"></i>
+                            <h3>Your Review</h3>
+                        </div>
+                        <div class="form-section-body">
+                            <div class="form-group-custom">
+                                <label for="{{ form.comment.id_for_label }}" class="form-label-custom">Tell Us Your Experience <span class="required">*</span></label>
+                                {{ form.comment }}
+                                {% if form.comment.errors %}
+                                <div class="invalid-feedback d-block">{{ form.comment.errors.0 }}</div>
+                                {% endif %}
+                                <small class="form-hint">Share details about your experience. What did you like? Would you recommend us?</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Submit Buttons -->
+                    <div class="form-actions">
+                        <button type="submit" class="btn-submit">
+                            <i class="fas fa-check me-2"></i> Submit Review
+                        </button>
+                        <a href="{% url 'core:home' %}" class="btn-cancel">Cancel</a>
+                    </div>
+                </form>
+
+                <!-- Info Box -->
+                <div class="testimonial-info-box">
+                    <div class="testimonial-info-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="testimonial-info-content">
+                        <h4>Review Moderation</h4>
+                        <p>We review all submissions to ensure quality and authenticity. Your review will appear on our website after approval.</p>
+                    </div>
+                </div>
+
+                <!-- Learn How To Review -->
+                <div class="learn-review-box">
+                    <p><strong>First time submitting a review?</strong> <a href="{% url 'core:how-to-review' %}">Learn how to submit a review →</a></p>
+                </div>
+            </div>
+
+            <!-- Info Card -->
+            <div class="testimonial-benefits-card">
+                <h3 class="benefits-title"><i class="fas fa-lightbulb me-2"></i>Why Your Review Matters</h3>
+                <ul class="benefits-list">
+                    <li><i class="fas fa-check-circle me-2"></i> Help other customers make informed decisions</li>
+                    <li><i class="fas fa-check-circle me-2"></i> Your honest feedback helps us improve</li>
+                    <li><i class="fas fa-check-circle me-2"></i> Share your positive experience</li>
+                    <li><i class="fas fa-check-circle me-2"></i> Build trust in our community</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+/* ==================== TESTIMONIAL SUBMISSION ==================== */
+.testimonial-hero {
+    position: relative;
+    background: linear-gradient(135deg, #183D39 0%, #2a5f5a 50%, #1a1a1a 100%);
+    padding: 100px 20px;
+    overflow: hidden;
+    text-align: center;
+    color: white;
+}
+
+.testimonial-hero-overlay {
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(0, 217, 122, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+}
+
+.testimonial-hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.testimonial-hero-title {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.testimonial-hero-subtitle {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 400;
+}
+
+/* Form Section */
+.testimonial-form-section {
+    padding: 80px 20px;
+    background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+}
+
+.testimonial-form-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.testimonial-form-container {
+    background: white;
+    border-radius: 12px;
+    padding: 50px;
+    box-shadow: 0 8px 40px rgba(24, 61, 57, 0.1);
+    border: 1px solid rgba(24, 61, 57, 0.08);
+}
+
+.testimonial-form-header {
+    margin-bottom: 40px;
+    text-align: center;
+    border-bottom: 2px solid rgba(24, 61, 57, 0.1);
+    padding-bottom: 30px;
+}
+
+.testimonial-form-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #1a1a1a;
+    margin-bottom: 10px;
+}
+
+.testimonial-form-intro {
+    font-size: 1.05rem;
+    color: #666;
+}
+
+/* Form Sections */
+.form-section {
+    margin-bottom: 40px;
+    padding: 28px;
+    background: linear-gradient(135deg, rgba(24, 61, 57, 0.04) 0%, rgba(0, 217, 122, 0.02) 100%);
+    border-radius: 8px;
+    border: 1px solid rgba(24, 61, 57, 0.08);
+}
+
+.form-section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid rgba(24, 61, 57, 0.15);
+}
+
+.form-section-header i {
+    font-size: 1.5rem;
+    color: #183D39;
+}
+
+.form-section-header h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0;
+}
+
+.form-section-body {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Form Groups */
+.form-group-custom {
+    margin-bottom: 0;
+}
+
+.form-label-custom {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+}
+
+.required {
+    color: #EF4444;
+    font-weight: 700;
+}
+
+.form-control {
+    border: 2px solid rgba(24, 61, 57, 0.15);
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    background: white;
+    width: 100%;
+    font-family: inherit;
+}
+
+.form-control:focus {
+    border-color: #183D39;
+    box-shadow: 0 0 0 4px rgba(24, 61, 57, 0.1);
+    outline: none;
+}
+
+textarea.form-control {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.form-hint {
+    display: block;
+    font-size: 0.85rem;
+    color: #999;
+    margin-top: 6px;
+    font-style: italic;
+}
+
+/* Rating Input */
+.rating-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.rating-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: rgba(24, 61, 57, 0.04);
+    border: 2px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.rating-label:hover {
+    background: rgba(24, 61, 57, 0.08);
+    border-color: rgba(24, 61, 57, 0.15);
+}
+
+.rating-input {
+    cursor: pointer;
+    accent-color: #183D39;
+}
+
+.rating-input:checked + .rating-stars {
+    color: #00d97a;
+}
+
+.rating-stars {
+    display: flex;
+    gap: 4px;
+    color: #ddd;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+.rating-text {
+    margin-left: auto;
+    font-weight: 600;
+    color: #666;
+}
+
+.rating-input:checked ~ .rating-text {
+    color: #183D39;
+}
+
+/* Form Actions */
+.form-actions {
+    display: flex;
+    gap: 16px;
+    margin: 40px 0;
+}
+
+.btn-submit,
+.btn-cancel {
+    flex: 1;
+    padding: 14px 28px;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 6px;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-submit {
+    background: linear-gradient(135deg, #183D39 0%, #00d97a 100%);
+    color: white;
+    box-shadow: 0 8px 25px rgba(24, 61, 57, 0.25);
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px rgba(24, 61, 57, 0.35);
+    color: white;
+}
+
+.btn-cancel {
+    background: #f5f5f5;
+    color: #183D39;
+    border: 2px solid #183D39;
+}
+
+.btn-cancel:hover {
+    background: #183D39;
+    color: white;
+}
+
+/* Info Box */
+.testimonial-info-box {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding: 28px;
+    background: linear-gradient(135deg, rgba(0, 217, 122, 0.08) 0%, rgba(24, 61, 57, 0.05) 100%);
+    border: 2px solid rgba(0, 217, 122, 0.2);
+    border-radius: 8px;
+    margin-top: 40px;
+}
+
+.testimonial-info-icon {
+    font-size: 2rem;
+    color: #00d97a;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: rgba(0, 217, 122, 0.1);
+    border-radius: 50%;
+}
+
+.testimonial-info-content h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #183D39;
+    margin-bottom: 6px;
+}
+
+.testimonial-info-content p {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Learn Review Box */
+.learn-review-box {
+    padding: 20px 28px;
+    background: linear-gradient(135deg, rgba(24, 61, 57, 0.04) 0%, rgba(0, 217, 122, 0.02) 100%);
+    border: 1px solid rgba(24, 61, 57, 0.1);
+    border-radius: 8px;
+    margin-top: 24px;
+    text-align: center;
+}
+
+.learn-review-box p {
+    font-size: 0.95rem;
+    color: #555;
+    margin: 0;
+}
+
+.learn-review-box a {
+    color: #183D39;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.learn-review-box a:hover {
+    color: #00d97a;
+}
+
+/* Benefits Card */
+.testimonial-benefits-card {
+    background: white;
+    border-radius: 12px;
+    padding: 32px 24px;
+    box-shadow: 0 8px 40px rgba(24, 61, 57, 0.1);
+    border: 1px solid rgba(24, 61, 57, 0.08);
+    height: fit-content;
+    position: sticky;
+    top: 20px;
+}
+
+.benefits-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 24px;
+}
+
+.benefits-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.benefits-list li {
+    font-size: 0.9rem;
+    color: #666;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    line-height: 1.6;
+}
+
+.benefits-list i {
+    color: #00d97a;
+    font-size: 1rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+    .testimonial-form-wrapper {
+        grid-template-columns: 1fr;
+    }
+
+    .testimonial-form-container {
+        padding: 40px;
+    }
+
+    .testimonial-form-title {
+        font-size: 1.8rem;
+    }
+
+    .testimonial-benefits-card {
+        position: static;
+    }
+}
+
+@media (max-width: 768px) {
+    .testimonial-hero-title {
+        font-size: 2.2rem;
+    }
+
+    .testimonial-form-section {
+        padding: 60px 20px;
+    }
+
+    .testimonial-form-container {
+        padding: 30px 20px;
+    }
+
+    .testimonial-form-title {
+        font-size: 1.5rem;
+    }
+
+    .form-section {
+        padding: 20px;
+    }
+
+    .form-section-header h3 {
+        font-size: 1.1rem;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .btn-submit,
+    .btn-cancel {
+        width: 100%;
+    }
+
+    .testimonial-info-box {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .testimonial-info-icon {
+        margin: 0 auto;
+    }
+}
+</style>
+{% endblock %}

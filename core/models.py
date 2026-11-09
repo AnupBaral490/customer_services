@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Testimonial(models.Model):
@@ -10,6 +11,7 @@ class Testimonial(models.Model):
         (1, '1 Star'),
     ]
 
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     customer_name = models.CharField(max_length=100)
     service = models.CharField(max_length=100)
     rating = models.IntegerField(choices=RATING_CHOICES, default=5)

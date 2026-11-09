@@ -1,0 +1,698 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}How to Submit a Review | {{ BUSINESS_NAME }}{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="how-to-hero">
+    <div class="how-to-hero-overlay"></div>
+    <div class="how-to-hero-content">
+        <h1 class="how-to-hero-title">How to Submit a Review</h1>
+        <p class="how-to-hero-subtitle">Easy steps to share your experience</p>
+    </div>
+</section>
+
+<!-- How To Guide Section -->
+<section class="how-to-section">
+    <div class="container-lg">
+        <!-- Overview -->
+        <div class="how-to-overview mb-5">
+            <h2 class="overview-title">Share Your Experience in 4 Simple Steps</h2>
+            <p class="overview-subtitle">Help other customers discover quality service by sharing your honest feedback</p>
+        </div>
+
+        <!-- Steps Grid -->
+        <div class="steps-container">
+            <!-- Step 1: Click Button -->
+            <div class="how-to-step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3 class="step-title">Click "Submit Your Review"</h3>
+                    <p class="step-description">
+                        Look for the green "Submit Your Review" button on our home page in the testimonials section. You can also visit the review page directly.
+                    </p>
+                    <div class="step-highlight">
+                        <p><strong>Where to find it:</strong></p>
+                        <ul class="step-list">
+                            <li>Home page → scroll down → "What Our Clients Say" section</li>
+                            <li>Direct URL: <code>/testimonials/submit/</code></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="step-visual">
+                    <i class="fas fa-mouse-pointer"></i>
+                </div>
+            </div>
+
+            <!-- Step 2: Fill Your Information -->
+            <div class="how-to-step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3 class="step-title">Enter Your Information</h3>
+                    <p class="step-description">
+                        Fill in the "Your Information" section with your details.
+                    </p>
+                    <div class="step-highlight">
+                        <p><strong>What to fill:</strong></p>
+                        <ul class="step-list">
+                            <li><strong>Full Name</strong> - Your name (required)</li>
+                            <li>Example: "John Smith"</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="step-visual">
+                    <i class="fas fa-user"></i>
+                </div>
+            </div>
+
+            <!-- Step 3: Select Service & Rating -->
+            <div class="how-to-step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3 class="step-title">Choose Service & Rating</h3>
+                    <p class="step-description">
+                        Select the service you used and give your rating.
+                    </p>
+                    <div class="step-highlight">
+                        <p><strong>Service Examples:</strong></p>
+                        <ul class="step-list">
+                            <li>Residential Cleaning</li>
+                            <li>Commercial Cleaning</li>
+                            <li>End-of-Lease Cleaning</li>
+                            <li>Office Cleaning</li>
+                            <li>Deep Cleaning</li>
+                        </ul>
+                        <p class="mt-3"><strong>Rating Scale:</strong></p>
+                        <div class="rating-examples">
+                            <div class="rating-example">
+                                <span class="stars">⭐⭐⭐⭐⭐</span>
+                                <span class="meaning">Excellent - Highly recommend!</span>
+                            </div>
+                            <div class="rating-example">
+                                <span class="stars">⭐⭐⭐⭐</span>
+                                <span class="meaning">Great - Very satisfied</span>
+                            </div>
+                            <div class="rating-example">
+                                <span class="stars">⭐⭐⭐</span>
+                                <span class="meaning">Good - Satisfied</span>
+                            </div>
+                            <div class="rating-example">
+                                <span class="stars">⭐⭐</span>
+                                <span class="meaning">Okay - Could be better</span>
+                            </div>
+                            <div class="rating-example">
+                                <span class="stars">⭐</span>
+                                <span class="meaning">Poor - Not satisfied</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="step-visual">
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+
+            <!-- Step 4: Write Review & Submit -->
+            <div class="how-to-step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3 class="step-title">Write Your Review & Submit</h3>
+                    <p class="step-description">
+                        Share your experience in the review text box, then click submit.
+                    </p>
+                    <div class="step-highlight">
+                        <p><strong>Review Tips:</strong></p>
+                        <ul class="step-list">
+                            <li>Be honest and specific</li>
+                            <li>Mention what you liked</li>
+                            <li>Share any areas for improvement</li>
+                            <li>Would you recommend us?</li>
+                            <li>Keep it constructive and professional</li>
+                        </ul>
+                        <p class="mt-3"><strong>Example Review:</strong></p>
+                        <div class="example-review">
+                            "Excellent service! The team arrived on time and was very professional. They cleaned every corner thoroughly and were respectful of our home. I highly recommend Raslan Cleaning Services to anyone looking for quality residential cleaning."
+                        </div>
+                    </div>
+                </div>
+                <div class="step-visual">
+                    <i class="fas fa-pen"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- What Happens Next -->
+        <div class="what-happens-next mt-5">
+            <h2 class="section-title">What Happens After You Submit?</h2>
+            <div class="process-cards">
+                <div class="process-card">
+                    <div class="process-number">1</div>
+                    <h4>Review Submitted</h4>
+                    <p>Your review is received and you see a success page</p>
+                </div>
+                <div class="process-arrow"><i class="fas fa-arrow-right"></i></div>
+                <div class="process-card">
+                    <div class="process-number">2</div>
+                    <h4>We Review It</h4>
+                    <p>Our team checks your submission (24-48 hours)</p>
+                </div>
+                <div class="process-arrow"><i class="fas fa-arrow-right"></i></div>
+                <div class="process-card">
+                    <div class="process-number">3</div>
+                    <h4>Published</h4>
+                    <p>If approved, your review appears on our website</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="faq-section mt-5">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-question-circle"></i>
+                        Do I need to be logged in to submit a review?
+                    </div>
+                    <div class="faq-answer">
+                        <p>No, you can submit a review without logging in. We just need your name and service details. If you're logged in, we'll associate the review with your account.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-question-circle"></i>
+                        How long does it take for my review to appear?
+                    </div>
+                    <div class="faq-answer">
+                        <p>We review all submissions within 24-48 hours to ensure quality and authenticity. Once approved, your review will be visible on our website immediately.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-question-circle"></i>
+                        Can I edit my review after submitting?
+                    </div>
+                    <div class="faq-answer">
+                        <p>Currently, you cannot edit reviews directly. If you need to make changes, please contact us and we'll help you update your review.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-question-circle"></i>
+                        Will you reject my review if it's negative?
+                    </div>
+                    <div class="faq-answer">
+                        <p>No, we welcome honest feedback both positive and negative. We only reject reviews that are abusive, spam, or contain inappropriate content. Fair criticism helps us improve.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-question-circle"></i>
+                        Can I submit multiple reviews?
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! If you've used different services or had multiple experiences, you can submit separate reviews for each. We encourage customers to share all their experiences.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-question-circle"></i>
+                        Where can I see my review?
+                    </div>
+                    <div class="faq-answer">
+                        <p>Once approved, your review will appear on our home page in the "What Our Clients Say" testimonials section. You can also see it when scrolling down the home page.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="cta-container mt-5">
+            <h2 class="cta-title">Ready to Share Your Experience?</h2>
+            <p class="cta-subtitle">Your honest feedback helps us improve and helps other customers make informed decisions</p>
+            <a href="{% url 'core:testimonial-submit' %}" class="cta-button">
+                <i class="fas fa-star me-2"></i> Submit Your Review Now
+            </a>
+        </div>
+    </div>
+</section>
+
+<style>
+/* ==================== HOW TO REVIEW PAGE ==================== */
+.how-to-hero {
+    position: relative;
+    background: linear-gradient(135deg, #183D39 0%, #2a5f5a 50%, #1a1a1a 100%);
+    padding: 100px 20px;
+    overflow: hidden;
+    text-align: center;
+    color: white;
+}
+
+.how-to-hero-overlay {
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(0, 217, 122, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+}
+
+.how-to-hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.how-to-hero-title {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.how-to-hero-subtitle {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 400;
+}
+
+/* How To Section */
+.how-to-section {
+    padding: 80px 20px;
+    background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+}
+
+.how-to-overview {
+    text-align: center;
+}
+
+.overview-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #1a1a1a;
+    margin-bottom: 15px;
+}
+
+.overview-subtitle {
+    font-size: 1.1rem;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Steps Container */
+.steps-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin: 60px 0;
+}
+
+.how-to-step {
+    display: grid;
+    grid-template-columns: 120px 1fr 100px;
+    gap: 30px;
+    align-items: start;
+    padding: 40px;
+    background: white;
+    border-radius: 12px;
+    border: 1px solid rgba(24, 61, 57, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.how-to-step:hover {
+    border-color: rgba(24, 61, 57, 0.2);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    transform: translateY(-4px);
+}
+
+.step-number {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #183D39 0%, #00d97a 100%);
+    color: white;
+    font-size: 2.5rem;
+    font-weight: 800;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.step-content {
+    flex: 1;
+}
+
+.step-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 12px;
+}
+
+.step-description {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.step-highlight {
+    background: linear-gradient(135deg, rgba(24, 61, 57, 0.04) 0%, rgba(0, 217, 122, 0.02) 100%);
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid #183D39;
+}
+
+.step-highlight p {
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0 0 12px 0;
+}
+
+.step-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.step-list li {
+    font-size: 0.95rem;
+    color: #555;
+    padding-left: 20px;
+    position: relative;
+}
+
+.step-list li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #00d97a;
+    font-weight: 700;
+}
+
+.step-visual {
+    font-size: 3rem;
+    color: #183D39;
+    text-align: center;
+    opacity: 0.3;
+}
+
+/* Rating Examples */
+.rating-examples {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.rating-example {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px;
+    background: white;
+    border-radius: 6px;
+    border: 1px solid rgba(24, 61, 57, 0.1);
+}
+
+.rating-example .stars {
+    font-size: 1.2rem;
+    min-width: 100px;
+}
+
+.rating-example .meaning {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Example Review */
+.example-review {
+    background: white;
+    padding: 16px;
+    border-radius: 6px;
+    border-left: 4px solid #00d97a;
+    font-style: italic;
+    color: #555;
+    line-height: 1.7;
+}
+
+/* Process Cards */
+.process-cards {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 40px;
+    justify-content: center;
+}
+
+.process-card {
+    flex: 1;
+    min-width: 200px;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    border: 1px solid rgba(24, 61, 57, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+.process-number {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #00d97a 0%, #00b35f 100%);
+    color: #1a1a1a;
+    font-size: 1.8rem;
+    font-weight: 800;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+}
+
+.process-card h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+}
+
+.process-card p {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0;
+}
+
+.process-arrow {
+    font-size: 2rem;
+    color: #183D39;
+    flex-shrink: 0;
+}
+
+.process-arrow i {
+    opacity: 0.5;
+}
+
+/* FAQ Section */
+.faq-section {
+    padding: 40px 0;
+}
+
+.section-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #1a1a1a;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.faq-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 24px;
+}
+
+.faq-item {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid rgba(24, 61, 57, 0.1);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+    border-color: rgba(24, 61, 57, 0.2);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.faq-question {
+    padding: 24px;
+    background: linear-gradient(135deg, rgba(24, 61, 57, 0.04) 0%, rgba(0, 217, 122, 0.02) 100%);
+    cursor: pointer;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-weight: 600;
+    color: #1a1a1a;
+    font-size: 1rem;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+.faq-item:hover .faq-question {
+    background: linear-gradient(135deg, rgba(24, 61, 57, 0.08) 0%, rgba(0, 217, 122, 0.04) 100%);
+}
+
+.faq-question i {
+    color: #183D39;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.faq-answer {
+    padding: 24px;
+    background: white;
+    max-height: 500px;
+    overflow: hidden;
+}
+
+.faq-answer p {
+    margin: 0;
+    color: #666;
+    line-height: 1.7;
+    font-size: 0.95rem;
+}
+
+.faq-answer p + p {
+    margin-top: 12px;
+}
+
+/* CTA Section */
+.cta-container {
+    text-align: center;
+    padding: 60px 40px;
+    background: linear-gradient(135deg, rgba(24, 61, 57, 0.08) 0%, rgba(0, 217, 122, 0.04) 100%);
+    border-radius: 12px;
+    border: 2px solid rgba(24, 61, 57, 0.15);
+}
+
+.cta-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #1a1a1a;
+    margin-bottom: 15px;
+}
+
+.cta-subtitle {
+    font-size: 1.05rem;
+    color: #666;
+    margin-bottom: 30px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #00d97a 0%, #00b35f 100%);
+    color: #1a1a1a;
+    padding: 16px 40px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.05rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(0, 217, 122, 0.3);
+}
+
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(0, 217, 122, 0.4);
+    color: #1a1a1a;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+    .how-to-step {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .step-visual {
+        text-align: left;
+    }
+
+    .process-cards {
+        flex-direction: column;
+    }
+
+    .process-arrow {
+        transform: rotate(90deg);
+    }
+
+    .faq-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .how-to-hero-title {
+        font-size: 2.2rem;
+    }
+
+    .how-to-section {
+        padding: 60px 20px;
+    }
+
+    .overview-title {
+        font-size: 1.8rem;
+    }
+
+    .how-to-step {
+        padding: 30px 20px;
+    }
+
+    .step-number {
+        width: 60px;
+        height: 60px;
+        font-size: 2rem;
+    }
+
+    .step-title {
+        font-size: 1.2rem;
+    }
+
+    .faq-question {
+        padding: 18px;
+    }
+
+    .faq-answer {
+        padding: 18px;
+    }
+
+    .cta-container {
+        padding: 40px 20px;
+    }
+
+    .cta-title {
+        font-size: 1.8rem;
+    }
+}
+</style>
+{% endblock %}

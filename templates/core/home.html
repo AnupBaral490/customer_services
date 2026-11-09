@@ -664,13 +664,53 @@
     </div>
 </section>
 
+<!-- Submit Review CTA Section -->
+<section class="submit-review-cta-section">
+    <div class="container-lg">
+        <div class="submit-review-card">
+            <div class="submit-review-content">
+                <h2 class="submit-review-title">Share Your Experience</h2>
+                <p class="submit-review-subtitle">Help other customers by sharing your honest feedback</p>
+                <p class="submit-review-description">
+                    Had a great experience with Raslan Cleaning Services? We'd love to hear about it! 
+                    Your review helps other customers make informed decisions and helps us improve our service.
+                </p>
+                <div class="submit-review-features">
+                    <div class="feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Takes only 2 minutes</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>No login required</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Your review helps others</span>
+                    </div>
+                </div>
+            </div>
+            <div class="submit-review-actions">
+                <a href="{% url 'core:testimonial-submit' %}" class="btn-submit-review-primary">
+                    <i class="fas fa-star me-2"></i> Submit Your Review
+                </a>
+                <a href="{% url 'core:how-to-review' %}" class="btn-submit-review-secondary">
+                    <i class="fas fa-question-circle me-2"></i> How It Works
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- Testimonials -->
 {% if testimonials %}
-<section class="section-padding-dark bg-white">
+<section class="testimonials-section">
     <div class="container-lg">
-        <div class="text-center mb-5">
-            <h2 class="section-title">What Our Clients Say</h2>
-            <p class="section-subtitle">Trusted by thousands of satisfied customers</p>
+        <div class="testimonials-header text-center mb-5">
+            <span class="testimonials-badge">CUSTOMER REVIEWS</span>
+            <h2 class="testimonials-title">What Our Clients Say</h2>
+            <p class="testimonials-subtitle">Trusted by thousands of satisfied customers</p>
+            <div class="testimonials-title-line"></div>
         </div>
 
         <div class="row g-4">
@@ -694,6 +734,14 @@
                 </div>
             </div>
             {% endfor %}
+        </div>
+
+        <!-- Submit Review CTA -->
+        <div class="testimonials-cta text-center mt-5">
+            <p class="testimonials-cta-text">Had a great experience with us?</p>
+            <a href="{% url 'core:testimonial-submit' %}" class="testimonials-cta-btn">
+                <i class="fas fa-star me-2"></i> Submit Your Review
+            </a>
         </div>
     </div>
 </section>
