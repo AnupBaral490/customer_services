@@ -5,160 +5,733 @@
 {% block title %}Book a Cleaning | {{ BUSINESS_NAME }}{% endblock %}
 
 {% block content %}
-<section class="section-padding bg-white">
+<!-- Booking Header Section -->
+<section class="booking-hero-section">
+    <div class="booking-hero-overlay"></div>
+    <div class="container-lg position-relative z-3">
+        <div class="text-center booking-header-content">
+            <h1 class="booking-title">Book Your Premium Cleaning</h1>
+            <p class="booking-subtitle">Schedule a service that fits your lifestyle. Fast, easy, and transparent pricing.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Main Booking Form Section -->
+<section class="booking-form-section">
     <div class="container-lg">
         <div class="row">
-            <div class="col-lg-8 mx-auto">
-                <h1 class="mb-2">Book Your Cleaning</h1>
-                <p class="text-muted mb-4">Fill in the form below to request a cleaning booking</p>
-
-                {% if messages %}
-                {% for message in messages %}
-                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-                    {{ message }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                </div>
-                {% endfor %}
-                {% endif %}
-
-                <form method="post" novalidate>
-                    {% csrf_token %}
-
-                    <!-- Customer Information -->
-                    <div class="card mb-4">
-                        <div class="card-header bg-primary text-white">
-                            <h5 class="mb-0"><i class="fas fa-user me-2"></i> Your Information</h5>
+            <div class="col-lg-3 d-none d-lg-block">
+                <!-- Booking Features -->
+                <div class="booking-features-sidebar">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-clock"></i>
                         </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="id_full_name" class="form-label">Full Name *</label>
+                        <h6>Quick & Easy</h6>
+                        <p>Complete booking in minutes</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <h6>Secure</h6>
+                        <p>Your data is protected</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <h6>Instant Confirmation</h6>
+                        <p>Get confirmation immediately</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-9">
+                <!-- Form Container -->
+                <div class="booking-form-container">
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show alert-premium" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+
+                    <form method="post" novalidate class="booking-form">
+                        {% csrf_token %}
+
+                        <!-- Step 1: Your Information -->
+                        <div class="form-section">
+                            <div class="section-header">
+                                <div class="section-number">1</div>
+                                <div>
+                                    <h5 class="section-title">Your Information</h5>
+                                    <p class="section-subtitle">Tell us about yourself</p>
+                                </div>
+                            </div>
+
+                            <div class="form-group-grid">
+                                <div class="form-group">
+                                    <label for="id_full_name" class="form-label-premium">
+                                        <i class="fas fa-user"></i> Full Name <span class="required">*</span>
+                                    </label>
                                     {{ customer_form.full_name }}
                                     {% if customer_form.full_name.errors %}
-                                    <div class="invalid-feedback d-block">{{ customer_form.full_name.errors.0 }}</div>
+                                    <div class="form-error">{{ customer_form.full_name.errors.0 }}</div>
                                     {% endif %}
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="id_email" class="form-label">Email *</label>
+
+                                <div class="form-group">
+                                    <label for="id_email" class="form-label-premium">
+                                        <i class="fas fa-envelope"></i> Email <span class="required">*</span>
+                                    </label>
                                     {{ customer_form.email }}
                                     {% if customer_form.email.errors %}
-                                    <div class="invalid-feedback d-block">{{ customer_form.email.errors.0 }}</div>
+                                    <div class="form-error">{{ customer_form.email.errors.0 }}</div>
                                     {% endif %}
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="id_phone" class="form-label">Phone *</label>
+
+                                <div class="form-group">
+                                    <label for="id_phone" class="form-label-premium">
+                                        <i class="fas fa-phone"></i> Phone <span class="required">*</span>
+                                    </label>
                                     {{ customer_form.phone }}
                                     {% if customer_form.phone.errors %}
-                                    <div class="invalid-feedback d-block">{{ customer_form.phone.errors.0 }}</div>
+                                    <div class="form-error">{{ customer_form.phone.errors.0 }}</div>
                                     {% endif %}
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="id_address" class="form-label">Address</label>
+
+                                <div class="form-group">
+                                    <label for="id_address" class="form-label-premium">
+                                        <i class="fas fa-home"></i> Address
+                                    </label>
                                     {{ customer_form.address }}
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="id_suburb" class="form-label">Suburb *</label>
+
+                                <div class="form-group">
+                                    <label for="id_suburb" class="form-label-premium">
+                                        <i class="fas fa-map-marker-alt"></i> Suburb <span class="required">*</span>
+                                    </label>
                                     {{ customer_form.suburb }}
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="id_postcode" class="form-label">Postcode *</label>
+
+                                <div class="form-group">
+                                    <label for="id_postcode" class="form-label-premium">
+                                        <i class="fas fa-map"></i> Postcode <span class="required">*</span>
+                                    </label>
                                     {{ customer_form.postcode }}
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Service Selection -->
-                    <div class="card mb-4">
-                        <div class="card-header bg-primary text-white">
-                            <h5 class="mb-0"><i class="fas fa-briefcase me-2"></i> Service Details</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="mb-3">
-                                <label for="id_service" class="form-label">Select Service *</label>
-                                <select name="service" class="form-select" required>
-                                    <option value="">-- Choose a service --</option>
-                                    {% for service in services %}
-                                    <option value="{{ service.id }}" {% if service_id|stringformat:"s" == service.id|stringformat:"s" %}selected{% endif %}>
-                                        {{ service.name }}
-                                    </option>
-                                    {% endfor %}
-                                </select>
+                        <!-- Divider -->
+                        <div class="form-divider"></div>
+
+                        <!-- Step 2: Service Selection -->
+                        <div class="form-section">
+                            <div class="section-header">
+                                <div class="section-number">2</div>
+                                <div>
+                                    <h5 class="section-title">Service Details</h5>
+                                    <p class="section-subtitle">Choose your cleaning service</p>
+                                </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="id_property_type" class="form-label">Property Type *</label>
+                            <div class="form-group-grid">
+                                <div class="form-group full-width">
+                                    <label for="id_service" class="form-label-premium">
+                                        <i class="fas fa-briefcase"></i> Select Service <span class="required">*</span>
+                                    </label>
+                                    <select name="service" id="id_service" class="form-select-premium" required>
+                                        <option value="">-- Choose a service --</option>
+                                        {% for service in services %}
+                                        <option value="{{ service.id }}" {% if service_id|stringformat:"s" == service.id|stringformat:"s" %}selected{% endif %}>
+                                            {{ service.name }}
+                                        </option>
+                                        {% endfor %}
+                                        <option value="others">Others (Describe in requirements)</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="id_property_type" class="form-label-premium">
+                                        <i class="fas fa-building"></i> Property Type <span class="required">*</span>
+                                    </label>
                                     {{ form.property_type }}
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="id_property_size" class="form-label">Property Size</label>
+
+                                <div class="form-group">
+                                    <label for="id_property_size" class="form-label-premium">
+                                        <i class="fas fa-ruler-combined"></i> Property Size
+                                    </label>
                                     {{ form.property_size }}
                                 </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="col-md-4 mb-3">
-                                    <label for="id_bedrooms" class="form-label">Bedrooms</label>
+                                <div class="form-group">
+                                    <label for="id_bedrooms" class="form-label-premium">
+                                        <i class="fas fa-bed"></i> Bedrooms
+                                    </label>
                                     {{ form.bedrooms }}
                                 </div>
-                                <div class="col-md-4 mb-3">
-                                    <label for="id_bathrooms" class="form-label">Bathrooms</label>
+
+                                <div class="form-group">
+                                    <label for="id_bathrooms" class="form-label-premium">
+                                        <i class="fas fa-bath"></i> Bathrooms
+                                    </label>
                                     {{ form.bathrooms }}
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Scheduling -->
-                    <div class="card mb-4">
-                        <div class="card-header bg-primary text-white">
-                            <h5 class="mb-0"><i class="fas fa-calendar me-2"></i> Scheduling</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="id_preferred_date" class="form-label">Preferred Date *</label>
+                        <!-- Divider -->
+                        <div class="form-divider"></div>
+
+                        <!-- Step 3: Scheduling -->
+                        <div class="form-section">
+                            <div class="section-header">
+                                <div class="section-number">3</div>
+                                <div>
+                                    <h5 class="section-title">Schedule Your Service</h5>
+                                    <p class="section-subtitle">Pick your preferred date and time</p>
+                                </div>
+                            </div>
+
+                            <div class="form-group-grid">
+                                <div class="form-group">
+                                    <label for="id_preferred_date" class="form-label-premium">
+                                        <i class="fas fa-calendar-alt"></i> Preferred Date <span class="required">*</span>
+                                    </label>
                                     {{ form.preferred_date }}
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="id_preferred_time" class="form-label">Preferred Time *</label>
+
+                                <div class="form-group">
+                                    <label for="id_preferred_time" class="form-label-premium">
+                                        <i class="fas fa-clock"></i> Preferred Time <span class="required">*</span>
+                                    </label>
                                     {{ form.preferred_time }}
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Additional Requirements -->
-                    <div class="card mb-4">
-                        <div class="card-header bg-primary text-white">
-                            <h5 class="mb-0"><i class="fas fa-comment-dots me-2"></i> Additional Information</h5>
+                        <!-- Divider -->
+                        <div class="form-divider"></div>
+
+                        <!-- Step 4: Additional Information -->
+                        <div class="form-section last">
+                            <div class="section-header">
+                                <div class="section-number">4</div>
+                                <div>
+                                    <h5 class="section-title">Special Requests</h5>
+                                    <p class="section-subtitle">Any additional information we should know?</p>
+                                </div>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="id_additional_requirements" class="form-label-premium">
+                                    <i class="fas fa-comment-dots"></i> Additional Requirements
+                                </label>
+                                {{ form.additional_requirements }}
+                                <small class="text-muted">Let us know about any special requirements or preferences</small>
+                            </div>
                         </div>
-                        <div class="card-body">
-                            <label for="id_additional_requirements" class="form-label">Additional Requirements</label>
-                            {{ form.additional_requirements }}
-                            <small class="text-muted d-block mt-2">Let us know about any special requirements or preferences</small>
+
+                        <!-- Submit Buttons -->
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-booking-submit">
+                                <i class="fas fa-check-circle me-2"></i> Request Booking
+                            </button>
+                            <a href="{% url 'core:home' %}" class="btn btn-booking-cancel">
+                                <i class="fas fa-times me-2"></i> Cancel
+                            </a>
                         </div>
-                    </div>
 
-                    <!-- Submit -->
-                    <div class="d-grid gap-2">
-                        <button type="submit" class="btn btn-primary btn-lg">
-                            <i class="fas fa-check-circle me-2"></i> Request Booking
-                        </button>
-                        <a href="{% url 'core:home' %}" class="btn btn-outline-secondary">Cancel</a>
-                    </div>
-                </form>
-
-                <div class="alert alert-info mt-4">
-                    <p class="mb-0"><strong>Note:</strong> Your booking request will be reviewed and confirmed. You'll receive a confirmation email with booking details and reference number.</p>
+                        <!-- Info Alert -->
+                        <div class="booking-info-box">
+                            <div class="info-icon">
+                                <i class="fas fa-info-circle"></i>
+                            </div>
+                            <div>
+                                <strong>How it works:</strong> Your booking request will be reviewed by our team. You'll receive a confirmation email with booking details, reference number, and final pricing within 2 hours.
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+<style>
+    /* ==================== PREMIUM BOOKING SECTION ==================== */
+
+    /* Hero Section */
+    .booking-hero-section {
+        position: relative;
+        padding: 80px 20px;
+        background: linear-gradient(135deg, #183D39 0%, #2a5f5a 50%, #1a1a1a 100%);
+        overflow: hidden;
+        min-height: 250px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .booking-hero-overlay {
+        position: absolute;
+        top: -50%;
+        right: -10%;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, rgba(0, 217, 122, 0.15) 0%, transparent 70%);
+        border-radius: 50%;
+    }
+
+    .booking-header-content {
+        position: relative;
+        z-index: 2;
+    }
+
+    .booking-title {
+        font-size: 3rem;
+        font-weight: 900;
+        color: white;
+        line-height: 1.2;
+        margin-bottom: 15px;
+        letter-spacing: -1px;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .booking-subtitle {
+        font-size: 1.2rem;
+        color: rgba(255, 255, 255, 0.9);
+        font-weight: 500;
+    }
+
+    /* Booking Form Section */
+    .booking-form-section {
+        padding: 80px 20px;
+        background: linear-gradient(180deg, #f5f7fa 0%, #ffffff 50%, #f0f5f7 100%);
+        min-height: 100vh;
+    }
+
+    /* Sidebar Features */
+    .booking-features-sidebar {
+        position: sticky;
+        top: 120px;
+    }
+
+    .feature-item {
+        background: white;
+        padding: 30px 25px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+        border: 2px solid transparent;
+        text-align: center;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        transition: all 0.3s ease;
+        background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+    }
+
+    .feature-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 30px rgba(0, 217, 122, 0.15);
+        border-color: #00d97a;
+        background: linear-gradient(135deg, #ffffff 0%, rgba(0, 217, 122, 0.02) 100%);
+    }
+
+    .feature-icon {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #183D39 0%, #2a5f5a 100%);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.8rem;
+        color: #00d97a;
+        margin: 0 auto 15px;
+        transition: all 0.3s ease;
+    }
+
+    .feature-item:hover .feature-icon {
+        background: linear-gradient(135deg, #00d97a 0%, #00a85c 100%);
+        color: white;
+        transform: scale(1.1);
+    }
+
+    .feature-item h6 {
+        font-weight: 700;
+        color: #183D39;
+        margin-bottom: 8px;
+        font-size: 1rem;
+    }
+
+    .feature-item p {
+        font-size: 0.85rem;
+        color: #777;
+        margin: 0;
+        line-height: 1.5;
+    }
+
+    /* Form Container */
+    .booking-form-container {
+        background: white;
+        border-radius: 16px;
+        padding: 50px;
+        box-shadow: 0 10px 40px rgba(24, 61, 57, 0.12);
+        border: 2px solid rgba(0, 217, 122, 0.1);
+    }
+
+    .booking-form {
+        max-width: 100%;
+    }
+
+    /* Form Sections */
+    .form-section {
+        margin-bottom: 40px;
+    }
+
+    .form-section.last {
+        margin-bottom: 30px;
+    }
+
+    .section-header {
+        display: flex;
+        align-items: flex-start;
+        gap: 20px;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 2px solid rgba(0, 217, 122, 0.15);
+    }
+
+    .section-number {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, #183D39 0%, #2a5f5a 100%);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #00d97a;
+        flex-shrink: 0;
+        box-shadow: 0 4px 12px rgba(24, 61, 57, 0.2);
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #183D39;
+        margin-bottom: 5px;
+    }
+
+    .section-subtitle {
+        font-size: 0.95rem;
+        color: #999;
+        margin: 0;
+    }
+
+    /* Form Groups */
+    .form-group-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 25px;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-group.full-width {
+        grid-column: 1 / -1;
+    }
+
+    .form-label-premium {
+        font-weight: 600;
+        color: #183D39;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.95rem;
+    }
+
+    .form-label-premium i {
+        color: #00d97a;
+        font-size: 1rem;
+    }
+
+    .required {
+        color: #ef4444;
+    }
+
+    /* Form Inputs */
+    .booking-form input[type="text"],
+    .booking-form input[type="email"],
+    .booking-form input[type="tel"],
+    .booking-form input[type="date"],
+    .booking-form input[type="time"],
+    .booking-form select,
+    .booking-form textarea,
+    .form-select-premium {
+        width: 100%;
+        padding: 12px 16px;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        font-family: inherit;
+        transition: all 0.3s ease;
+        background-color: #fafbfc;
+    }
+
+    .booking-form input:focus,
+    .booking-form select:focus,
+    .booking-form textarea:focus,
+    .form-select-premium:focus {
+        outline: none;
+        border-color: #00d97a;
+        background-color: white;
+        box-shadow: 0 0 0 3px rgba(0, 217, 122, 0.1);
+    }
+
+    .booking-form textarea {
+        min-height: 120px;
+        resize: vertical;
+    }
+
+    /* Divider */
+    .form-divider {
+        height: 2px;
+        background: linear-gradient(90deg, transparent, rgba(0, 217, 122, 0.2), transparent);
+        margin: 40px 0;
+    }
+
+    /* Form Actions */
+    .form-actions {
+        display: flex;
+        gap: 15px;
+        margin-top: 40px;
+        margin-bottom: 25px;
+    }
+
+    .btn-booking-submit {
+        flex: 1;
+        padding: 14px 32px;
+        background: linear-gradient(135deg, #00d97a 0%, #00a85c 100%);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-weight: 700;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 6px 20px rgba(0, 217, 122, 0.3);
+    }
+
+    .btn-booking-submit:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(0, 217, 122, 0.4);
+        background: linear-gradient(135deg, #00a85c 0%, #008045 100%);
+    }
+
+    .btn-booking-submit:active {
+        transform: translateY(0);
+    }
+
+    .btn-booking-cancel {
+        padding: 14px 32px;
+        background: white;
+        color: #183D39;
+        border: 2px solid #183D39;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .btn-booking-cancel:hover {
+        border-color: #00d97a;
+        color: #00d97a;
+        background: rgba(0, 217, 122, 0.08);
+        transform: translateY(-2px);
+    }
+
+    /* Info Box */
+    .booking-info-box {
+        background: linear-gradient(135deg, rgba(24, 61, 57, 0.08) 0%, rgba(0, 217, 122, 0.08) 100%);
+        border-left: 4px solid #00d97a;
+        padding: 20px;
+        border-radius: 8px;
+        display: flex;
+        gap: 15px;
+        align-items: flex-start;
+    }
+
+    .info-icon {
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, #183D39 0%, #2a5f5a 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #00d97a;
+        font-size: 1.2rem;
+        flex-shrink: 0;
+    }
+
+    .booking-info-box > div {
+        color: #555;
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+    .booking-info-box strong {
+        color: #183D39;
+    }
+
+    /* Alert Premium */
+    .alert-premium {
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        border-left: 4px solid #00d97a;
+    }
+
+    /* Form Error */
+    .form-error {
+        color: #ef4444;
+        font-size: 0.85rem;
+        margin-top: 5px;
+        font-weight: 600;
+    }
+
+    /* Services Grid */
+    .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 15px;
+        margin-top: 15px;
+    }
+
+    .service-card-option {
+        position: relative;
+        cursor: pointer;
+    }
+
+    .service-radio {
+        display: none;
+    }
+
+    .service-card-content {
+        background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+        border: 2px solid #e0e0e0;
+        border-radius: 10px;
+        padding: 18px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        text-align: center;
+    }
+
+    .service-card-option .service-radio:checked ~ .service-card-content {
+        background: linear-gradient(135deg, #00d97a 0%, #00a85c 100%);
+        border-color: #00d97a;
+        color: white;
+        box-shadow: 0 8px 20px rgba(0, 217, 122, 0.3);
+        transform: translateY(-3px);
+    }
+
+    .service-card-content:hover {
+        border-color: #00d97a;
+        box-shadow: 0 6px 15px rgba(0, 217, 122, 0.15);
+        transform: translateY(-2px);
+    }
+
+    .service-name {
+        font-weight: 700;
+        font-size: 0.95rem;
+        color: #183D39;
+        margin-bottom: 5px;
+        line-height: 1.3;
+    }
+
+    .service-radio:checked ~ .service-card-content .service-name {
+        color: white;
+    }
+
+    .service-price {
+        font-size: 0.85rem;
+        color: #666;
+        font-weight: 600;
+    }
+
+    .service-radio:checked ~ .service-card-content .service-price {
+        color: rgba(255, 255, 255, 0.9);
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+        .services-grid {
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 12px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .booking-hero-section {
+            padding: 50px 20px;
+        }
+
+        .booking-title {
+            font-size: 1.8rem;
+        }
+
+        .booking-subtitle {
+            font-size: 1rem;
+        }
+
+        .booking-form-section {
+            padding: 40px 20px;
+        }
+
+        .booking-form-container {
+            padding: 30px 20px;
+            border-radius: 12px;
+        }
+
+        .form-group-grid {
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .section-header {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .section-number {
+            margin: 0 auto;
+        }
+
+        .form-actions {
+            flex-direction: column;
+        }
+
+        .btn-booking-cancel {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .services-grid {
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        }
+    }
+</style>
 {% endblock %}

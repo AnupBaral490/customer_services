@@ -4,38 +4,81 @@
 {% block title %}Services | {{ BUSINESS_NAME }}{% endblock %}
 
 {% block content %}
-<!-- Hero -->
-<section class="hero-section" style="padding: 60px 0;">
+<!-- Premium Hero Section -->
+<section class="services-hero">
+    <div class="services-hero-overlay"></div>
     <div class="container-lg">
-        <h1 class="display-4 mb-3">Our Services</h1>
-        <p class="lead">Professional cleaning solutions for every need</p>
+        <div class="services-hero-content">
+            <h1 class="services-hero-title">Our Professional Services</h1>
+            <p class="services-hero-subtitle">Premium cleaning solutions for every need</p>
+        </div>
     </div>
 </section>
 
-<!-- Services Grid -->
-<section class="section-padding bg-white">
+<!-- Services Section -->
+<section class="featured-services-section">
     <div class="container-lg">
-        <div class="row g-4">
+        <!-- Section Header -->
+        <div class="services-header text-center mb-5">
+            <span class="services-badge">PROFESSIONAL SERVICES</span>
+            <h2 class="services-main-title">Complete Cleaning Solutions</h2>
+            <p class="services-main-subtitle">Experience professional cleaning with attention to detail and commitment to excellence</p>
+            <div class="services-title-line"></div>
+        </div>
+
+        <!-- Services Grid -->
+        <div class="services-grid-home">
             {% for service in services %}
-            <div class="col-md-6 col-lg-4">
-                <div class="service-card h-100">
+            <div class="service-card-home">
+                <!-- Image Container -->
+                <div class="service-image-container">
                     {% if service.image %}
-                    <img src="{{ service.image.url }}" alt="{{ service.name }}" class="card-img-top">
+                    <img src="{{ service.image.url }}" alt="{{ service.name }}" class="service-image-home">
                     {% else %}
-                    <div style="height: 250px; background: linear-gradient(135deg, #183D39 0%, #2d5b57 100%); display: flex; align-items: center; justify-content: center;">
-                        <i class="fas fa-sparkles" style="font-size: 3rem; color: white; opacity: 0.5;"></i>
+                    <div class="service-image-placeholder-home">
+                        <div class="placeholder-content">
+                            <i class="fas fa-broom"></i>
+                            <p>{{ service.name }}</p>
+                        </div>
                     </div>
                     {% endif %}
-                    <div class="service-card-body">
-                        <h5>{{ service.name }}</h5>
-                        <p>{{ service.description }}</p>
+                    
+                    <!-- Quick Action Overlay -->
+                    <div class="service-quick-action">
+                        <a href="{% url 'bookings:booking-create' %}?service_id={{ service.id }}" class="quick-action-btn">
+                            <i class="fas fa-plus"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Content -->
+                <div class="service-content-home">
+                    <div class="service-header-content">
+                        <h5 class="service-name-home">{{ service.name }}</h5>
                         {% if service.price %}
-                        <p class="service-price">{{ service.price }}</p>
+                        <span class="service-price-badge">{{ service.price }}</span>
                         {% endif %}
-                        <div class="d-grid gap-2">
-                            <a href="{% url 'services:service-detail' service.slug %}" class="btn btn-outline-primary btn-sm">View Details</a>
-                            <a href="{% url 'bookings:booking-create' %}?service_id={{ service.id }}" class="btn btn-primary btn-sm">Book Now</a>
-                        </div>
+                    </div>
+
+                    <p class="service-desc-home">{{ service.description|truncatewords:18 }}</p>
+
+                    <!-- Service Features (if included items exist) -->
+                    {% if service.what_included %}
+                    <ul class="service-features-home">
+                        {% for item in service.get_included_items|slice:":2" %}
+                        <li><i class="fas fa-check-circle"></i> {{ item }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+
+                    <!-- Action Buttons -->
+                    <div class="service-actions-home">
+                        <a href="{% url 'services:service-detail' service.slug %}" class="service-btn-detail">
+                            View Details
+                        </a>
+                        <a href="{% url 'bookings:booking-create' %}?service_id={{ service.id }}" class="service-btn-book-home">
+                            Book Service
+                        </a>
                     </div>
                 </div>
             </div>
@@ -48,14 +91,1000 @@
     </div>
 </section>
 
-<!-- CTA -->
-<section class="section-padding" style="background-color: var(--secondary);">
-    <div class="container-lg text-center">
-        <h2 class="section-title mb-3">Can't Find What You're Looking For?</h2>
-        <p class="lead text-muted mb-4">Get a personalized quote for your specific cleaning needs</p>
-        <a href="{% url 'bookings:quote-request' %}" class="btn btn-primary btn-lg">
-            <i class="fas fa-quote-left me-2"></i> Request a Quote
-        </a>
+<!-- Service Coverage Area Section -->
+<section class="service-coverage-section">
+    <div class="container-lg">
+        <!-- Section Header -->
+        <div class="coverage-header text-center mb-5">
+            <span class="coverage-badge">SERVICE AREAS</span>
+            <h2 class="coverage-title">Serving Darwin, Palmerston and Surrounding Suburbs</h2>
+            <p class="coverage-subtitle">Professional cleaning services across the greater Darwin area</p>
+            <div class="coverage-title-line"></div>
+        </div>
+
+        <div class="coverage-grid">
+            <!-- Darwin City & Inner Suburbs -->
+            <div class="coverage-card">
+                <div class="coverage-card-icon-wrapper">
+                    <i class="fas fa-city coverage-card-icon"></i>
+                </div>
+                <div class="coverage-card-content">
+                    <h4 class="coverage-card-title">Darwin City & Inner Suburbs</h4>
+                    <p class="coverage-card-text">Darwin CBD, Larrakeyah, Stuart Park, Woolner, Bayview, Parap, Fannie Bay, The Gardens and Ludmilla.</p>
+                </div>
+                <div class="coverage-card-badge">✓ Covered</div>
+            </div>
+
+            <!-- Northern Suburbs -->
+            <div class="coverage-card">
+                <div class="coverage-card-icon-wrapper">
+                    <i class="fas fa-map coverage-card-icon"></i>
+                </div>
+                <div class="coverage-card-content">
+                    <h4 class="coverage-card-title">Northern Suburbs</h4>
+                    <p class="coverage-card-text">Nightcliff, Rapid Creek, Millner, Coconut Grove, Jingili, Alawa, Brinkin, Tiwi, Casuarina, Wanguri, Leanyer, Wagaman, Karama, Malak, Anula and Wulagi.</p>
+                </div>
+                <div class="coverage-card-badge">✓ Covered</div>
+            </div>
+
+            <!-- Palmerston -->
+            <div class="coverage-card">
+                <div class="coverage-card-icon-wrapper">
+                    <i class="fas fa-home coverage-card-icon"></i>
+                </div>
+                <div class="coverage-card-content">
+                    <h4 class="coverage-card-title">Palmerston</h4>
+                    <p class="coverage-card-text">Palmerston City, Gray, Driver, Moulden, Durack, Rosebery, Bakewell, Gunn, Farrar, Johnston, Bellamack and Zuccoli.</p>
+                </div>
+                <div class="coverage-card-badge">✓ Covered</div>
+            </div>
+
+            <!-- Not on the list -->
+            <div class="coverage-card coverage-card-contact">
+                <div class="coverage-card-icon-wrapper coverage-card-icon-wrapper-contact">
+                    <i class="fas fa-phone coverage-card-icon coverage-card-icon-contact"></i>
+                </div>
+                <div class="coverage-card-content">
+                    <h4 class="coverage-card-title">Not on the List?</h4>
+                    <p class="coverage-card-text">Get in touch to check availability for your suburb. We may be able to serve you!</p>
+                </div>
+                <a href="{% url 'contact:message' %}" class="coverage-contact-btn">
+                    <i class="fas fa-comments me-2"></i>Contact Us
+                </a>
+            </div>
+        </div>
     </div>
 </section>
+
+<!-- Google Map Section -->
+<section class="service-map-section">
+    <div class="container-lg">
+        <div class="map-header text-center mb-5">
+            <h2 class="map-title">Our Service Coverage Map</h2>
+            <p class="map-subtitle">Visualize the areas we serve across Darwin and Palmerston</p>
+        </div>
+
+        <div class="map-container">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3835.5968831234567!2d130.8387!3d-12.4737!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2c2b3e0f0f0f0f0f%3A0x1234567890abcdef!2sDarwin%2C%20NT%200800!5e0!3m2!1sen!2sau!4v1234567890" 
+                width="100%" 
+                height="500" 
+                style="border:0; border-radius: 8px;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+
+        <div class="map-info mt-5">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="map-info-card">
+                        <div class="map-info-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h5 class="map-info-title">Service Coverage</h5>
+                        <p class="map-info-text">Greater Darwin & Palmerston areas with over 50+ suburbs covered</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="map-info-card">
+                        <div class="map-info-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h5 class="map-info-title">Fast Response</h5>
+                        <p class="map-info-text">Quick scheduling available for most suburbs with flexible timing</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="map-info-card">
+                        <div class="map-info-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <h5 class="map-info-title">Local Experts</h5>
+                        <p class="map-info-text">Experienced team familiar with your local area requirements</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="services-cta">
+    <div class="services-cta-overlay"></div>
+    <div class="container-lg">
+        <div class="services-cta-content">
+            <h2 class="services-cta-title">Ready to Get Started?</h2>
+            <p class="services-cta-subtitle">Book your service today and experience professional cleaning excellence</p>
+            <a href="{% url 'bookings:quote-request' %}" class="btn-cta-primary">
+                <i class="fas fa-quote-left me-2"></i> Request a Custom Quote
+            </a>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* ==================== SERVICES PAGE - PROFESSIONAL DESIGN ==================== */
+
+    /* Hero Section */
+    .services-hero {
+        position: relative;
+        padding: 100px 20px;
+        background: linear-gradient(135deg, #183D39 0%, #2a5f5a 50%, #1a1a1a 100%);
+        overflow: hidden;
+        min-height: 300px;
+        display: flex;
+        align-items: center;
+    }
+
+    .services-hero-overlay {
+        position: absolute;
+        top: -50%;
+        right: -10%;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, rgba(0, 217, 122, 0.15) 0%, transparent 70%);
+        border-radius: 50%;
+    }
+
+    .services-hero-content {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        color: white;
+    }
+
+    .services-hero-title {
+        font-size: 3.5rem;
+        font-weight: 800;
+        margin-bottom: 20px;
+        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        animation: fadeInUp 0.8s ease-out;
+    }
+
+    .services-hero-subtitle {
+        font-size: 1.3rem;
+        color: rgba(255, 255, 255, 0.85);
+        animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+
+    /* Featured Services Section */
+    .featured-services-section {
+        padding: 100px 20px;
+        background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+        position: relative;
+    }
+
+    /* Services Header */
+    .services-header {
+        margin-bottom: 60px;
+    }
+
+    .services-badge {
+        display: inline-block;
+        padding: 8px 16px;
+        background: rgba(24, 61, 57, 0.08);
+        border: 1px solid rgba(24, 61, 57, 0.2);
+        color: #183D39;
+        border-radius: 6px;
+        font-size: 0.75rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+        margin-bottom: 20px;
+    }
+
+    .services-main-title {
+        font-size: 2.8rem;
+        font-weight: 800;
+        color: #1a1a1a;
+        margin-bottom: 12px;
+        line-height: 1.2;
+        letter-spacing: -0.8px;
+    }
+
+    .services-main-subtitle {
+        font-size: 1.05rem;
+        color: #555;
+        margin-bottom: 30px;
+        font-weight: 400;
+        line-height: 1.7;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .services-title-line {
+        width: 50px;
+        height: 3px;
+        background: #183D39;
+        border-radius: 2px;
+        margin: 0 auto;
+    }
+
+    /* Services Grid */
+    .services-grid-home {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+        gap: 28px;
+        margin-bottom: 50px;
+    }
+
+    /* Service Card */
+    .service-card-home {
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        position: relative;
+    }
+
+    .service-card-home:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 32px rgba(24, 61, 57, 0.12);
+        border-color: rgba(24, 61, 57, 0.15);
+    }
+
+    /* Service Image */
+    .service-image-container {
+        position: relative;
+        height: 280px;
+        overflow: hidden;
+        background: linear-gradient(135deg, #f0f0f0 0%, #e8e8e8 100%);
+    }
+
+    .service-image-home {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .service-card-home:hover .service-image-home {
+        transform: scale(1.05);
+    }
+
+    .service-image-placeholder-home {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #f5f5f5 0%, #ececec 100%);
+    }
+
+    .placeholder-content {
+        text-align: center;
+        color: #999;
+    }
+
+    .placeholder-content i {
+        font-size: 3rem;
+        color: #bbb;
+        margin-bottom: 10px;
+    }
+
+    .placeholder-content p {
+        font-size: 0.9rem;
+        color: #999;
+        margin: 0;
+    }
+
+    /* Quick Action */
+    .service-quick-action {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .service-card-home:hover .service-quick-action {
+        opacity: 1;
+    }
+
+    .quick-action-btn {
+        width: 44px;
+        height: 44px;
+        background: rgba(24, 61, 57, 0.9);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .quick-action-btn:hover {
+        background: rgba(24, 61, 57, 1);
+        transform: scale(1.1);
+        color: white;
+    }
+
+    /* Service Content */
+    .service-content-home {
+        padding: 28px;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+
+    .service-header-content {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 12px;
+    }
+
+    .service-name-home {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #1a1a1a;
+        margin: 0;
+        line-height: 1.3;
+        flex: 1;
+    }
+
+    .service-price-badge {
+        display: inline-block;
+        background: #f5f5f5;
+        color: #183D39;
+        padding: 5px 12px;
+        border-radius: 4px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        white-space: nowrap;
+        border: 1px solid rgba(24, 61, 57, 0.15);
+    }
+
+    .service-desc-home {
+        color: #666;
+        font-size: 0.9rem;
+        line-height: 1.6;
+        margin-bottom: 16px;
+    }
+
+    /* Service Features */
+    .service-features-home {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 16px 0;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .service-features-home li {
+        font-size: 0.85rem;
+        color: #666;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .service-features-home i {
+        color: #183D39;
+        font-size: 0.75rem;
+    }
+
+    /* Service Actions */
+    .service-actions-home {
+        display: flex;
+        gap: 10px;
+        margin-top: auto;
+        padding-top: 16px;
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .service-btn-detail,
+    .service-btn-book-home {
+        flex: 1;
+        padding: 10px 14px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.85rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        text-align: center;
+        cursor: pointer;
+        border: none;
+    }
+
+    .service-btn-detail {
+        background: #f5f5f5;
+        color: #183D39;
+        border: 1px solid rgba(24, 61, 57, 0.15);
+    }
+
+    .service-btn-detail:hover {
+        background: #e8e8e8;
+        border-color: rgba(24, 61, 57, 0.3);
+        color: #1a1a1a;
+    }
+
+    .service-btn-book-home {
+        background: #183D39;
+        color: white;
+        border: none;
+    }
+
+    .service-btn-book-home:hover {
+        background: #0f2620;
+        color: white;
+    }
+
+    /* CTA Section */
+    .services-cta {
+        position: relative;
+        padding: 80px 20px;
+        background: linear-gradient(135deg, #183D39 0%, #2a5f5a 50%, #1a1a1a 100%);
+        overflow: hidden;
+    }
+
+    .services-cta-overlay {
+        position: absolute;
+        top: -50%;
+        right: -10%;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, rgba(0, 217, 122, 0.15) 0%, transparent 70%);
+        border-radius: 50%;
+    }
+
+    .services-cta-content {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        color: white;
+    }
+
+    .services-cta-title {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin-bottom: 15px;
+        animation: fadeInUp 0.8s ease-out;
+    }
+
+    .services-cta-subtitle {
+        font-size: 1.1rem;
+        color: rgba(255, 255, 255, 0.85);
+        margin-bottom: 35px;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+
+    .btn-cta-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: #00d97a;
+        color: #1a1a1a;
+        padding: 14px 36px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 25px rgba(0, 217, 122, 0.3);
+        animation: fadeInUp 0.8s ease-out 0.4s both;
+    }
+
+    .btn-cta-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 35px rgba(0, 217, 122, 0.4);
+        color: #1a1a1a;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Responsive */
+    @media (max-width: 991px) {
+        .services-main-title {
+            font-size: 2.2rem;
+        }
+
+        .services-grid-home {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .featured-services-section {
+            padding: 70px 20px;
+        }
+
+        .services-hero-title {
+            font-size: 2.5rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .services-main-title {
+            font-size: 1.8rem;
+        }
+
+        .services-main-subtitle {
+            font-size: 0.95rem;
+        }
+
+        .services-grid-home {
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+
+        .service-image-container {
+            height: 240px;
+        }
+
+        .service-content-home {
+            padding: 20px;
+        }
+
+        .service-name-home {
+            font-size: 1.1rem;
+        }
+
+        .featured-services-section {
+            padding: 50px 20px;
+        }
+
+        .services-hero-title {
+            font-size: 2rem;
+        }
+
+        .services-hero-subtitle {
+            font-size: 1rem;
+        }
+    }
+
+    /* ==================== SERVICE COVERAGE SECTION ==================== */
+    .service-coverage-section {
+        padding: 100px 20px;
+        background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .service-coverage-section::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -10%;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, rgba(0, 217, 122, 0.08) 0%, transparent 70%);
+        border-radius: 50%;
+        pointer-events: none;
+    }
+
+    .coverage-header {
+        position: relative;
+        z-index: 1;
+        margin-bottom: 80px;
+    }
+
+    .coverage-badge {
+        display: inline-block;
+        padding: 8px 16px;
+        background: rgba(24, 61, 57, 0.08);
+        border: 1px solid rgba(24, 61, 57, 0.2);
+        color: #183D39;
+        border-radius: 6px;
+        font-size: 0.75rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+        margin-bottom: 20px;
+    }
+
+    .coverage-title {
+        font-size: 2.8rem;
+        font-weight: 800;
+        color: #1a1a1a;
+        margin-bottom: 15px;
+        line-height: 1.2;
+        letter-spacing: -0.8px;
+    }
+
+    .coverage-subtitle {
+        font-size: 1.1rem;
+        color: #666;
+        font-weight: 400;
+        line-height: 1.6;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .coverage-title-line {
+        width: 50px;
+        height: 3px;
+        background: #183D39;
+        border-radius: 2px;
+        margin: 30px auto 0;
+    }
+
+    .coverage-grid {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+        gap: 28px;
+    }
+
+    .coverage-card {
+        background: white;
+        border-radius: 12px;
+        padding: 36px;
+        border: 1px solid rgba(24, 61, 57, 0.1);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .coverage-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: #183D39;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .coverage-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 16px 40px rgba(24, 61, 57, 0.15);
+        border-color: rgba(24, 61, 57, 0.2);
+    }
+
+    .coverage-card:hover::before {
+        transform: scaleX(1);
+    }
+
+    .coverage-card-icon-wrapper {
+        width: 70px;
+        height: 70px;
+        background: rgba(24, 61, 57, 0.08);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 24px;
+        transition: all 0.3s ease;
+    }
+
+    .coverage-card:hover .coverage-card-icon-wrapper {
+        background: rgba(24, 61, 57, 0.15);
+        transform: scale(1.1) rotate(-5deg);
+    }
+
+    .coverage-card-icon {
+        font-size: 2rem;
+        color: #183D39;
+    }
+
+    .coverage-card-icon-wrapper-contact {
+        background: rgba(0, 217, 122, 0.1);
+    }
+
+    .coverage-card-icon-contact {
+        color: #00d97a;
+    }
+
+    .coverage-card-content {
+        flex-grow: 1;
+        margin-bottom: 20px;
+    }
+
+    .coverage-card-title {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #1a1a1a;
+        margin: 0 0 12px 0;
+        line-height: 1.3;
+    }
+
+    .coverage-card-text {
+        font-size: 0.95rem;
+        color: #666;
+        line-height: 1.7;
+        margin: 0;
+    }
+
+    .coverage-card-badge {
+        display: inline-block;
+        background: rgba(0, 217, 122, 0.1);
+        color: #00d97a;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        border: 1px solid rgba(0, 217, 122, 0.3);
+        width: fit-content;
+    }
+
+    .coverage-card-contact {
+        background: linear-gradient(135deg, rgba(24, 61, 57, 0.04) 0%, rgba(0, 217, 122, 0.04) 100%);
+        border: 2px solid rgba(24, 61, 57, 0.15);
+    }
+
+    .coverage-card-contact:hover {
+        border-color: rgba(24, 61, 57, 0.3);
+        background: linear-gradient(135deg, rgba(24, 61, 57, 0.08) 0%, rgba(0, 217, 122, 0.08) 100%);
+    }
+
+    .coverage-contact-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: linear-gradient(135deg, #183D39 0%, #0f2620 100%);
+        color: white;
+        padding: 12px 24px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        align-self: flex-start;
+        box-shadow: 0 4px 12px rgba(24, 61, 57, 0.25);
+    }
+
+    .coverage-contact-btn:hover {
+        background: linear-gradient(135deg, #0f2620 0%, #051410 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(24, 61, 57, 0.3);
+        color: white;
+    }
+
+    /* ==================== SERVICE MAP SECTION ==================== */
+    .service-map-section {
+        padding: 100px 20px;
+        background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+        position: relative;
+    }
+
+    .map-header {
+        margin-bottom: 60px;
+    }
+
+    .map-title {
+        font-size: 2.8rem;
+        font-weight: 800;
+        color: #1a1a1a;
+        margin-bottom: 15px;
+        line-height: 1.2;
+        letter-spacing: -0.8px;
+    }
+
+    .map-subtitle {
+        font-size: 1.05rem;
+        color: #666;
+        font-weight: 400;
+        line-height: 1.6;
+    }
+
+    .map-container {
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        margin-bottom: 50px;
+    }
+
+    .map-info {
+        position: relative;
+        z-index: 1;
+    }
+
+    .map-info-card {
+        background: white;
+        border-radius: 8px;
+        padding: 28px;
+        text-align: center;
+        border: 1px solid rgba(24, 61, 57, 0.1);
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+    }
+
+    .map-info-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 32px rgba(24, 61, 57, 0.12);
+        border-color: rgba(24, 61, 57, 0.15);
+    }
+
+    .map-info-icon {
+        width: 60px;
+        height: 60px;
+        background: rgba(24, 61, 57, 0.08);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 16px;
+        font-size: 1.8rem;
+        color: #183D39;
+        transition: all 0.3s ease;
+    }
+
+    .map-info-card:hover .map-info-icon {
+        background: rgba(0, 217, 122, 0.15);
+        color: #00d97a;
+        transform: scale(1.1);
+    }
+
+    .map-info-title {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #1a1a1a;
+        margin-bottom: 8px;
+    }
+
+    .map-info-text {
+        font-size: 0.9rem;
+        color: #666;
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    /* Coverage Section Responsive */
+    @media (max-width: 991px) {
+        .coverage-title {
+            font-size: 2.2rem;
+        }
+
+        .map-title {
+            font-size: 2.2rem;
+        }
+
+        .service-coverage-section {
+            padding: 70px 20px;
+        }
+
+        .service-map-section {
+            padding: 70px 20px;
+        }
+
+        .coverage-grid {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .map-container {
+            height: 400px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .coverage-title {
+            font-size: 1.8rem;
+        }
+
+        .map-title {
+            font-size: 1.8rem;
+        }
+
+        .coverage-subtitle,
+        .map-subtitle {
+            font-size: 1rem;
+        }
+
+        .coverage-grid {
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+
+        .service-coverage-section {
+            padding: 50px 20px;
+        }
+
+        .service-map-section {
+            padding: 50px 20px;
+        }
+
+        .coverage-card {
+            padding: 24px;
+        }
+
+        .coverage-card-title {
+            font-size: 1.1rem;
+        }
+
+        .coverage-card-text {
+            font-size: 0.9rem;
+        }
+
+        .map-container {
+            height: 300px;
+        }
+
+        .map-info {
+            margin-top: 40px;
+        }
+
+        .map-info-card {
+            padding: 20px;
+        }
+
+        .map-info-title {
+            font-size: 1.1rem;
+        }
+
+        .map-info-text {
+            font-size: 0.85rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .coverage-title,
+        .map-title {
+            font-size: 1.5rem;
+        }
+
+        .coverage-badge {
+            font-size: 0.7rem;
+        }
+
+        .coverage-card {
+            padding: 20px;
+        }
+
+        .map-container {
+            height: 250px;
+        }
+    }
+</style>
 {% endblock %}

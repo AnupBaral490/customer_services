@@ -22,4 +22,5 @@ class ServiceDetailView(DetailView):
         context['related_services'] = Service.objects.filter(
             is_active=True
         ).exclude(id=self.object.id)[:3]
+        context['all_services'] = Service.objects.filter(is_active=True).order_by('display_order')
         return context

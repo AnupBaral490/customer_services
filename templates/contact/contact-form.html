@@ -4,64 +4,148 @@
 {% block title %}Contact Form | {{ BUSINESS_NAME }}{% endblock %}
 
 {% block content %}
-<section class="section-padding bg-white">
-    <div class="container-lg">
-        <div class="row">
-            <div class="col-lg-8 mx-auto">
-                <h1 class="mb-2">Send us a Message</h1>
-                <p class="text-muted mb-4">We'll get back to you as soon as possible</p>
-
-                <form method="post" novalidate>
-                    {% csrf_token %}
-
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="id_full_name" class="form-label">Full Name *</label>
-                            {{ form.full_name }}
-                            {% if form.full_name.errors %}
-                            <div class="invalid-feedback d-block">{{ form.full_name.errors.0 }}</div>
-                            {% endif %}
+<section class="contact-form-section">
+    <!-- Hero Header -->
+    <div class="contact-hero">
+        <div class="contact-overlay"></div>
+        <div class="container-lg">
+            <div class="row align-items-center min-vh-100">
+                <div class="col-lg-6 pe-lg-5">
+                    <div class="contact-hero-content">
+                        <h1 class="contact-hero-title">Get in Touch</h1>
+                        <p class="contact-hero-subtitle">Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+                        
+                        <!-- Contact Info Cards -->
+                        <div class="contact-info-cards mt-5">
+                            <div class="contact-info-card">
+                                <div class="info-icon">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div class="info-content">
+                                    <h6>Phone</h6>
+                                    <p>{{ BUSINESS_PHONE }}</p>
+                                </div>
+                            </div>
+                            <div class="contact-info-card">
+                                <div class="info-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="info-content">
+                                    <h6>Email</h6>
+                                    <p>{{ BUSINESS_EMAIL }}</p>
+                                </div>
+                            </div>
+                            <div class="contact-info-card">
+                                <div class="info-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="info-content">
+                                    <h6>Location</h6>
+                                    <p>{{ BUSINESS_ADDRESS }}</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="id_email" class="form-label">Email *</label>
-                            {{ form.email }}
-                            {% if form.email.errors %}
-                            <div class="invalid-feedback d-block">{{ form.email.errors.0 }}</div>
-                            {% endif %}
-                        </div>
                     </div>
+                </div>
 
-                    <div class="mb-3">
-                        <label for="id_phone" class="form-label">Phone *</label>
-                        {{ form.phone }}
-                        {% if form.phone.errors %}
-                        <div class="invalid-feedback d-block">{{ form.phone.errors.0 }}</div>
-                        {% endif %}
-                    </div>
+                <div class="col-lg-6 ps-lg-5">
+                    <!-- Contact Form Card -->
+                    <div class="contact-form-card">
+                        <form method="post" novalidate class="contact-form">
+                            {% csrf_token %}
 
-                    <div class="mb-3">
-                        <label for="id_subject" class="form-label">Subject *</label>
-                        {{ form.subject }}
-                        {% if form.subject.errors %}
-                        <div class="invalid-feedback d-block">{{ form.subject.errors.0 }}</div>
-                        {% endif %}
-                    </div>
+                            <!-- Name Field -->
+                            <div class="form-group-contact mb-4">
+                                <div class="form-field-wrapper">
+                                    <label for="id_full_name" class="form-label-contact">
+                                        <i class="fas fa-user me-2"></i>Full Name
+                                    </label>
+                                    {{ form.full_name }}
+                                    <div class="form-field-border"></div>
+                                    {% if form.full_name.errors %}
+                                    <div class="form-error">
+                                        <i class="fas fa-exclamation-circle me-2"></i>{{ form.full_name.errors.0 }}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
 
-                    <div class="mb-4">
-                        <label for="id_message" class="form-label">Message *</label>
-                        {{ form.message }}
-                        {% if form.message.errors %}
-                        <div class="invalid-feedback d-block">{{ form.message.errors.0 }}</div>
-                        {% endif %}
-                    </div>
+                            <!-- Email Field -->
+                            <div class="form-group-contact mb-4">
+                                <div class="form-field-wrapper">
+                                    <label for="id_email" class="form-label-contact">
+                                        <i class="fas fa-envelope me-2"></i>Email Address
+                                    </label>
+                                    {{ form.email }}
+                                    <div class="form-field-border"></div>
+                                    {% if form.email.errors %}
+                                    <div class="form-error">
+                                        <i class="fas fa-exclamation-circle me-2"></i>{{ form.email.errors.0 }}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
 
-                    <div class="d-grid gap-2">
-                        <button type="submit" class="btn btn-primary btn-lg">
-                            <i class="fas fa-send me-2"></i> Send Message
-                        </button>
-                        <a href="{% url 'contact:contact' %}" class="btn btn-outline-secondary">Cancel</a>
+                            <!-- Phone Field -->
+                            <div class="form-group-contact mb-4">
+                                <div class="form-field-wrapper">
+                                    <label for="id_phone" class="form-label-contact">
+                                        <i class="fas fa-phone me-2"></i>Phone Number
+                                    </label>
+                                    {{ form.phone }}
+                                    <div class="form-field-border"></div>
+                                    {% if form.phone.errors %}
+                                    <div class="form-error">
+                                        <i class="fas fa-exclamation-circle me-2"></i>{{ form.phone.errors.0 }}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <!-- Subject Field -->
+                            <div class="form-group-contact mb-4">
+                                <div class="form-field-wrapper">
+                                    <label for="id_subject" class="form-label-contact">
+                                        <i class="fas fa-bookmark me-2"></i>Subject
+                                    </label>
+                                    {{ form.subject }}
+                                    <div class="form-field-border"></div>
+                                    {% if form.subject.errors %}
+                                    <div class="form-error">
+                                        <i class="fas fa-exclamation-circle me-2"></i>{{ form.subject.errors.0 }}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <!-- Message Field -->
+                            <div class="form-group-contact mb-5">
+                                <div class="form-field-wrapper">
+                                    <label for="id_message" class="form-label-contact">
+                                        <i class="fas fa-message me-2"></i>Message
+                                    </label>
+                                    {{ form.message }}
+                                    <div class="form-field-border"></div>
+                                    {% if form.message.errors %}
+                                    <div class="form-error">
+                                        <i class="fas fa-exclamation-circle me-2"></i>{{ form.message.errors.0 }}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <!-- Buttons -->
+                            <div class="form-actions">
+                                <button type="submit" class="btn-submit-contact">
+                                    <i class="fas fa-paper-plane me-2"></i>Send Message
+                                </button>
+                                <a href="{% url 'contact:contact' %}" class="btn-cancel-contact">
+                                    <i class="fas fa-times me-2"></i>Cancel
+                                </a>
+                            </div>
+                        </form>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>

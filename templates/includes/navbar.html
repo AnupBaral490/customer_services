@@ -1,33 +1,118 @@
-<nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background: white; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);">
+{% load static %}
+
+<nav class="navbar navbar-expand-lg sticky-top navbar-dark-premium" id="mainNavbar">
     <div class="container-lg">
-        <a class="navbar-brand fw-700" href="{% url 'core:home' %}">
-            <i class="fas fa-sparkles" style="color: #DCA85C;"></i> {{ BUSINESS_NAME }}
+        <!-- Brand with Logo -->
+        <a class="navbar-brand navbar-brand-dark-premium" href="{% url 'core:home' %}">
+            <div class="logo-wrapper-dark">
+                <img src="{% static 'images/Raslan Cleaning Services Logo.png' %}" alt="Raslan Cleaning Services" class="navbar-logo-dark">
+            </div>
         </a>
         
-        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <!-- Mobile Toggle -->
+        <button class="navbar-toggler navbar-toggler-dark-premium" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         
+        <!-- Navigation Items -->
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto align-items-center">
+            <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-4">
                 <li class="nav-item">
-                    <a class="nav-link fw-600" href="{% url 'core:home' %}">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link fw-600" href="{% url 'services:service-list' %}">Services</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link fw-600" href="{% url 'core:about' %}">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link fw-600" href="{% url 'contact:contact' %}">Contact</a>
-                </li>
-                <li class="nav-item ms-lg-3">
-                    <a class="btn btn-primary btn-sm" href="{% url 'bookings:booking-create' %}">
-                        <i class="fas fa-calendar-check me-1"></i> Book Now
+                    <a class="nav-link nav-link-dark-premium" href="{% url 'services:service-list' %}">
+                        <i class="fas fa-briefcase me-1"></i>SERVICES
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-link-dark-premium" href="{% url 'core:about' %}">ABOUT</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-link-dark-premium" href="{% url 'contact:contact' %}">CONTACT</a>
+                </li>
+                
+                <!-- Appointment Button -->
+                <li class="nav-item ms-lg-2">
+                    <a class="btn btn-appointment-premium" href="{% url 'bookings:booking-create' %}">
+                        <i class="fas fa-calendar-check me-2"></i>Book Appointment
+                    </a>
+                </li>
+                
+                <!-- CTA Buttons -->
+                {% if user.is_authenticated %}
+                    <!-- User Profile Dropdown -->
+                    <li class="nav-item dropdown ms-lg-3">
+                        <a class="nav-link dropdown-toggle nav-link-dark-premium d-flex align-items-center gap-2" href="#" id="navbarUserDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="border-radius: 50px; padding: 8px 12px !important;">
+                            {% if user.customer_profile.profile_picture %}
+                                <img src="{{ user.customer_profile.profile_picture.url }}" alt="{{ user.first_name }}" class="navbar-user-avatar">
+                            {% else %}
+                                <div class="navbar-user-avatar-placeholder">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                            {% endif %}
+                            <span class="d-none d-lg-inline">{{ user.first_name }}</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end navbar-dropdown-premium" aria-labelledby="navbarUserDropdown">
+                            <li class="dropdown-header" style="background: linear-gradient(135deg, #183D39 0%, #00d97a 100%); color: white; padding: 15px 16px; border-radius: 8px 8px 0 0;">
+                                <div class="d-flex align-items-center gap-2">
+                                    {% if user.customer_profile.profile_picture %}
+                                        <img src="{{ user.customer_profile.profile_picture.url }}" alt="{{ user.first_name }}" style="width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 3px solid white; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
+                                    {% else %}
+                                        <div style="width: 45px; height: 45px; border-radius: 50%; background: rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem;">
+                                            <i class="fas fa-user"></i>
+                                        </div>
+                                    {% endif %}
+                                    <div>
+                                        <p class="mb-0 fw-700">{{ user.get_full_name }}</p>
+                                        <small style="opacity: 0.9;">{{ user.email }}</small>
+                                    </div>
+                                </div>
+                            </li>
+                            <li><a class="dropdown-item dropdown-item-profile" href="{% url 'customers:customer-profile' %}"><i class="fas fa-user me-2" style="color: #183D39;"></i>My Profile</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <form method="post" action="{% url 'customers:customer-logout' %}" class="d-inline">
+                                    {% csrf_token %}
+                                    <button type="submit" class="dropdown-item text-danger" style="background: none; border: none; width: 100%; text-align: left; padding: 0.5rem 1rem; cursor: pointer;">
+                                        <i class="fas fa-sign-out-alt me-2"></i>Log Out
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                {% else %}
+                    <!-- Login and Call Now Buttons -->
+                    <li class="nav-item ms-lg-2">
+                        <a class="btn btn-login-premium" href="{% url 'customers:customer-login' %}">
+                            <i class="fas fa-sign-in-alt me-2"></i>Login
+                        </a>
+                    </li>
+                    <li class="nav-item ms-lg-2">
+                        <a class="btn btn-call-now-premium" href="tel:+61212345678">
+                            <i class="fas fa-phone me-2"></i>Call Now
+                        </a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </div>
 </nav>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const navbar = document.getElementById('mainNavbar');
+        const heroSection = document.querySelector('.hero-section-dark-bg');
+        
+        window.addEventListener('scroll', function() {
+            // Get the height of the hero section
+            const heroHeight = heroSection ? heroSection.offsetHeight : 0;
+            const scrollY = window.scrollY;
+            
+            if (scrollY > heroHeight * 0.3) {
+                // Change navbar to white background when scrolled past hero
+                navbar.classList.add('navbar-scrolled');
+            } else {
+                // Transparent/dark background on hero section
+                navbar.classList.remove('navbar-scrolled');
+            }
+        });
+    });
+</script>

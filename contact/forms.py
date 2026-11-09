@@ -20,6 +20,6 @@ class ContactForm(forms.ModelForm):
         phone = self.cleaned_data.get('phone')
         if phone:
             phone_digits = re.sub(r'\D', '', phone)
-            if not (len(phone_digits) == 10 and phone_digits.startswith(('02', '03', '04', '07', '08'))):
-                raise ValidationError("Please enter a valid Australian phone number.")
+            if len(phone_digits) < 7:
+                raise ValidationError("Please enter a valid phone number (at least 7 digits).")
         return phone

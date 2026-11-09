@@ -4,157 +4,669 @@
 {% block title %}Home | {{ BUSINESS_NAME }}{% endblock %}
 
 {% block content %}
-<!-- Hero Section -->
-<section class="hero-section">
-    <div class="container-lg">
-        <div class="row align-items-center min-vh-75">
-            <div class="col-lg-8 mx-auto text-center">
-                <h1 class="display-3 fw-800 mb-4">A Cleaner Space.<br><span class="gradient-text">A Better Life.</span></h1>
-                <p class="lead mb-5 text-white-75">Professional cleaning services you can trust. Let us handle the cleaning while you focus on what matters most.</p>
-                <div class="hero-cta">
-                    <a href="{% url 'bookings:booking-create' %}" class="btn btn-light btn-lg shadow-lg">
-                        <i class="fas fa-calendar-check me-2"></i> Book a Cleaning
-                    </a>
-                    <a href="{% url 'bookings:quote-request' %}" class="btn btn-outline-light btn-lg">
-                        <i class="fas fa-quote-left me-2"></i> Get a Free Quote
-                    </a>
+<!-- Hero Section - Modern Dark Theme with Full Background Image -->
+<section class="hero-section-dark-bg">
+    <img src="{% static 'images/image2.jpeg' %}" alt="Professional Cleaning Service" class="hero-bg-image">
+    
+    <div class="hero-overlay"></div>
+    
+    <div class="hero-content-overlay">
+        <div class="container-lg">
+            <div class="row align-items-center min-vh-85">
+                <div class="col-lg-7">
+                    <!-- Rating Badge -->
+                    <div class="rating-badge mb-4">
+                        <i class="fas fa-star me-2"></i>#1 Rated Cleaning Service in Australia
+                    </div>
+
+                    <!-- Main Heading -->
+                    <h1 class="hero-title-dark mb-4">
+                        A <span class="text-green-accent">Cleaner</span> Home<br>
+                        With <span class="text-green-accent">Safer</span> Products.
+                    </h1>
+
+                    <!-- Description -->
+                    <div class="hero-description mb-5">
+                        <div class="description-bar"></div>
+                        <p>Experience the difference of non-toxic, eco-friendly cleaning. We protect your family's health while making your home shine.</p>
+                    </div>
+
+                    <!-- CTA Buttons -->
+                    <div class="hero-cta-dark">
+                        <a href="{% url 'bookings:quote-request' %}" class="btn btn-get-quote">
+                            <i class="fas fa-quote-left me-2"></i>Get a Free Quote
+                        </a>
+                        <a href="{% url 'services:service-list' %}" class="btn btn-view-services">
+                            View Services
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Why Choose Us -->
-<section class="section-padding bg-white">
+<!-- Why Choose Us - Modern Cards -->
+<section class="why-choose-section">
     <div class="container-lg">
         <div class="text-center mb-5">
-            <h2 class="section-title">Why Choose Premium Cleaning?</h2>
-            <p class="section-subtitle">Experience the difference with professional cleaning services</p>
+            <h2 class="section-title-premium mb-4">Why Choose Raslan Cleaning Service?</h2>
+            <p class="section-subtitle-premium">Trusted by hundreds of satisfied customers. Industry-leading standards in every service.</p>
         </div>
 
         <div class="row g-4">
+            <!-- Professional & Insured -->
             <div class="col-md-6 col-lg-3">
-                <div class="text-center h-100">
-                    <div class="mb-4">
-                        <div class="rounded-circle mx-auto mb-3" style="width: 80px; height: 80px; background: linear-gradient(135deg, #183D39 0%, #2d5b57 100%); display: flex; align-items: center; justify-content: center;">
-                            <i class="fas fa-shield-alt text-white" style="font-size: 2rem;"></i>
-                        </div>
+                <div class="feature-card-premium h-100">
+                    <div class="feature-card-top"></div>
+                    <div class="feature-icon-premium feature-icon-1">
+                        <i class="fas fa-certificate"></i>
                     </div>
-                    <h5 class="fw-700 mb-2">Professional & Insured</h5>
-                    <p class="text-muted small">Fully trained, background-checked, and fully insured teams</p>
+                    <h5 class="feature-title-premium">Professional & Insured</h5>
+                    <p class="feature-text-premium">Fully trained, background-checked, and fully insured teams for complete peace of mind</p>
                 </div>
             </div>
+            
+            <!-- 100% Satisfaction -->
             <div class="col-md-6 col-lg-3">
-                <div class="text-center h-100">
-                    <div class="mb-4">
-                        <div class="rounded-circle mx-auto mb-3" style="width: 80px; height: 80px; background: linear-gradient(135deg, #183D39 0%, #2d5b57 100%); display: flex; align-items: center; justify-content: center;">
-                            <i class="fas fa-check-circle text-white" style="font-size: 2rem;"></i>
-                        </div>
+                <div class="feature-card-premium h-100">
+                    <div class="feature-card-top"></div>
+                    <div class="feature-icon-premium feature-icon-2">
+                        <i class="fas fa-star"></i>
                     </div>
-                    <h5 class="fw-700 mb-2">100% Satisfaction</h5>
-                    <p class="text-muted small">Satisfaction guaranteed or we'll re-clean for free</p>
+                    <h5 class="feature-title-premium">100% Satisfaction Guaranteed</h5>
+                    <p class="feature-text-premium">If you're not satisfied, we'll re-clean for free. Your satisfaction is our guarantee.</p>
                 </div>
             </div>
+            
+            <!-- Eco-Friendly -->
             <div class="col-md-6 col-lg-3">
-                <div class="text-center h-100">
-                    <div class="mb-4">
-                        <div class="rounded-circle mx-auto mb-3" style="width: 80px; height: 80px; background: linear-gradient(135deg, #183D39 0%, #2d5b57 100%); display: flex; align-items: center; justify-content: center;">
-                            <i class="fas fa-leaf text-white" style="font-size: 2rem;"></i>
-                        </div>
+                <div class="feature-card-premium h-100">
+                    <div class="feature-card-top"></div>
+                    <div class="feature-icon-premium feature-icon-3">
+                        <i class="fas fa-leaf"></i>
                     </div>
-                    <h5 class="fw-700 mb-2">Eco-Friendly</h5>
-                    <p class="text-muted small">Safe, environmentally responsible cleaning products</p>
+                    <h5 class="feature-title-premium">Eco-Friendly Solutions</h5>
+                    <p class="feature-text-premium">Safe, non-toxic products that protect your family and the environment without compromise</p>
                 </div>
             </div>
+            
+            <!-- On-Time & Reliable -->
             <div class="col-md-6 col-lg-3">
-                <div class="text-center h-100">
-                    <div class="mb-4">
-                        <div class="rounded-circle mx-auto mb-3" style="width: 80px; height: 80px; background: linear-gradient(135deg, #183D39 0%, #2d5b57 100%); display: flex; align-items: center; justify-content: center;">
-                            <i class="fas fa-clock text-white" style="font-size: 2rem;"></i>
-                        </div>
+                <div class="feature-card-premium h-100">
+                    <div class="feature-card-top"></div>
+                    <div class="feature-icon-premium feature-icon-4">
+                        <i class="fas fa-clock"></i>
                     </div>
-                    <h5 class="fw-700 mb-2">On-Time & Reliable</h5>
-                    <p class="text-muted small">Punctual service with flexible scheduling options</p>
+                    <h5 class="feature-title-premium">Punctual & Reliable</h5>
+                    <p class="feature-text-premium">On-time, every time. Flexible scheduling that works around your busy lifestyle</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Featured Services -->
-<section class="section-padding" style="background: linear-gradient(135deg, #F7F9F8 0%, #DCEFE8 100%);">
-    <div class="container-lg">
-        <div class="text-center mb-5">
-            <h2 class="section-title">Our Services</h2>
-            <p class="section-subtitle">Professional cleaning solutions tailored to your needs</p>
+
+<!-- Message From Managing Director Section -->
+<section class="director-message-section">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+        <!-- Title Section -->
+        <div class="director-title-section text-center mb-5">
+            <div class="director-label">Message From</div>
+            <h2 class="director-title">Managing Director</h2>
         </div>
 
-        <div class="row g-4">
+        <div class="director-wrapper" style="display: flex; gap: 200px; align-items: flex-start;">
+            <!-- Photo & Info Column -->
+            <div class="director-left-column" style="flex: 0 0 280px;">
+                <div class="director-photo-container" style="max-width: 280px;">
+                    <img src="{% static 'images/sadan.jpg' %}" alt="Managing Director" class="director-photo" style="width: 100%; height: 340px; object-fit: cover;">
+                </div>
+                <div class="director-info">
+                    <div class="director-name">Sadan Aryal</div>
+                    <div class="director-position">Managing Director</div>
+                    <div class="director-company">Raslan Cleaning Services</div>
+                </div>
+            </div>
+
+            <!-- Content Column -->
+            <div class="director-right-column" style="flex: 1; min-width: 0;">
+                <div class="director-text-content">
+                    <p class="director-intro">
+                        It's a matter of our pride to introduce <strong>Raslan Cleaning Services</strong> as a service providing company in Australia with a government registered commitment to excellence. We specialize in comprehensive, high-quality and reliable <strong>cleaning solutions</strong> to our valuable customers. We aim to our <strong>customer's better health</strong> and wish to provide every customer a clean and safe environment with Quality Services at a fair charges.
+                    </p>
+
+                    <p class="director-message">
+                        I want to express my sincere gratitude for your continued partnership and the trust you place in us. As our clients are our most valuable assets, we remain at your best service. So, if you are in need of any services, please feel easy & love to contact us and let us be at your service.
+                    </p>
+
+                    <p class="director-closing">
+                        <strong>We help your business to shine,</strong> without compromising the quality and chemicals to make you satisfied.
+                    </p>
+
+                    <p class="director-signature">Thank you!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+<section class="featured-services-section">
+    <div class="container-lg">
+        <!-- Section Header -->
+        <div class="services-header text-center mb-5">
+            <span class="services-badge">PROFESSIONAL SERVICES</span>
+            <h2 class="services-main-title">Premium Cleaning Solutions</h2>
+            <p class="services-main-subtitle">Experience professional cleaning with attention to detail and commitment to excellence</p>
+            <div class="services-title-line"></div>
+        </div>
+
+        <!-- Services Grid -->
+        <div class="services-grid-home">
             {% for service in featured_services %}
-            <div class="col-md-6 col-lg-4">
-                <div class="service-card">
+            <div class="service-card-home">
+                <!-- Image Container -->
+                <div class="service-image-container">
                     {% if service.image %}
-                    <img src="{{ service.image.url }}" alt="{{ service.name }}" class="card-img-top">
+                    <img src="{{ service.image.url }}" alt="{{ service.name }}" class="service-image-home">
                     {% else %}
-                    <div style="height: 280px; background: linear-gradient(135deg, #183D39 0%, #2d5b57 100%); display: flex; align-items: center; justify-content: center;">
-                        <i class="fas fa-sparkles" style="font-size: 3rem; color: white; opacity: 0.5;"></i>
+                    <div class="service-image-placeholder-home">
+                        <div class="placeholder-content">
+                            <i class="fas fa-broom"></i>
+                            <p>{{ service.name }}</p>
+                        </div>
                     </div>
                     {% endif %}
-                    <div class="service-card-body">
-                        <h5 class="fw-700">{{ service.name }}</h5>
-                        <p>{{ service.description|truncatewords:20 }}</p>
+                    
+                    <!-- Quick Action Overlay -->
+                    <div class="service-quick-action">
+                        <a href="{% url 'bookings:booking-create' %}?service_id={{ service.id }}" class="quick-action-btn">
+                            <i class="fas fa-plus"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Content -->
+                <div class="service-content-home">
+                    <div class="service-header-content">
+                        <h5 class="service-name-home">{{ service.name }}</h5>
                         {% if service.price %}
-                        <p class="service-price mb-3">{{ service.price }}</p>
+                        <span class="service-price-badge">{{ service.price }}</span>
                         {% endif %}
-                        <div class="d-grid gap-2">
-                            <a href="{% url 'services:service-detail' service.slug %}" class="btn btn-outline-primary btn-sm">View Details</a>
-                            <a href="{% url 'bookings:booking-create' %}?service_id={{ service.id }}" class="btn btn-primary btn-sm">Book Now</a>
-                        </div>
+                    </div>
+
+                    <p class="service-desc-home">{{ service.description|truncatewords:18 }}</p>
+
+                    <!-- Service Features (if included items exist) -->
+                    {% if service.what_included %}
+                    <ul class="service-features-home">
+                        {% for item in service.get_included_items|slice:":2" %}
+                        <li><i class="fas fa-check-circle"></i> {{ item }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+
+                    <!-- Action Buttons -->
+                    <div class="service-actions-home">
+                        <a href="{% url 'services:service-detail' service.slug %}" class="service-btn-detail">
+                            View Details
+                        </a>
+                        <a href="{% url 'bookings:booking-create' %}?service_id={{ service.id }}" class="service-btn-book-home">
+                            Book Service
+                        </a>
                     </div>
                 </div>
             </div>
             {% endfor %}
         </div>
 
-        <div class="text-center mt-5">
-            <a href="{% url 'services:service-list' %}" class="btn btn-primary btn-lg">
-                <i class="fas fa-arrow-right me-2"></i> View All Services
+        <!-- View All CTA -->
+        <div class="services-cta-home text-center mt-5">
+            <a href="{% url 'services:service-list' %}" class="btn-view-all-services">
+                Explore All Services
+                <i class="fas fa-arrow-right ms-2"></i>
             </a>
+            <p class="services-cta-text">Discover more professional cleaning options tailored to your needs</p>
         </div>
     </div>
 </section>
 
+<style>
+    /* ==================== FEATURED SERVICES SECTION - PROFESSIONAL ==================== */
+    .featured-services-section {
+        padding: 100px 20px;
+        background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+        position: relative;
+    }
+
+    /* Services Header */
+    .services-header {
+        margin-bottom: 60px;
+    }
+
+    .services-badge {
+        display: inline-block;
+        padding: 8px 16px;
+        background: rgba(24, 61, 57, 0.08);
+        border: 1px solid rgba(24, 61, 57, 0.2);
+        color: #183D39;
+        border-radius: 6px;
+        font-size: 0.75rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+        margin-bottom: 20px;
+    }
+
+    .services-main-title {
+        font-size: 2.8rem;
+        font-weight: 800;
+        color: #1a1a1a;
+        margin-bottom: 12px;
+        line-height: 1.2;
+        letter-spacing: -0.8px;
+    }
+
+    .services-main-subtitle {
+        font-size: 1.05rem;
+        color: #555;
+        margin-bottom: 30px;
+        font-weight: 400;
+        line-height: 1.7;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .services-title-line {
+        width: 50px;
+        height: 3px;
+        background: #183D39;
+        border-radius: 2px;
+        margin: 0 auto;
+    }
+
+    /* Services Grid */
+    .services-grid-home {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+        gap: 28px;
+        margin-bottom: 50px;
+    }
+
+    /* Service Card */
+    .service-card-home {
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        position: relative;
+    }
+
+    .service-card-home:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 32px rgba(24, 61, 57, 0.12);
+        border-color: rgba(24, 61, 57, 0.15);
+    }
+
+    /* Service Image */
+    .service-image-container {
+        position: relative;
+        height: 280px;
+        overflow: hidden;
+        background: linear-gradient(135deg, #f0f0f0 0%, #e8e8e8 100%);
+    }
+
+    .service-image-home {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .service-card-home:hover .service-image-home {
+        transform: scale(1.05);
+    }
+
+    .service-image-placeholder-home {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #f5f5f5 0%, #ececec 100%);
+    }
+
+    .placeholder-content {
+        text-align: center;
+        color: #999;
+    }
+
+    .placeholder-content i {
+        font-size: 3rem;
+        color: #bbb;
+        margin-bottom: 10px;
+    }
+
+    .placeholder-content p {
+        font-size: 0.9rem;
+        color: #999;
+        margin: 0;
+    }
+
+    /* Quick Action */
+    .service-quick-action {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .service-card-home:hover .service-quick-action {
+        opacity: 1;
+    }
+
+    .quick-action-btn {
+        width: 44px;
+        height: 44px;
+        background: rgba(24, 61, 57, 0.9);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .quick-action-btn:hover {
+        background: rgba(24, 61, 57, 1);
+        transform: scale(1.1);
+        color: white;
+    }
+
+    /* Service Content */
+    .service-content-home {
+        padding: 28px;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+
+    .service-header-content {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 12px;
+    }
+
+    .service-name-home {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #1a1a1a;
+        margin: 0;
+        line-height: 1.3;
+        flex: 1;
+    }
+
+    .service-price-badge {
+        display: inline-block;
+        background: #f5f5f5;
+        color: #183D39;
+        padding: 5px 12px;
+        border-radius: 4px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        white-space: nowrap;
+        border: 1px solid rgba(24, 61, 57, 0.15);
+    }
+
+    .service-desc-home {
+        color: #666;
+        font-size: 0.9rem;
+        line-height: 1.6;
+        margin-bottom: 16px;
+    }
+
+    /* Service Features */
+    .service-features-home {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 16px 0;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .service-features-home li {
+        font-size: 0.85rem;
+        color: #666;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .service-features-home i {
+        color: #183D39;
+        font-size: 0.75rem;
+    }
+
+    /* Service Actions */
+    .service-actions-home {
+        display: flex;
+        gap: 10px;
+        margin-top: auto;
+        padding-top: 16px;
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .service-btn-detail,
+    .service-btn-book-home {
+        flex: 1;
+        padding: 10px 14px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.85rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        text-align: center;
+        cursor: pointer;
+        border: none;
+    }
+
+    .service-btn-detail {
+        background: #f5f5f5;
+        color: #183D39;
+        border: 1px solid rgba(24, 61, 57, 0.15);
+    }
+
+    .service-btn-detail:hover {
+        background: #e8e8e8;
+        border-color: rgba(24, 61, 57, 0.3);
+        color: #1a1a1a;
+    }
+
+    .service-btn-book-home {
+        background: #183D39;
+        color: white;
+        border: none;
+    }
+
+    .service-btn-book-home:hover {
+        background: #0f2620;
+        color: white;
+    }
+
+    /* CTA Section */
+    .services-cta-home {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .btn-view-all-services {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: #183D39;
+        color: white;
+        padding: 12px 30px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.95rem;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+    }
+
+    .btn-view-all-services:hover {
+        background: #0f2620;
+        transform: translateY(-2px);
+        color: white;
+    }
+
+    .services-cta-text {
+        font-size: 0.9rem;
+        color: #999;
+        margin: 0;
+    }
+
+    /* Responsive */
+    @media (max-width: 991px) {
+        .services-main-title {
+            font-size: 2.2rem;
+        }
+
+        .services-grid-home {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .featured-services-section {
+            padding: 70px 20px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .services-main-title {
+            font-size: 1.8rem;
+        }
+
+        .services-main-subtitle {
+            font-size: 0.95rem;
+        }
+
+        .services-grid-home {
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+
+        .service-image-container {
+            height: 240px;
+        }
+
+        .service-content-home {
+            padding: 20px;
+        }
+
+        .service-name-home {
+            font-size: 1.1rem;
+        }
+
+        .featured-services-section {
+            padding: 50px 20px;
+        }
+    }
+</style>
+
 <!-- How It Works -->
-<section class="section-padding bg-white">
+<section class="how-it-works-section">
     <div class="container-lg">
-        <div class="text-center mb-5">
-            <h2 class="section-title">How It Works</h2>
-            <p class="section-subtitle">Simple process to get your home cleaned</p>
+        <!-- Section Header -->
+        <div class="how-it-works-header text-center mb-5">
+            <span class="how-it-works-badge">OUR PROCESS</span>
+            <h2 class="how-it-works-title">How It Works</h2>
+            <p class="how-it-works-subtitle">Simple process to get your home cleaned</p>
+            <div class="how-it-works-line"></div>
         </div>
 
-        <div class="row g-4">
-            {% for i in "1234" %}
-            <div class="col-lg-3 col-md-6">
-                <div class="text-center">
-                    <div class="rounded-circle mx-auto mb-4" style="width: 70px; height: 70px; background: linear-gradient(135deg, #DCA85C 0%, #E8B870 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.8rem; font-weight: bold;">
-                        {{ i }}
-                    </div>
-                    <h5 class="fw-700 mb-2">
-                        {% if i == "1" %}Request{% elif i == "2" %}Quote{% elif i == "3" %}Confirm{% else %}Enjoy{% endif %}
-                    </h5>
-                    <p class="text-muted">
-                        {% if i == "1" %}Tell us about your cleaning needs{% elif i == "2" %}Receive a personalized quote{% elif i == "3" %}Confirm your booking{% else %}Relax while we clean{% endif %}
-                    </p>
+        <!-- Steps Grid -->
+        <div class="steps-grid">
+            <!-- Step 1 -->
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <div class="step-icon">
+                    <i class="fas fa-edit"></i>
                 </div>
+                <h4 class="step-title">Request</h4>
+                <p class="step-description">Tell us about your cleaning needs</p>
+                <div class="step-connector"></div>
             </div>
-            {% endfor %}
+
+            <!-- Step 2 -->
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <div class="step-icon">
+                    <i class="fas fa-quote-right"></i>
+                </div>
+                <h4 class="step-title">Quote</h4>
+                <p class="step-description">Receive a personalized quote</p>
+                <div class="step-connector"></div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <div class="step-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h4 class="step-title">Confirm</h4>
+                <p class="step-description">Confirm your booking</p>
+                <div class="step-connector"></div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="step-card">
+                <div class="step-number">4</div>
+                <div class="step-icon">
+                    <i class="fas fa-smile"></i>
+                </div>
+                <h4 class="step-title">Enjoy</h4>
+                <p class="step-description">Relax while we clean</p>
+            </div>
+        </div>
+
+        <!-- CTA Button -->
+        <div class="how-it-works-cta text-center mt-5">
+            <a href="{% url 'bookings:quote-request' %}" class="how-it-works-btn">
+                <i class="fas fa-arrow-right me-2"></i>Get Started Today
+            </a>
         </div>
     </div>
 </section>
 
 <!-- Testimonials -->
 {% if testimonials %}
-<section class="section-padding" style="background: linear-gradient(135deg, #F7F9F8 0%, #DCEFE8 100%);">
+<section class="section-padding-dark bg-white">
     <div class="container-lg">
         <div class="text-center mb-5">
             <h2 class="section-title">What Our Clients Say</h2>
@@ -189,25 +701,25 @@
 
 <!-- FAQ Section -->
 {% if faqs %}
-<section class="section-padding bg-white">
+<section class="section-padding-dark" style="background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);">
     <div class="container-lg">
         <div class="text-center mb-5">
-            <h2 class="section-title">Frequently Asked Questions</h2>
-            <p class="section-subtitle">Find answers to common questions</p>
+            <h2 class="section-title-dark">Frequently Asked Questions</h2>
+            <p class="section-subtitle-dark">Find answers to common questions</p>
         </div>
 
         <div class="row">
             <div class="col-lg-8 mx-auto">
                 <div class="accordion" id="faqAccordion">
                     {% for faq in faqs %}
-                    <div class="accordion-item border-0 mb-3 rounded-lg shadow-sm-custom">
+                    <div class="accordion-item-dark border-0 mb-3 rounded-lg">
                         <h2 class="accordion-header">
-                            <button class="accordion-button {% if forloop.first %}{% else %}collapsed{% endif %} fw-600" type="button" data-bs-toggle="collapse" data-bs-target="#faq{{ faq.id }}">
-                                <i class="fas fa-question-circle me-2 text-accent"></i> {{ faq.question }}
+                            <button class="accordion-button-dark {% if forloop.first %}{% else %}collapsed{% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#faq{{ faq.id }}">
+                                <i class="fas fa-question-circle me-2 text-green-accent"></i> {{ faq.question }}
                             </button>
                         </h2>
                         <div id="faq{{ faq.id }}" class="accordion-collapse collapse {% if forloop.first %}show{% endif %}" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body">
+                            <div class="accordion-body-dark">
                                 {{ faq.answer }}
                             </div>
                         </div>
@@ -221,20 +733,17 @@
 {% endif %}
 
 <!-- Final CTA -->
-<section class="section-padding" style="background: linear-gradient(135deg, #183D39 0%, #2d5b57 100%);">
+<section class="section-padding-dark" style="background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);">
     <div class="container-lg">
         <div class="row align-items-center">
             <div class="col-lg-7">
-                <h2 style="color: white; font-size: 2.2rem; margin-bottom: 15px;">Ready for a Cleaner Space?</h2>
-                <p class="lead text-white-75 mb-0">Let our professional team handle the cleaning. Get your free quote today!</p>
+                <h2 class="cta-title-dark mb-3">Ready for a Cleaner Space?</h2>
+                <p class="cta-subtitle-dark">Let our professional team handle the cleaning. Get your free quote today!</p>
             </div>
             <div class="col-lg-5 text-lg-end pt-4 pt-lg-0">
                 <div class="d-flex gap-3 justify-content-lg-end flex-wrap">
-                    <a href="{% url 'bookings:booking-create' %}" class="btn btn-light btn-lg">
-                        <i class="fas fa-calendar-check me-2"></i> Book Now
-                    </a>
-                    <a href="{% url 'bookings:quote-request' %}" class="btn btn-outline-light btn-lg">
-                        <i class="fas fa-quote-left me-2"></i> Get Quote
+                    <a href="{% url 'bookings:quote-request' %}" class="btn btn-get-quote-final">
+                        <i class="fas fa-quote-left me-2"></i>Get Free Quote
                     </a>
                 </div>
             </div>
@@ -243,33 +752,452 @@
 </section>
 
 <style>
-    .min-vh-75 {
-        min-height: 75vh;
+    /* Hero Section Dark Theme */
+    .hero-section-dark {
+        background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(42, 42, 42, 0.95) 100%),
+                    url('{% static "images/Raslan Cleaning Services Logo.png" %}') center/cover no-repeat;
+        min-height: 100vh;
+        position: relative;
+        overflow: hidden;
+        padding: 60px 0;
     }
 
-    .text-white-75 {
-        color: rgba(255, 255, 255, 0.9);
+    .hero-section-dark::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(circle at 20% 50%, rgba(0, 217, 122, 0.1) 0%, transparent 50%);
+        pointer-events: none;
     }
 
-    .fw-800 {
-        font-weight: 800;
+    .hero-content {
+        position: relative;
+        z-index: 1;
     }
 
-    .fw-700 {
-        font-weight: 700;
-    }
-
-    .fw-600 {
+    .rating-badge {
+        display: inline-block;
+        padding: 10px 16px;
+        background: rgba(0, 217, 122, 0.15);
+        border: 1px solid rgba(0, 217, 122, 0.4);
+        border-radius: 20px;
+        color: #00d97a;
+        font-size: 0.9rem;
         font-weight: 600;
     }
 
-    .accordion-button:not(.collapsed) {
-        background: linear-gradient(135deg, #183D39 0%, #2d5b57 100%);
+    .hero-title-dark {
+        font-size: 4.2rem;
+        font-weight: 800;
+        color: white;
+        line-height: 1.1;
+        margin-bottom: 30px;
+        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 2px 10px rgba(0, 217, 122, 0.2);
+        letter-spacing: -0.5px;
+    }
+
+    .text-green-accent {
+        color: #00d97a;
+    }
+
+    .description-bar {
+        width: 4px;
+        height: 40px;
+        background: #00d97a;
+        margin-bottom: 15px;
+        border-radius: 2px;
+    }
+
+    .hero-description {
+        padding-left: 20px;
+        border-left: 2px solid rgba(0, 217, 122, 0.3);
+    }
+
+    .hero-description p {
+        font-size: 1.1rem;
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 1.6;
+    }
+
+    .hero-cta-dark {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .btn-get-quote {
+        background: #00d97a;
+        color: #1a1a1a;
+        padding: 14px 35px;
+        font-weight: 700;
+        border-radius: 8px;
+        border: none;
+        transition: all 0.3s ease;
+    }
+
+    .btn-get-quote:hover {
+        background: #00b35f;
+        color: #1a1a1a;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px rgba(0, 217, 122, 0.3);
+    }
+
+    .btn-view-services {
+        background: transparent;
+        color: white;
+        padding: 14px 35px;
+        font-weight: 700;
+        border-radius: 8px;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        transition: all 0.3s ease;
+    }
+
+    .btn-view-services:hover {
+        border-color: #00d97a;
+        color: #00d97a;
+    }
+
+    .hero-stats-dark {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.95rem;
+    }
+
+    .stat-item {
+        display: flex;
+        align-items: center;
+    }
+
+    .stat-item i {
+        color: #00d97a;
+        margin-right: 8px;
+    }
+
+    .hero-image-placeholder {
+        height: 500px;
+        background: linear-gradient(135deg, rgba(0, 217, 122, 0.1) 0%, rgba(0, 217, 122, 0.05) 100%);
+        border-radius: 12px;
+        border: 2px dashed rgba(0, 217, 122, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Dark Theme Elements */
+    .section-padding-dark {
+        padding: 80px 20px;
+    }
+
+    .section-title-dark {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: white;
+        margin-bottom: 10px;
+    }
+
+    .section-subtitle-dark {
+        font-size: 1.1rem;
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    .feature-card-dark {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 40px 30px;
+        border-radius: 12px;
+        border: 1px solid rgba(0, 217, 122, 0.2);
+        transition: all 0.3s ease;
+    }
+
+    .feature-card-dark:hover {
+        background: rgba(0, 217, 122, 0.1);
+        border-color: rgba(0, 217, 122, 0.5);
+        transform: translateY(-5px);
+    }
+
+    .feature-icon-dark {
+        width: 70px;
+        height: 70px;
+        background: rgba(0, 217, 122, 0.15);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        color: #00d97a;
+        margin-bottom: 20px;
+    }
+
+    .feature-title-dark {
+        font-size: 1.3rem;
+        color: white;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+
+    .feature-text-dark {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+    .step-number-dark {
+        width: 70px;
+        height: 70px;
+        background: linear-gradient(135deg, #00d97a 0%, #00b35f 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #1a1a1a;
+        font-size: 2rem;
+        font-weight: 700;
+    }
+
+    .step-title-dark {
+        font-size: 1.3rem;
+        color: white;
+        margin-bottom: 10px;
+    }
+
+    .step-text-dark {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.95rem;
+    }
+
+    .accordion-item-dark {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(0, 217, 122, 0.2);
+    }
+
+    .accordion-button-dark {
+        background: transparent;
+        color: white;
+        font-weight: 600;
+        padding: 20px;
+        border: none;
+    }
+
+    .accordion-button-dark:not(.collapsed) {
+        background: rgba(0, 217, 122, 0.1);
+        color: #00d97a;
+    }
+
+    .accordion-button-dark::after {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%2300d97a'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+    }
+
+    .accordion-body-dark {
+        background: transparent;
+        color: rgba(255, 255, 255, 0.7);
+        border: none;
+        padding: 20px;
+    }
+
+    .cta-title-dark {
+        font-size: 2.2rem;
+        color: white;
+        font-weight: 800;
+    }
+
+    .cta-subtitle-dark {
+        font-size: 1.1rem;
+        color: rgba(255, 255, 255, 0.7);
+        line-height: 1.6;
+    }
+
+    .btn-get-quote-final {
+        background: #00d97a;
+        color: #1a1a1a;
+        padding: 12px 30px;
+        font-weight: 700;
+        border-radius: 8px;
+        border: none;
+        transition: all 0.3s ease;
+    }
+
+    .btn-get-quote-final:hover {
+        background: #00b35f;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px rgba(0, 217, 122, 0.3);
+    }
+
+    .min-vh-85 {
+        min-height: 85vh;
+    }
+
+    .text-green-accent {
+        color: #00d97a;
+    }
+
+    /* ==================== PROFESSIONAL WHY CHOOSE SECTION ==================== */
+    .why-choose-section {
+        padding: 120px 20px;
+        background: linear-gradient(180deg, #ffffff 0%, #f5f7fa 100%);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .why-choose-section > .container-lg {
+        position: relative;
+        z-index: 1;
+    }
+
+    .section-title-premium {
+        font-size: 3rem;
+        font-weight: 900;
+        color: #1a1a1a;
+        line-height: 1.2;
+        letter-spacing: -1px;
+        margin-bottom: 20px;
+    }
+
+    .section-subtitle-premium {
+        font-size: 1.15rem;
+        color: #666;
+        line-height: 1.6;
+        margin-bottom: 60px;
+        font-weight: 500;
+    }
+
+    /* Premium Feature Cards */
+    .feature-card-premium {
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 50px 40px 40px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid #e8e8e8;
+        transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    .feature-card-top {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: linear-gradient(90deg, #183D39 0%, #00d97a 100%);
+        opacity: 0;
+        transition: opacity 0.35s ease;
+    }
+
+    .feature-card-premium:hover {
+        transform: translateY(-8px);
+        border-color: #e0e0e0;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    .feature-card-premium:hover .feature-card-top {
+        opacity: 1;
+    }
+
+    .feature-icon-premium {
+        width: 70px;
+        height: 70px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.2rem;
+        margin: 0 auto 25px;
+        transition: all 0.35s ease;
+        position: relative;
+    }
+
+    .feature-icon-1 {
+        background: linear-gradient(135deg, #183D39 0%, #2a5f5a 100%);
         color: white;
     }
 
-    .accordion-button::after {
-        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23DCA85C'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+    .feature-icon-2 {
+        background: linear-gradient(135deg, #00d97a 0%, #00a85c 100%);
+        color: white;
     }
+
+    .feature-icon-3 {
+        background: linear-gradient(135deg, #183D39 0%, #2a5f5a 100%);
+        color: white;
+    }
+
+    .feature-icon-4 {
+        background: linear-gradient(135deg, #00d97a 0%, #00a85c 100%);
+        color: white;
+    }
+
+    .feature-card-premium:hover .feature-icon-premium {
+        transform: scale(1.08);
+    }
+
+    .feature-title-premium {
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: #1a1a1a;
+        margin-bottom: 15px;
+        transition: all 0.3s ease;
+        letter-spacing: -0.3px;
+    }
+
+    .feature-card-premium:hover .feature-title-premium {
+        color: #00d97a;
+    }
+
+    .feature-text-premium {
+        font-size: 0.95rem;
+        color: #777;
+        line-height: 1.8;
+        margin-bottom: 0;
+        transition: all 0.3s ease;
+        font-weight: 500;
+    }
+
+    .feature-card-premium:hover .feature-text-premium {
+        color: #666;
+    }
+
+    @media (max-width: 992px) {
+        .section-title-premium {
+            font-size: 2.2rem;
+        }
+
+        .why-choose-section {
+            padding: 80px 20px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .why-choose-section {
+            padding: 60px 20px;
+        }
+
+        .section-title-premium {
+            font-size: 1.8rem;
+        }
+
+        .section-subtitle-premium {
+            font-size: 1rem;
+            margin-bottom: 40px;
+        }
+
+        .feature-card-premium {
+            padding: 40px 25px 30px;
+        }
+
+        .feature-icon-premium {
+            width: 60px;
+            height: 60px;
+            font-size: 1.8rem;
+        }
+
+        .feature-title-premium {
+            font-size: 1.15rem;
+        }
+    }
+
 </style>
 {% endblock %}

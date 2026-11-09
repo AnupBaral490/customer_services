@@ -25,13 +25,17 @@
 
             <!-- Services -->
             <div class="col-md-3 mb-4">
-                <h5 class="fw-700 mb-3">Services</h5>
-                <ul class="list-unstyled">
-                    <li class="mb-2"><a href="{% url 'services:service-list' %}" class="text-white-50 text-decoration-none transition">Residential Cleaning</a></li>
-                    <li class="mb-2"><a href="{% url 'services:service-list' %}" class="text-white-50 text-decoration-none transition">Commercial Cleaning</a></li>
-                    <li class="mb-2"><a href="{% url 'services:service-list' %}" class="text-white-50 text-decoration-none transition">Deep Cleaning</a></li>
-                    <li class="mb-2"><a href="{% url 'bookings:quote-request' %}" class="text-white-50 text-decoration-none transition">Get a Quote</a></li>
-                </ul>
+                <h5 class="fw-700 mb-3">Popular Services</h5>
+                <div class="footer-services-pills">
+                    {% for service in services %}
+                    <a href="{% url 'bookings:booking-create' %}?service_id={{ service.id }}" class="footer-service-pill">
+                        {{ service.name }}
+                    </a>
+                    {% endfor %}
+                    <a href="{% url 'services:service-list' %}" class="footer-service-pill footer-service-pill-primary">
+                        View All <i class="fas fa-arrow-right ms-1"></i>
+                    </a>
+                </div>
             </div>
 
             <!-- Contact Info -->
@@ -75,6 +79,50 @@
         
         .transition {
             transition: all 0.3s ease;
+        }
+
+        /* Footer Services Pills */
+        .footer-services-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .footer-service-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(0, 217, 122, 0.2);
+            color: rgba(255, 255, 255, 0.75);
+            padding: 5px 10px;
+            border-radius: 16px;
+            font-size: 0.75rem;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+        }
+
+        .footer-service-pill:hover {
+            background: rgba(0, 217, 122, 0.15);
+            border-color: #00d97a;
+            color: #00d97a;
+            transform: translateY(-1px);
+        }
+
+        .footer-service-pill-primary {
+            background: linear-gradient(135deg, #00d97a 0%, #00a85c 100%);
+            border: none;
+            color: white;
+            font-weight: 600;
+            font-size: 0.75rem;
+            padding: 5px 10px;
+        }
+
+        .footer-service-pill-primary:hover {
+            background: linear-gradient(135deg, #00a85c 0%, #007c3f 100%);
+            box-shadow: 0 4px 12px rgba(0, 217, 122, 0.3);
+            color: white;
         }
     </style>
 </footer>

@@ -41,13 +41,48 @@
                 </div>
 
                 <div class="d-grid gap-2">
-                    <a href="{% url 'bookings:booking-create' %}?service_id={{ service.id }}" class="btn btn-primary btn-lg">
-                        <i class="fas fa-calendar-check me-2"></i> Book This Service
-                    </a>
+                    <div class="service-selector-wrapper">
+                        <label for="service_select" class="form-label" style="font-weight: 600; color: #183D39; margin-bottom: 10px;">
+                            <i class="fas fa-briefcase me-2"></i>Select Service <span style="color: #ef4444;">*</span>
+                        </label>
+                        <div class="input-group">
+                            <select id="service_select" class="form-select form-select-premium" style="border-radius: 8px 0 0 8px;" required>
+                                <option value="">-- Choose a service --</option>
+                                {% for svc in all_services %}
+                                <option value="{% url 'bookings:booking-create' %}?service_id={{ svc.id }}" {% if svc.id == service.id %}selected{% endif %}>
+                                    {{ svc.name }}
+                                </option>
+                                {% endfor %}
+                                <option value="{% url 'bookings:booking-create' %}?service_id=others">Others</option>
+                            </select>
+                            <button class="btn btn-primary" type="button" id="book_button" style="border-radius: 0 8px 8px 0; padding: 10px 32px;">
+                                <i class="fas fa-calendar-check me-2"></i> Book
+                            </button>
+                        </div>
+                    </div>
                     <a href="{% url 'bookings:quote-request' %}" class="btn btn-outline-primary btn-lg">
                         <i class="fas fa-quote-left me-2"></i> Get a Custom Quote
                     </a>
                 </div>
+
+                <script>
+                    document.getElementById('book_button').addEventListener('click', function() {
+                        const selectElement = document.getElementById('service_select');
+                        const url = selectElement.value;
+                        if (url) {
+                            window.location.href = url;
+                        } else {
+                            alert('Please select a service first');
+                        }
+                    });
+
+                    document.getElementById('service_select').addEventListener('change', function() {
+                        if (this.value) {
+                            document.getElementById('book_button').style.opacity = '1';
+                            document.getElementById('book_button').style.cursor = 'pointer';
+                        }
+                    });
+                </script>
 
                 <div class="alert alert-light border mt-4">
                     <p class="mb-0"><strong>Questions?</strong> <a href="{% url 'contact:contact' %}">Contact us</a> or call {{ BUSINESS_PHONE }}</p>
@@ -93,10 +128,41 @@
 <section class="section-padding bg-white">
     <div class="container-lg text-center">
         <h2 class="section-title mb-3">Ready to Get Started?</h2>
-        <p class="lead text-muted mb-4">Book {{ service.name }} today and enjoy a cleaner space</p>
-        <a href="{% url 'bookings:booking-create' %}?service_id={{ service.id }}" class="btn btn-primary btn-lg">
-            <i class="fas fa-calendar-check me-2"></i> Book Now
-        </a>
+        <p class="lead text-muted mb-4">Book your service today and enjoy a cleaner space</p>
+        <div style="max-width: 500px; margin: 0 auto;">
+            <div class="input-group" style="box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden;">
+                <select id="service_select_cta" class="form-select form-select-premium" style="border-radius: 0;" required>
+                    <option value="">-- Choose a service --</option>
+                    {% for svc in all_services %}
+                    <option value="{% url 'bookings:booking-create' %}?service_id={{ svc.id }}" {% if svc.id == service.id %}selected{% endif %}>
+                        {{ svc.name }}
+                    </option>
+                    {% endfor %}
+                    <option value="{% url 'bookings:booking-create' %}?service_id=others">Others</option>
+                </select>
+                <button class="btn btn-primary" type="button" id="book_button_cta" style="border-radius: 0; padding: 10px 40px; font-weight: 700;">
+                    <i class="fas fa-calendar-check me-2"></i> Book Now
+                </button>
+            </div>
+        </div>
     </div>
 </section>
+
+<script>
+    document.getElementById('book_button_cta').addEventListener('click', function() {
+        const selectElement = document.getElementById('service_select_cta');
+        const url = selectElement.value;
+        if (url) {
+            window.location.href = url;
+        } else {
+            alert('Please select a service first');
+        }
+    });
+
+    document.getElementById('service_select_cta').addEventListener('change', function() {
+        if (this.value) {
+            document.getElementById('book_button_cta').style.opacity = '1';
+        }
+    });
+</script>
 {% endblock %}

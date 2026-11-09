@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.conf import settings
 from .models import ContactMessage
@@ -11,6 +12,7 @@ class ContactPageView(TemplateView):
     template_name = 'contact/contact.html'
 
 
+@login_required
 def contact_message_view(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
