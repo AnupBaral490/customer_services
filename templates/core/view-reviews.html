@@ -1,0 +1,698 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Customer Reviews & Ratings | {{ BUSINESS_NAME }}{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="reviews-hero">
+    <div class="reviews-hero-overlay"></div>
+    <div class="reviews-hero-content">
+        <h1 class="reviews-hero-title">What Our Customers Say</h1>
+        <p class="reviews-hero-subtitle">Read real reviews from satisfied customers</p>
+    </div>
+</section>
+
+<!-- Reviews Section -->
+<section class="reviews-display-section">
+    <div class="container-lg">
+        <!-- Reviews Header -->
+        <div class="reviews-header">
+            <h2 class="reviews-main-title">Customer Reviews & Ratings</h2>
+            <p class="reviews-main-subtitle">Transparent feedback from our valued customers</p>
+        </div>
+
+        {% if all_testimonials %}
+        <!-- Reviews Stats -->
+        <div class="reviews-stats">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-number">{% widthratio all_testimonials|length all_testimonials|length 1 %}.0</div>
+                    <div class="stat-label">Average Rating</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-number">{{ all_testimonials|length }}</div>
+                    <div class="stat-label">Total Reviews</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Verified Reviews</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="reviews-filters">
+            <p class="filter-label">Filter by Rating:</p>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All Reviews</button>
+                <button class="filter-btn" data-filter="5">⭐⭐⭐⭐⭐ (5 Stars)</button>
+                <button class="filter-btn" data-filter="4">⭐⭐⭐⭐ (4 Stars)</button>
+                <button class="filter-btn" data-filter="3">⭐⭐⭐ (3 Stars)</button>
+                <button class="filter-btn" data-filter="2">⭐⭐ (2 Stars)</button>
+                <button class="filter-btn" data-filter="1">⭐ (1 Star)</button>
+            </div>
+        </div>
+
+        <!-- Reviews Grid -->
+        <div class="reviews-grid">
+            {% for testimonial in all_testimonials %}
+            <div class="review-card" data-rating="{{ testimonial.rating }}">
+                <!-- Header -->
+                <div class="review-header">
+                    <div class="review-rating">
+                        {% for i in "12345" %}
+                            {% if i|add:"0" <= testimonial.rating %}
+                            <i class="fas fa-star"></i>
+                            {% else %}
+                            <i class="far fa-star"></i>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="review-date">{{ testimonial.created_at|date:"M d, Y" }}</div>
+                </div>
+
+                <!-- Content -->
+                <p class="review-text">"{{ testimonial.comment }}"</p>
+
+                <!-- Footer -->
+                <div class="review-footer">
+                    <div class="reviewer-info">
+                        <div class="reviewer-avatar">{{ testimonial.customer_name|first }}</div>
+                        <div class="reviewer-details">
+                            <div class="reviewer-name">{{ testimonial.customer_name }}</div>
+                            <div class="reviewer-service">{{ testimonial.service }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- CTA -->
+        <div class="reviews-cta mt-5 text-center">
+            <p class="cta-text">Have an experience to share?</p>
+            <a href="{% url 'core:testimonial-submit' %}" class="btn-share-review">
+                <i class="fas fa-star me-2"></i> Submit Your Review
+            </a>
+        </div>
+        {% else %}
+        <!-- Empty State -->
+        <div class="reviews-empty">
+            <div class="empty-icon">
+                <i class="fas fa-comments"></i>
+            </div>
+            <h3 class="empty-title">No Reviews Yet</h3>
+            <p class="empty-text">Be the first to share your experience with our service!</p>
+            <a href="{% url 'core:testimonial-submit' %}" class="btn-first-review">
+                <i class="fas fa-star me-2"></i> Submit Your Review
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Why Reviews Matter Section -->
+<section class="why-reviews-section">
+    <div class="container-lg">
+        <h2 class="section-title">Why Customer Reviews Matter</h2>
+        <div class="why-grid">
+            <div class="why-card">
+                <div class="why-icon">
+                    <i class="fas fa-eye"></i>
+                </div>
+                <h4>Transparency</h4>
+                <p>Real feedback from real customers. No hidden agendas, just honest experiences.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon">
+                    <i class="fas fa-handshake"></i>
+                </div>
+                <h4>Trust</h4>
+                <p>Build confidence in our service quality through authentic customer testimonials.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h4>Continuous Improvement</h4>
+                <p>Your feedback helps us identify strengths and areas for improvement.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon">
+                    <i class="fas fa-community"></i>
+                </div>
+                <h4>Community</h4>
+                <p>Join a community of satisfied customers sharing their experiences.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="reviews-faq-section">
+    <div class="container-lg">
+        <h2 class="section-title">About Our Reviews</h2>
+        <div class="faq-grid">
+            <div class="faq-box">
+                <h4><i class="fas fa-question-circle me-2"></i> Are these real customer reviews?</h4>
+                <p>Yes! All reviews are submitted directly by customers. We verify submissions to ensure authenticity and quality.</p>
+            </div>
+            <div class="faq-box">
+                <h4><i class="fas fa-question-circle me-2"></i> How are reviews approved?</h4>
+                <p>We review all submissions within 24-48 hours. We approve honest feedback (positive or negative) and reject only spam or inappropriate content.</p>
+            </div>
+            <div class="faq-box">
+                <h4><i class="fas fa-question-circle me-2"></i> Can I trust the ratings?</h4>
+                <p>Absolutely. Each review includes the customer name, service type, date, and detailed feedback. This transparency builds trust.</p>
+            </div>
+            <div class="faq-box">
+                <h4><i class="fas fa-question-circle me-2"></i> How often are reviews updated?</h4>
+                <p>New approved reviews are added regularly. The most recent reviews appear first to show current customer experiences.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+/* ==================== REVIEWS DISPLAY PAGE ==================== */
+.reviews-hero {
+    position: relative;
+    background: linear-gradient(135deg, #183D39 0%, #2a5f5a 50%, #1a1a1a 100%);
+    padding: 100px 20px;
+    overflow: hidden;
+    text-align: center;
+    color: white;
+}
+
+.reviews-hero-overlay {
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(0, 217, 122, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+}
+
+.reviews-hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.reviews-hero-title {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.reviews-hero-subtitle {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 400;
+}
+
+/* Reviews Display Section */
+.reviews-display-section {
+    padding: 80px 20px;
+    background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+}
+
+.reviews-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.reviews-main-title {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: #1a1a1a;
+    margin-bottom: 15px;
+    line-height: 1.2;
+}
+
+.reviews-main-subtitle {
+    font-size: 1.05rem;
+    color: #666;
+    font-weight: 400;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Stats Cards */
+.reviews-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px;
+    margin-bottom: 50px;
+}
+
+.stat-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 28px;
+    background: white;
+    border-radius: 12px;
+    border: 1px solid rgba(24, 61, 57, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.stat-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, rgba(0, 217, 122, 0.15) 0%, rgba(24, 61, 57, 0.1) 100%);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    color: #183D39;
+    flex-shrink: 0;
+}
+
+.stat-content {
+    flex: 1;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #1a1a1a;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: #999;
+    font-weight: 600;
+}
+
+/* Filters */
+.reviews-filters {
+    margin-bottom: 40px;
+    padding: 24px;
+    background: white;
+    border-radius: 12px;
+    border: 1px solid rgba(24, 61, 57, 0.1);
+}
+
+.filter-label {
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 16px;
+    font-size: 0.95rem;
+}
+
+.filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.filter-btn {
+    padding: 8px 16px;
+    border: 2px solid rgba(24, 61, 57, 0.2);
+    background: white;
+    color: #183D39;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+    border-color: #183D39;
+    background: rgba(24, 61, 57, 0.05);
+}
+
+.filter-btn.active {
+    background: #183D39;
+    color: white;
+    border-color: #183D39;
+}
+
+/* Reviews Grid */
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 28px;
+    margin-bottom: 50px;
+}
+
+.review-card {
+    background: white;
+    border-radius: 12px;
+    padding: 32px;
+    border: 1px solid rgba(24, 61, 57, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.review-card::before {
+    content: '"';
+    position: absolute;
+    font-size: 3.5rem;
+    color: #00d97a;
+    opacity: 0.15;
+    top: -5px;
+    left: 12px;
+    font-family: Georgia, serif;
+}
+
+.review-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(24, 61, 57, 0.15);
+    border-color: #183D39;
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid rgba(24, 61, 57, 0.1);
+}
+
+.review-rating {
+    display: flex;
+    gap: 4px;
+    font-size: 1.1rem;
+    color: #00d97a;
+}
+
+.review-date {
+    font-size: 0.85rem;
+    color: #999;
+    font-weight: 600;
+}
+
+.review-text {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 24px;
+    font-style: italic;
+    flex-grow: 1;
+}
+
+.review-footer {
+    margin-top: auto;
+}
+
+.reviewer-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.reviewer-avatar {
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, #183D39 0%, #00d97a 100%);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.2rem;
+}
+
+.reviewer-details {
+    flex: 1;
+}
+
+.reviewer-name {
+    font-weight: 700;
+    color: #1a1a1a;
+    font-size: 0.95rem;
+}
+
+.reviewer-service {
+    font-size: 0.85rem;
+    color: #00d97a;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Empty State */
+.reviews-empty {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.empty-icon {
+    font-size: 4rem;
+    color: #00d97a;
+    margin-bottom: 20px;
+}
+
+.empty-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 12px;
+}
+
+.empty-text {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.btn-first-review {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #00d97a 0%, #00b35f 100%);
+    color: #1a1a1a;
+    padding: 14px 36px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(0, 217, 122, 0.3);
+}
+
+.btn-first-review:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px rgba(0, 217, 122, 0.4);
+    color: #1a1a1a;
+}
+
+/* CTA */
+.reviews-cta {
+    padding: 40px;
+    background: linear-gradient(135deg, rgba(0, 217, 122, 0.08) 0%, rgba(24, 61, 57, 0.04) 100%);
+    border-radius: 12px;
+    border: 1px solid rgba(24, 61, 57, 0.1);
+}
+
+.cta-text {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.btn-share-review {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #00d97a 0%, #00b35f 100%);
+    color: #1a1a1a;
+    padding: 14px 36px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(0, 217, 122, 0.3);
+}
+
+.btn-share-review:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px rgba(0, 217, 122, 0.4);
+    color: #1a1a1a;
+}
+
+/* Why Reviews Section */
+.why-reviews-section {
+    padding: 80px 20px;
+    background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+.section-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #1a1a1a;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 28px;
+}
+
+.why-card {
+    text-align: center;
+    padding: 32px;
+    background: white;
+    border-radius: 12px;
+    border: 1px solid rgba(24, 61, 57, 0.1);
+    transition: all 0.3s ease;
+}
+
+.why-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(24, 61, 57, 0.1);
+}
+
+.why-icon {
+    font-size: 2.5rem;
+    color: #183D39;
+    margin-bottom: 16px;
+}
+
+.why-card h4 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 12px;
+}
+
+.why-card p {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* FAQ Section */
+.reviews-faq-section {
+    padding: 80px 20px;
+    background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+}
+
+.faq-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+.faq-box {
+    padding: 28px;
+    background: white;
+    border-radius: 12px;
+    border: 1px solid rgba(24, 61, 57, 0.1);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.faq-box:hover {
+    border-color: rgba(24, 61, 57, 0.2);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.faq-box h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.faq-box h4 i {
+    color: #183D39;
+}
+
+.faq-box p {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+    .reviews-main-title {
+        font-size: 2.2rem;
+    }
+
+    .reviews-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .reviews-hero-title {
+        font-size: 2.2rem;
+    }
+
+    .reviews-display-section {
+        padding: 60px 20px;
+    }
+
+    .reviews-main-title {
+        font-size: 1.8rem;
+    }
+
+    .reviews-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .stat-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .reviews-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .filter-buttons {
+        flex-direction: column;
+    }
+
+    .filter-btn {
+        width: 100%;
+    }
+
+    .why-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .faq-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+{% endblock %}

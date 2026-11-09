@@ -37,6 +37,15 @@ class HowToReviewView(TemplateView):
     template_name = 'core/how-to-review.html'
 
 
+class ViewReviewsView(TemplateView):
+    template_name = 'core/view-reviews.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['all_testimonials'] = Testimonial.objects.filter(is_approved=True).order_by('-created_at')
+        return context
+
+
 class AboutView(TemplateView):
     template_name = 'core/about.html'
 

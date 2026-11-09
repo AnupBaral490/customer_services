@@ -12,4 +12,5 @@ urlpatterns = [
     path('testimonials/submit/', views.TestimonialCreateView.as_view(), name='testimonial-submit'),
     path('testimonials/success/', views.TestimonialSuccessView.as_view(), name='testimonial-success'),
     path('how-to-review/', views.HowToReviewView.as_view(), name='how-to-review'),
+    path('reviews/', views.ViewReviewsView.as_view(), name='view-reviews'),
 ]

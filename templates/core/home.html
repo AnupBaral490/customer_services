@@ -739,9 +739,14 @@
         <!-- Submit Review CTA -->
         <div class="testimonials-cta text-center mt-5">
             <p class="testimonials-cta-text">Had a great experience with us?</p>
-            <a href="{% url 'core:testimonial-submit' %}" class="testimonials-cta-btn">
-                <i class="fas fa-star me-2"></i> Submit Your Review
-            </a>
+            <div class="testimonials-cta-buttons">
+                <a href="{% url 'core:view-reviews' %}" class="testimonials-cta-btn">
+                    <i class="fas fa-list me-2"></i> View All Reviews
+                </a>
+                <a href="{% url 'core:testimonial-submit' %}" class="testimonials-cta-btn">
+                    <i class="fas fa-star me-2"></i> Submit Your Review
+                </a>
+            </div>
         </div>
     </div>
 </section>
@@ -749,50 +754,107 @@
 
 <!-- FAQ Section -->
 {% if faqs %}
-<section class="section-padding-dark" style="background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);">
+<section class="faq-section-professional">
     <div class="container-lg">
-        <div class="text-center mb-5">
-            <h2 class="section-title-dark">Frequently Asked Questions</h2>
-            <p class="section-subtitle-dark">Find answers to common questions</p>
+        <!-- FAQ Header -->
+        <div class="faq-header text-center mb-5">
+            <span class="faq-badge">FAQ</span>
+            <h2 class="faq-title">Frequently Asked Questions</h2>
+            <p class="faq-subtitle">Find answers to common questions about our services</p>
+            <div class="faq-title-line"></div>
         </div>
 
-        <div class="row">
-            <div class="col-lg-8 mx-auto">
-                <div class="accordion" id="faqAccordion">
-                    {% for faq in faqs %}
-                    <div class="accordion-item-dark border-0 mb-3 rounded-lg">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button-dark {% if forloop.first %}{% else %}collapsed{% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#faq{{ faq.id }}">
-                                <i class="fas fa-question-circle me-2 text-green-accent"></i> {{ faq.question }}
-                            </button>
-                        </h2>
-                        <div id="faq{{ faq.id }}" class="accordion-collapse collapse {% if forloop.first %}show{% endif %}" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body-dark">
-                                {{ faq.answer }}
-                            </div>
-                        </div>
+        <!-- FAQ Grid -->
+        <div class="faq-grid">
+            {% for faq in faqs %}
+            <div class="faq-item">
+                <!-- Question Header -->
+                <div class="faq-question-header">
+                    <div class="faq-question-icon">
+                        <i class="fas fa-question-circle"></i>
                     </div>
-                    {% endfor %}
+                    <h3 class="faq-question-text">{{ faq.question }}</h3>
+                    <div class="faq-toggle-icon">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+
+                <!-- Answer Content -->
+                <div class="faq-answer-content">
+                    <p class="faq-answer-text">{{ faq.answer }}</p>
                 </div>
             </div>
+            {% endfor %}
+        </div>
+
+        <!-- CTA Section -->
+        <div class="faq-cta mt-5 text-center">
+            <p class="faq-cta-text">Didn't find your answer?</p>
+            <a href="{% url 'contact:message' %}" class="faq-cta-btn">
+                <i class="fas fa-envelope me-2"></i> Contact Us
+            </a>
         </div>
     </div>
 </section>
 {% endif %}
 
-<!-- Final CTA -->
-<section class="section-padding-dark" style="background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);">
+<!-- Final CTA - Professional Hero Section -->
+<section class="final-cta-hero-section">
+    <!-- Background Decoration -->
+    <div class="final-cta-bg-decoration"></div>
+    
     <div class="container-lg">
-        <div class="row align-items-center">
-            <div class="col-lg-7">
-                <h2 class="cta-title-dark mb-3">Ready for a Cleaner Space?</h2>
-                <p class="cta-subtitle-dark">Let our professional team handle the cleaning. Get your free quote today!</p>
+        <div class="final-cta-card">
+            <!-- Header Content -->
+            <div class="final-cta-header">
+                <div class="final-cta-badge">GET STARTED</div>
+                <h2 class="final-cta-main-title">Ready for a Cleaner Space?</h2>
+                <div class="final-cta-divider"></div>
             </div>
-            <div class="col-lg-5 text-lg-end pt-4 pt-lg-0">
-                <div class="d-flex gap-3 justify-content-lg-end flex-wrap">
-                    <a href="{% url 'bookings:quote-request' %}" class="btn btn-get-quote-final">
-                        <i class="fas fa-quote-left me-2"></i>Get Free Quote
-                    </a>
+
+            <!-- Content Row -->
+            <div class="final-cta-content-row">
+                <!-- Left Column - Description -->
+                <div class="final-cta-left">
+                    <p class="final-cta-description">
+                        Transform your home with our professional cleaning service. Our experienced team delivers exceptional results using safe, eco-friendly products.
+                    </p>
+                    
+                    <div class="final-cta-benefits">
+                        <div class="benefit-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Professional & Insured Team</span>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Free Quote - No Obligation</span>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Eco-Friendly Products</span>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>100% Satisfaction Guaranteed</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column - CTA Actions -->
+                <div class="final-cta-right">
+                    <div class="final-cta-actions">
+                        <a href="{% url 'bookings:quote-request' %}" class="final-cta-btn-primary">
+                            <i class="fas fa-quote-left"></i>
+                            <span>Get Your Free Quote</span>
+                        </a>
+                        <a href="{% url 'services:service-list' %}" class="final-cta-btn-secondary">
+                            <i class="fas fa-arrow-right"></i>
+                            <span>Explore Services</span>
+                        </a>
+                    </div>
+                    <p class="final-cta-trust-text">
+                        <i class="fas fa-star"></i> Trusted by 500+ satisfied customers
+                    </p>
                 </div>
             </div>
         </div>
@@ -1045,32 +1107,292 @@
         padding: 20px;
     }
 
-    .cta-title-dark {
-        font-size: 2.2rem;
-        color: white;
+    /* ==================== FINAL CTA HERO SECTION - PROFESSIONAL ==================== */
+    .final-cta-hero-section {
+        padding: 100px 20px;
+        background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 50%, #f5f7fa 100%);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .final-cta-bg-decoration {
+        position: absolute;
+        top: -100px;
+        right: -100px;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, rgba(0, 217, 122, 0.08) 0%, transparent 70%);
+        border-radius: 50%;
+        z-index: 0;
+    }
+
+    .final-cta-card {
+        background: white;
+        border-radius: 16px;
+        padding: 60px 50px;
+        box-shadow: 0 8px 30px rgba(24, 61, 57, 0.1);
+        position: relative;
+        z-index: 1;
+        border: 1px solid rgba(24, 61, 57, 0.08);
+    }
+
+    /* Header */
+    .final-cta-header {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+    .final-cta-badge {
+        display: inline-block;
+        padding: 8px 18px;
+        background: rgba(24, 61, 57, 0.08);
+        border: 1px solid rgba(24, 61, 57, 0.2);
+        color: #183D39;
+        border-radius: 6px;
+        font-size: 0.75rem;
         font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+        margin-bottom: 18px;
     }
 
-    .cta-subtitle-dark {
-        font-size: 1.1rem;
-        color: rgba(255, 255, 255, 0.7);
-        line-height: 1.6;
-    }
-
-    .btn-get-quote-final {
-        background: #00d97a;
+    .final-cta-main-title {
+        font-size: 3.2rem;
+        font-weight: 900;
         color: #1a1a1a;
-        padding: 12px 30px;
-        font-weight: 700;
-        border-radius: 8px;
-        border: none;
+        margin: 0 0 25px 0;
+        line-height: 1.15;
+        letter-spacing: -0.5px;
+    }
+
+    .final-cta-divider {
+        width: 60px;
+        height: 4px;
+        background: linear-gradient(90deg, #183D39 0%, #00d97a 100%);
+        margin: 0 auto;
+        border-radius: 2px;
+    }
+
+    /* Content Row */
+    .final-cta-content-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+    }
+
+    /* Left Column */
+    .final-cta-description {
+        font-size: 1.15rem;
+        color: #555;
+        line-height: 1.8;
+        margin-bottom: 35px;
+        font-weight: 500;
+    }
+
+    .final-cta-benefits {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .benefit-item {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 12px 0;
+        color: #666;
+        font-size: 0.95rem;
+        font-weight: 500;
         transition: all 0.3s ease;
     }
 
-    .btn-get-quote-final:hover {
-        background: #00b35f;
+    .benefit-item i {
+        color: #00d97a;
+        font-size: 1.3rem;
+        flex-shrink: 0;
+    }
+
+    .benefit-item:hover {
+        color: #183D39;
+        padding-left: 10px;
+    }
+
+    /* Right Column */
+    .final-cta-right {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .final-cta-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .final-cta-btn-primary,
+    .final-cta-btn-secondary {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        padding: 18px 32px;
+        border-radius: 10px;
+        font-weight: 700;
+        font-size: 1rem;
+        text-decoration: none;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        border: none;
+        cursor: pointer;
+        letter-spacing: 0.2px;
+    }
+
+    .final-cta-btn-primary {
+        background: linear-gradient(135deg, #183D39 0%, #2d5b57 100%);
+        color: white;
+        box-shadow: 0 6px 20px rgba(24, 61, 57, 0.25);
+    }
+
+    .final-cta-btn-primary:hover {
+        background: linear-gradient(135deg, #0f2620 0%, #1a3a37 100%);
+        transform: translateY(-3px);
+        box-shadow: 0 12px 35px rgba(24, 61, 57, 0.35);
+        color: white;
+    }
+
+    .final-cta-btn-secondary {
+        background: rgba(24, 61, 57, 0.06);
+        color: #183D39;
+        border: 2px solid rgba(24, 61, 57, 0.15);
+        font-weight: 600;
+    }
+
+    .final-cta-btn-secondary:hover {
+        background: rgba(24, 61, 57, 0.12);
+        border-color: rgba(24, 61, 57, 0.3);
         transform: translateY(-2px);
-        box-shadow: 0 10px 30px rgba(0, 217, 122, 0.3);
+        color: #183D39;
+    }
+
+    .final-cta-trust-text {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        font-size: 0.9rem;
+        color: #999;
+        font-weight: 600;
+        margin: 0;
+    }
+
+    .final-cta-trust-text i {
+        color: #00d97a;
+        font-size: 1rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 992px) {
+        .final-cta-card {
+            padding: 50px 40px;
+        }
+
+        .final-cta-main-title {
+            font-size: 2.4rem;
+        }
+
+        .final-cta-content-row {
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+
+        .final-cta-bg-decoration {
+            width: 250px;
+            height: 250px;
+            top: -80px;
+            right: -80px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .final-cta-hero-section {
+            padding: 60px 20px;
+        }
+
+        .final-cta-card {
+            padding: 40px 25px;
+            border-radius: 12px;
+        }
+
+        .final-cta-header {
+            margin-bottom: 35px;
+        }
+
+        .final-cta-main-title {
+            font-size: 1.8rem;
+            margin-bottom: 18px;
+        }
+
+        .final-cta-description {
+            font-size: 1rem;
+            margin-bottom: 25px;
+        }
+
+        .final-cta-benefits {
+            gap: 12px;
+        }
+
+        .benefit-item {
+            gap: 12px;
+            padding: 10px 0;
+            font-size: 0.9rem;
+        }
+
+        .final-cta-btn-primary,
+        .final-cta-btn-secondary {
+            padding: 16px 24px;
+            font-size: 0.95rem;
+            gap: 10px;
+        }
+
+        .final-cta-right {
+            gap: 20px;
+        }
+
+        .final-cta-bg-decoration {
+            width: 200px;
+            height: 200px;
+            top: -50px;
+            right: -50px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .final-cta-card {
+            padding: 30px 20px;
+        }
+
+        .final-cta-main-title {
+            font-size: 1.5rem;
+        }
+
+        .final-cta-description {
+            font-size: 0.95rem;
+        }
+
+        .final-cta-btn-primary,
+        .final-cta-btn-secondary {
+            padding: 14px 20px;
+            font-size: 0.9rem;
+        }
+
+        .benefit-item {
+            font-size: 0.85rem;
+        }
+
+        .final-cta-trust-text {
+            font-size: 0.8rem;
+        }
     }
 
     .min-vh-85 {
