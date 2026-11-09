@@ -3,21 +3,26 @@ from django.dispatch import receiver
 from django.core.mail import send_mail
 from django.conf import settings
 from .models import Booking
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 @receiver(post_save, sender=Booking)
 def send_booking_confirmation_email(sender, instance, created, update_fields, **kwargs):
     """
     Send confirmation email to customer when admin confirms booking.
-    Triggered when booking status changes to 'confirmed'.
+    Triggered IMMEDIATELY when booking status changes to 'confirmed'.
     """
     
     # Only process updates (not new bookings)
     if created:
+        logger.info(f"New booking created: {instance.booking_reference} - No email sent (new booking)")
         return
     
     # Check if status was changed and is now 'confirmed'
     if update_fields and 'status' in update_fields and instance.status == 'confirmed':
+        logger.info(f"Processing booking confirmation for {instance.booking_reference}")
         try:
             customer = instance.customer
             subject = f'Booking Confirmed - {instance.booking_reference}'
@@ -101,7 +106,8 @@ def send_booking_confirmation_email(sender, instance, created, update_fields, **
             </html>
             """
             
-            send_mail(
+            # Send email IMMEDIATELY (synchronous - not queued)
+            result = send_mail(
                 subject,
                 f'Your booking {instance.booking_reference} has been confirmed.',
                 settings.DEFAULT_FROM_EMAIL,
@@ -110,7 +116,18 @@ def send_booking_confirmation_email(sender, instance, created, update_fields, **
                 fail_silently=False,
             )
             
-            print(f"✓ Confirmation email sent to {customer.email} for booking {instance.booking_reference}")
+            print(f"\n✓✓✓ CONFIRMATION EMAIL SENT IMMEDIATELY ✓✓✓")
+            print(f"    To: {customer.email}")
+            print(f"    Booking: {instance.booking_reference}")
+            print(f"    Date: {instance.preferred_date.strftime('%A, %d %B %Y')}")
+            print(f"    Time: {instance.preferred_time.strftime('%H:%M')}")
+            print(f"    Result: {result} email(s) sent\n")
+            
+            logger.info(f"✓ Confirmation email sent IMMEDIATELY to {customer.email} for booking {instance.booking_reference}")
             
         except Exception as e:
-            print(f"✗ Error sending confirmation email: {e}")
+            error_msg = f"Error sending confirmation email for {instance.booking_reference}: {str(e)}"
+            print(f"\n✗✗✗ EMAIL SEND FAILED ✗✗✗")
+            print(f"    Error: {error_msg}\n")
+            logger.error(error_msg)
+
