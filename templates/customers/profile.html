@@ -204,6 +204,7 @@
                                         <th class="text-primary fw-600">Service</th>
                                         <th class="text-primary fw-600">Date</th>
                                         <th class="text-primary fw-600">Status</th>
+                                        <th class="text-primary fw-600">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -217,8 +218,24 @@
                                                 <span class="badge" style="background: #00d97a; color: #1a1a1a; padding: 6px 12px;">Confirmed</span>
                                             {% elif booking.status == 'pending' %}
                                                 <span class="badge" style="background: #ffc107; color: #1a1a1a; padding: 6px 12px;">Pending</span>
+                                            {% elif booking.status == 'cancelled' %}
+                                                <span class="badge" style="background: #dc3545; color: white; padding: 6px 12px;">Cancelled</span>
                                             {% else %}
-                                                <span class="badge" style="background: #6c757d; color: white; padding: 6px 12px;">{{ booking.status }}</span>
+                                                <span class="badge" style="background: #6c757d; color: white; padding: 6px 12px;">{{ booking.status|title }}</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if booking.can_be_cancelled %}
+                                                <div class="d-flex gap-2">
+                                                    <a href="{% url 'bookings:booking-reminder' booking.id %}" class="btn btn-sm btn-outline-info" title="View cancellation policy">
+                                                        <i class="fas fa-bell"></i>
+                                                    </a>
+                                                    <a href="{% url 'bookings:booking-cancel' booking.id %}" class="btn btn-sm btn-outline-danger" title="Cancel booking">
+                                                        <i class="fas fa-times"></i>
+                                                    </a>
+                                                </div>
+                                            {% else %}
+                                                <span class="text-muted small">No actions</span>
                                             {% endif %}
                                         </td>
                                     </tr>

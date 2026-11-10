@@ -1,0 +1,213 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Cancel Booking - {{ BUSINESS_NAME }}{% endblock %}
+
+{% block content %}
+<div class="booking-cancellation py-5" style="margin-top: 40px; background: linear-gradient(135deg, #FEF3C7 0%, #F3E8FF 100%); min-height: 100vh;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <!-- Page Header -->
+                <div class="mb-5">
+                    <a href="{% url 'customers:customer-profile' %}" class="btn btn-outline-primary btn-sm mb-4">
+                        <i class="fas fa-arrow-left me-2"></i>Back to Profile
+                    </a>
+                    <h1 class="text-danger fw-700 mb-2" style="font-size: 2.5rem;">Cancel Booking</h1>
+                    <p class="text-muted" style="font-size: 1.1rem;">We're sorry to see you go. Please let us know why.</p>
+                </div>
+
+                <!-- Booking Summary Card -->
+                <div class="card border-0 shadow-md-custom mb-4">
+                    <div class="card-header" style="background: linear-gradient(135deg, #183D39 0%, #00d97a 100%); color: white; padding: 20px;">
+                        <h5 class="mb-0"><i class="fas fa-calendar-check me-2"></i>Booking Summary</h5>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <p class="text-muted mb-1">Reference</p>
+                                <p class="h5 text-primary fw-700">{{ booking.booking_reference }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="text-muted mb-1">Service</p>
+                                <p class="h5 text-primary fw-700">{{ booking.service.name }}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p class="text-muted mb-1">Appointment Date</p>
+                                <p class="h5 text-primary fw-700">{{ booking.preferred_date|date:"d M Y" }} at {{ booking.preferred_time|time:"H:i" }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="text-muted mb-1">Days Until Appointment</p>
+                                <p class="h5 text-primary fw-700">
+                                    {% if days_until > 0 %}
+                                        {{ days_until }} day{{ days_until|pluralize }}
+                                    {% else %}
+                                        <span class="badge bg-danger">Appointment in Progress/Past</span>
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cancellation Policy Card -->
+                <div class="card border-0 shadow-md-custom mb-4">
+                    <div class="card-header" style="background: #FEF3C7; border-bottom: 2px solid #F59E0B; padding: 20px;">
+                        <h5 class="mb-0" style="color: #92400E;"><i class="fas fa-exclamation-triangle me-2"></i>Cancellation Policy</h5>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="alert alert-info mb-0" style="background: #DCEFE8; border: 1px solid #10B981; color: #1F2937;">
+                            <h6 class="fw-700 mb-2" style="color: #183D39;">Based on your booking date, here's your refund eligibility:</h6>
+                            
+                            <div style="margin: 15px 0;">
+                                {% if refund_type == 'full_refund' %}
+                                    <div class="p-3" style="background: #ECFDF5; border-left: 4px solid #10B981; border-radius: 4px;">
+                                        <p class="mb-2"><strong>✓ Full Refund or Reschedule</strong></p>
+                                        <p class="mb-0 text-muted">Your booking is more than 7 days away. You're eligible for a full refund or to reschedule without any penalty.</p>
+                                    </div>
+                                {% elif refund_type == 'fifty_percent' %}
+                                    <div class="p-3" style="background: #FEF3C7; border-left: 4px solid #F59E0B; border-radius: 4px;">
+                                        <p class="mb-2"><strong>⚠ 50% Refund Available</strong></p>
+                                        <p class="mb-0 text-muted">Your booking is 3-7 days away. You're eligible for a 50% refund. Rescheduling is subject to availability.</p>
+                                    </div>
+                                {% else %}
+                                    <div class="p-3" style="background: #FEE2E2; border-left: 4px solid #EF4444; border-radius: 4px;">
+                                        <p class="mb-2"><strong>✗ No Refund</strong></p>
+                                        <p class="mb-0 text-muted">Your booking is less than 3 days away. Unfortunately, no refund is applicable as per our cancellation policy. Your booking fee will be retained.</p>
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <hr class="my-3">
+                            
+                            <div class="small text-muted">
+                                <p class="mb-2"><strong>Refund Policy Summary:</strong></p>
+                                <ul class="mb-0" style="padding-left: 20px;">
+                                    <li><strong>More than 7 days:</strong> Full refund or reschedule without penalty</li>
+                                    <li><strong>3-7 days:</strong> 50% refund or reschedule subject to availability</li>
+                                    <li><strong>Less than 3 days:</strong> No refund (booking fee retained)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cancellation Form -->
+                <div class="card border-0 shadow-md-custom">
+                    <div class="card-header" style="background: linear-gradient(135deg, #183D39 0%, #00d97a 100%); color: white; padding: 20px;">
+                        <h5 class="mb-0"><i class="fas fa-edit me-2"></i>Cancel This Booking</h5>
+                    </div>
+                    <div class="card-body p-4">
+                        <form method="POST" novalidate id="cancellationForm">
+                            {% csrf_token %}
+
+                            <!-- Reason Selection -->
+                            <div class="form-group mb-4">
+                                <label class="form-label fw-600 mb-3">{{ form.reason.label }}</label>
+                                <div class="reason-options">
+                                    {% for value, label in form.reason.field.choices %}
+                                        <div class="form-check mb-3">
+                                            <input class="form-check-input" type="radio" name="{{ form.reason.name }}" value="{{ value }}" id="reason_{{ value }}" required>
+                                            <label class="form-check-label" for="reason_{{ value }}" style="cursor: pointer; font-weight: 500;">
+                                                {{ label }}
+                                            </label>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                {% if form.reason.errors %}
+                                    <div class="alert alert-danger mt-2">{{ form.reason.errors }}</div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Additional Details -->
+                            <div class="form-group mb-4">
+                                <label for="{{ form.additional_details.id_for_label }}" class="form-label fw-600 mb-2">
+                                    {{ form.additional_details.label }}
+                                </label>
+                                {{ form.additional_details }}
+                                <small class="text-muted d-block mt-2">Helping us understand why helps us improve. (Optional)</small>
+                                {% if form.additional_details.errors %}
+                                    <div class="alert alert-danger mt-2">{{ form.additional_details.errors }}</div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Confirmation Checkbox -->
+                            <div class="form-check mb-4">
+                                <input class="form-check-input" type="checkbox" name="{{ form.confirm_cancellation.name }}" id="{{ form.confirm_cancellation.id_for_label }}" required>
+                                <label class="form-check-label" for="{{ form.confirm_cancellation.id_for_label }}" style="cursor: pointer;">
+                                    {{ form.confirm_cancellation.label }}
+                                </label>
+                                {% if form.confirm_cancellation.errors %}
+                                    <div class="alert alert-danger mt-2">{{ form.confirm_cancellation.errors }}</div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="row gap-3">
+                                <div class="col-md-6">
+                                    <button type="submit" class="btn btn-danger btn-lg w-100" style="padding: 12px 24px; font-weight: 600;">
+                                        <i class="fas fa-times me-2"></i>Confirm Cancellation
+                                    </button>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="{% url 'customers:customer-profile' %}" class="btn btn-outline-primary btn-lg w-100" style="padding: 12px 24px; font-weight: 600;">
+                                        <i class="fas fa-arrow-left me-2"></i>Keep Booking
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Contact Support -->
+                <div class="alert alert-info mt-4 mb-0">
+                    <div style="display: flex; align-items: start; gap: 15px;">
+                        <i class="fas fa-info-circle" style="margin-top: 2px; color: #0284C7; font-size: 1.2rem;"></i>
+                        <div>
+                            <p class="mb-2"><strong>Need help?</strong></p>
+                            <p class="mb-2 text-muted">If you'd like to reschedule instead of cancel, or if you have any questions about our cancellation policy, please contact us:</p>
+                            <p class="mb-0">
+                                <strong>Phone:</strong> <a href="tel:{{ BUSINESS_PHONE }}">{{ BUSINESS_PHONE }}</a><br>
+                                <strong>Email:</strong> <a href="mailto:{{ BUSINESS_EMAIL }}">{{ BUSINESS_EMAIL }}</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .form-check-input {
+        width: 20px;
+        height: 20px;
+        margin-top: 2px;
+        cursor: pointer;
+        border: 2px solid #ccc;
+    }
+
+    .form-check-input:checked {
+        background-color: #00d97a;
+        border-color: #00d97a;
+    }
+
+    .reason-options .form-check {
+        padding: 12px;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+        background: #f8f9f8;
+    }
+
+    .reason-options .form-check:hover {
+        background: #eff6f3;
+    }
+
+    .reason-options .form-check input:checked + label {
+        color: #183D39;
+        font-weight: 700;
+    }
+</style>
+{% endblock %}

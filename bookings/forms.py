@@ -8,8 +8,9 @@ import re
 class BookingForm(forms.ModelForm):
     class Meta:
         model = Booking
-        fields = ['preferred_date', 'preferred_time', 'property_type', 'bedrooms', 'bathrooms', 'property_size', 'additional_requirements']
+        fields = ['service', 'preferred_date', 'preferred_time', 'property_type', 'bedrooms', 'bathrooms', 'property_size', 'additional_requirements']
         widgets = {
+            'service': forms.Select(attrs={'class': 'form-select'}),
             'preferred_date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
             'preferred_time': forms.TimeInput(attrs={'type': 'time', 'class': 'form-control'}),
             'property_type': forms.Select(attrs={'class': 'form-select'}),
@@ -75,3 +76,37 @@ class QuoteRequestCustomerForm(forms.ModelForm):
             if len(phone_digits) not in [10, 11]:
                 raise ValidationError("Please enter a valid Australian phone number (10 digits). Example: +61412345678 or 0412345678")
         return phone
+
+
+class BookingCancellationForm(forms.Form):
+    """Form for customers to cancel their bookings."""
+    REASON_CHOICES = [
+        ('schedule_conflict', 'Schedule Conflict'),
+        ('no_longer_needed', 'No Longer Needed'),
+        ('found_alternative', 'Found Alternative Service'),
+        ('financial_reasons', 'Financial Reasons'),
+        ('other', 'Other Reason'),
+    ]
+    
+    reason = forms.ChoiceField(
+        choices=REASON_CHOICES,
+        widget=forms.RadioSelect(attrs={'class': 'form-check-input'}),
+        label='Cancellation Reason',
+        required=True
+    )
+    
+    additional_details = forms.CharField(
+        widget=forms.Textarea(attrs={
+            'class': 'form-control',
+            'rows': 4,
+            'placeholder': 'Please provide any additional details (optional)'
+        }),
+        required=False,
+        label='Additional Details'
+    )
+    
+    confirm_cancellation = forms.BooleanField(
+        widget=forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+        required=True,
+        label='I understand the cancellation policy and confirm my cancellation request'
+    )

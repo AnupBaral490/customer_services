@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from datetime import timedelta
 from customers.models import Customer
 from services.models import Service
 import uuid
@@ -22,6 +23,15 @@ class Booking(models.Model):
         ('other', 'Other'),
     ]
 
+    REFUND_STATUS_CHOICES = [
+        ('full_refund', 'Full Refund'),
+        ('fifty_percent', '50% Refund'),
+        ('no_refund', 'No Refund (Fee Retained)'),
+        ('refunded', 'Refunded'),
+        ('pending', 'Pending'),
+        ('not_applicable', 'Not Applicable'),
+    ]
+
     booking_reference = models.CharField(max_length=20, unique=True, editable=False)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='bookings')
     service = models.ForeignKey(Service, on_delete=models.SET_NULL, null=True)
@@ -37,6 +47,15 @@ class Booking(models.Model):
     assigned_staff = models.CharField(max_length=100, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    
+    # Cancellation fields
+    is_cancelled = models.BooleanField(default=False)
+    cancelled_at = models.DateTimeField(null=True, blank=True)
+    cancellation_reason = models.TextField(blank=True)
+    refund_status = models.CharField(max_length=20, choices=REFUND_STATUS_CHOICES, default='not_applicable')
+    refund_amount = models.CharField(max_length=100, blank=True, help_text="Refund amount or percentage")
+    cancellation_requested_by = models.CharField(max_length=100, blank=True, choices=[('customer', 'Customer'), ('admin', 'Admin')])
+    reminder_sent = models.BooleanField(default=False, help_text="Whether cancellation policy reminder was sent")
 
     class Meta:
         ordering = ['-created_at']
@@ -49,6 +68,38 @@ class Booking(models.Model):
 
     def __str__(self):
         return f"{self.booking_reference} - {self.customer.full_name}"
+
+    def get_days_until_booking(self):
+        """Calculate days until booking appointment."""
+        today = timezone.now().date()
+        return (self.preferred_date - today).days
+
+    def get_refund_policy(self):
+        """
+        Determine refund policy based on days until booking.
+        Returns: (refund_type, refund_percentage, description)
+        """
+        days_until = self.get_days_until_booking()
+        
+        if days_until > 7:
+            return ('full_refund', 100, 'Full refund or reschedule without penalty')
+        elif days_until >= 3:
+            return ('fifty_percent', 50, '50% refund or reschedule subject to availability')
+        else:
+            return ('no_refund', 0, 'No refund (booking fee retained)')
+
+    def can_be_cancelled(self):
+        """Check if booking can still be cancelled."""
+        # Can only cancel if not completed or already cancelled
+        return self.status not in ['completed', 'cancelled'] and not self.is_cancelled
+
+    def get_cancellation_allowed_until(self):
+        """Get the datetime until which cancellation is allowed."""
+        # Allow cancellation up to 24 hours before appointment
+        booking_datetime = timezone.make_aware(
+            timezone.datetime.combine(self.preferred_date, self.preferred_time)
+        )
+        return booking_datetime - timedelta(hours=24)
 
 
 class QuoteRequest(models.Model):

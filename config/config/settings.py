@@ -183,7 +183,7 @@ LOGGING = {
 }
 
 # Business information - can be overridden via environment variables
-BUSINESS_NAME = os.environ.get('BUSINESS_NAME', 'Premium Cleaning Services')
+BUSINESS_NAME = os.environ.get('BUSINESS_NAME', 'Raslan Cleaning Services')
 BUSINESS_PHONE = os.environ.get('BUSINESS_PHONE', '+61 2 1234 5678')
 BUSINESS_EMAIL = os.environ.get('BUSINESS_EMAIL', 'hello@cleaningservices.com.au')
 BUSINESS_ADDRESS = os.environ.get('BUSINESS_ADDRESS', 'Sydney, NSW 2000, Australia')

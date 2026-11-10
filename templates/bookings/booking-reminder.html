@@ -1,0 +1,181 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Booking Reminder - {{ BUSINESS_NAME }}{% endblock %}
+
+{% block content %}
+<div class="booking-reminder py-5" style="margin-top: 40px; background: linear-gradient(135deg, var(--white) 0%, #FAFBFA 100%); min-height: 100vh;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <!-- Back Button -->
+                <a href="{% url 'customers:customer-profile' %}" class="btn btn-outline-primary btn-sm mb-4">
+                    <i class="fas fa-arrow-left me-2"></i>Back to Profile
+                </a>
+
+                <!-- Main Alert -->
+                <div class="alert alert-warning mb-4" style="background: #FEF3C7; border: 2px solid #F59E0B; border-radius: 8px; padding: 20px;">
+                    <div style="display: flex; align-items: start; gap: 15px;">
+                        <i class="fas fa-bell" style="color: #D97706; font-size: 1.5rem; margin-top: 2px;"></i>
+                        <div>
+                            <h4 class="mb-2" style="color: #92400E;">Cancellation Policy Reminder</h4>
+                            <p class="mb-0">Review our cancellation and refund policy for your upcoming appointment.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Booking Details Card -->
+                <div class="card border-0 shadow-md-custom mb-4">
+                    <div class="card-header" style="background: linear-gradient(135deg, #183D39 0%, #00d97a 100%); color: white; padding: 20px;">
+                        <h5 class="mb-0"><i class="fas fa-calendar-check me-2"></i>Your Booking</h5>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <p class="text-muted mb-1">Reference</p>
+                                <p class="h5 text-primary fw-700">{{ booking.booking_reference }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="text-muted mb-1">Service</p>
+                                <p class="h5 text-primary fw-700">{{ booking.service.name }}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p class="text-muted mb-1">Appointment Date</p>
+                                <p class="h5 text-primary fw-700">{{ booking.preferred_date|date:"d M Y" }} at {{ booking.preferred_time|time:"H:i" }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="text-muted mb-1">Days Until Appointment</p>
+                                <p class="h5 text-primary fw-700">
+                                    {% if days_until > 0 %}
+                                        <span class="badge" style="background: #10B981; font-size: 0.95rem; padding: 6px 12px;">{{ days_until }} day{{ days_until|pluralize }}</span>
+                                    {% else %}
+                                        <span class="badge bg-danger">Appointment Today/Past</span>
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Refund Policy Card -->
+                <div class="card border-0 shadow-md-custom mb-4">
+                    <div class="card-header" style="background: #DCEFE8; border-bottom: 2px solid #10B981; padding: 20px;">
+                        <h5 class="mb-0" style="color: #183D39;"><i class="fas fa-info-circle me-2"></i>Refund Policy for Your Booking</h5>
+                    </div>
+                    <div class="card-body p-4">
+                        <!-- Current Policy -->
+                        <div class="mb-4">
+                            <h6 class="fw-700 mb-3">Your Current Eligibility:</h6>
+                            {% if refund_type == 'full_refund' %}
+                                <div class="p-4" style="background: linear-gradient(135deg, #ECFDF5 0%, #F0FDF4 100%); border-left: 4px solid #10B981; border-radius: 8px;">
+                                    <h5 class="text-success fw-700 mb-2">
+                                        <i class="fas fa-check-circle me-2"></i>Full Refund Eligible
+                                    </h5>
+                                    <p class="mb-2">Your booking is <strong>more than 7 days away</strong>.</p>
+                                    <p class="mb-0 text-muted">
+                                        You're eligible for a <strong>100% refund</strong> or to <strong>reschedule without any penalty</strong>.
+                                    </p>
+                                </div>
+                            {% elif refund_type == 'fifty_percent' %}
+                                <div class="p-4" style="background: linear-gradient(135deg, #FEF3C7 0%, #FFFBEB 100%); border-left: 4px solid #F59E0B; border-radius: 8px;">
+                                    <h5 class="fw-700 mb-2" style="color: #92400E;">
+                                        <i class="fas fa-exclamation-circle me-2"></i>50% Refund Available
+                                    </h5>
+                                    <p class="mb-2">Your booking is <strong>3-7 days away</strong>.</p>
+                                    <p class="mb-0 text-muted">
+                                        You're eligible for a <strong>50% refund</strong>. Rescheduling is <strong>subject to availability</strong>.
+                                    </p>
+                                </div>
+                            {% else %}
+                                <div class="p-4" style="background: linear-gradient(135deg, #FEE2E2 0%, #FEF2F2 100%); border-left: 4px solid #EF4444; border-radius: 8px;">
+                                    <h5 class="text-danger fw-700 mb-2">
+                                        <i class="fas fa-times-circle me-2"></i>No Refund Policy
+                                    </h5>
+                                    <p class="mb-2">Your booking is <strong>less than 3 days away</strong>.</p>
+                                    <p class="mb-0 text-muted">
+                                        Unfortunately, <strong>no refund</strong> is applicable as per our policy. Your booking fee will be retained, but you can still cancel if needed.
+                                    </p>
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Policy Table -->
+                        <hr class="my-4">
+                        
+                        <h6 class="fw-700 mb-3">Complete Refund Policy:</h6>
+                        <div class="table-responsive">
+                            <table class="table table-borderless mb-0">
+                                <thead>
+                                    <tr style="border-bottom: 2px solid #E5E7EB;">
+                                        <th class="text-primary fw-700">Time Before Booking</th>
+                                        <th class="text-primary fw-700">Refund</th>
+                                        <th class="text-primary fw-700">Reschedule</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="border-bottom: 1px solid #E5E7EB;">
+                                        <td class="fw-600">More than 7 days</td>
+                                        <td><span class="badge" style="background: #DCEFED; color: #0F766E; padding: 6px 12px;">Full Refund</span></td>
+                                        <td><span class="badge" style="background: #DCEFED; color: #0F766E; padding: 6px 12px;">No Penalty</span></td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid #E5E7EB;">
+                                        <td class="fw-600">3 - 7 days</td>
+                                        <td><span class="badge" style="background: #FEF3C7; color: #92400E; padding: 6px 12px;">50% Refund</span></td>
+                                        <td><span class="badge" style="background: #FEF3C7; color: #92400E; padding: 6px 12px;">If Available</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-600">Less than 3 days</td>
+                                        <td><span class="badge" style="background: #FEE2E2; color: #7F1D1D; padding: 6px 12px;">No Refund</span></td>
+                                        <td><span class="badge" style="background: #FEE2E2; color: #7F1D1D; padding: 6px 12px;">No Penalty*</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <small class="text-muted d-block mt-2">* Rescheduling is always subject to staff availability.</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="row gap-3 mb-4">
+                    {% if can_cancel %}
+                    <div class="col-md-6">
+                        <a href="{% url 'bookings:booking-cancel' booking.id %}" class="btn btn-danger btn-lg w-100" style="padding: 12px 24px; font-weight: 600;">
+                            <i class="fas fa-times me-2"></i>Cancel Booking
+                        </a>
+                    </div>
+                    {% endif %}
+                    <div class="col-md-6">
+                        <a href="{% url 'customers:customer-profile' %}" class="btn btn-primary btn-lg w-100" style="background: linear-gradient(135deg, #183D39 0%, #00d97a 100%); border: none; padding: 12px 24px; font-weight: 600;">
+                            <i class="fas fa-check me-2"></i>Keep Booking
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Important Information -->
+                <div class="alert alert-info mb-0">
+                    <h6 class="fw-700 mb-2"><i class="fas fa-lightbulb me-2"></i>Important Information</h6>
+                    <ul class="mb-2">
+                        <li><strong>Cancellation Deadline:</strong> You can cancel up to 24 hours before your scheduled appointment</li>
+                        <li><strong>Refund Processing:</strong> Refunds are typically processed within 5-7 business days</li>
+                        <li><strong>Rescheduling:</strong> You can reschedule your appointment by contacting us directly</li>
+                        <li><strong>Questions?</strong> Contact our support team anytime</li>
+                    </ul>
+                    <p class="mb-0">
+                        <strong>Phone:</strong> <a href="tel:{{ BUSINESS_PHONE }}">{{ BUSINESS_PHONE }}</a><br>
+                        <strong>Email:</strong> <a href="mailto:{{ BUSINESS_EMAIL }}">{{ BUSINESS_EMAIL }}</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .badge {
+        font-weight: 600;
+        font-size: 0.85rem;
+    }
+</style>
+{% endblock %}
